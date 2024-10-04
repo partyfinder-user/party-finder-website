@@ -10,11 +10,14 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
+export const viewport = {
+  themeColor: "#281F44",
+};
+
 export const metadata = {
   title: {
     template: "%s — PartyFinder.it",
     default: "PartyFinder.it — cerca eventi nella tua zona",
-    themeColor: '#281F44',
   },
   description: "Cerca eventi nella tua zona",
 };
