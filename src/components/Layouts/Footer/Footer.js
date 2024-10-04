@@ -106,7 +106,7 @@ export default function Footer() {
           ))}
         </div>
         <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-          &copy; {currentYear} PartyFinder.it - All rights reserved.
+          &copy; {currentYear} PartyFinder.it - All rights reserved. zzz
         </p>
       </div>
     </footer>
