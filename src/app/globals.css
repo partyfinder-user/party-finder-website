@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-background-50: 230, 228, 242;
+  --c-background-100: 204, 201, 220;
+  --c-background-200: 178, 175, 196;
+  --c-background-300: 135, 132, 156;
+  --c-background-400: 95, 92, 120;
+  --c-background-500: 37, 31, 68;
+  --c-background-600: 33, 28, 61;
+  --c-background-700: 29, 24, 54;
+  --c-background-800: 25, 21, 46;
+  --c-background-900: 21, 17, 39;
+
+  --c-primary-50: 235, 228, 255;
+  --c-primary-100: 210, 190, 255;
+  --c-primary-200: 185, 153, 255;
+  --c-primary-300: 145, 102, 255;
+  --c-primary-400: 115, 61, 255;
+  --c-primary-500: 82, 0, 255;
+  --c-primary-600: 74, 0, 230;
+  --c-primary-700: 65, 0, 205;
+  --c-primary-800: 56, 0, 180;
+  --c-primary-900: 47, 0, 155;
+
+  --c-accent-50: 240, 230, 255;
+  --c-accent-100: 220, 204, 255;
+  --c-accent-200: 199, 178, 255;
+  --c-accent-300: 176, 145, 255;
+  --c-accent-400: 165, 125, 255;
+  --c-accent-500: 157, 112, 255;
+  --c-accent-600: 139, 100, 230;
+  --c-accent-700: 121, 85, 205;
+  --c-accent-800: 105, 72, 180;
+  --c-accent-900: 91, 60, 155;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.max-w-8xl {
+  max-width: 1424px;
+}
+
+.header-bg {
+  @apply bg-primary-500/60 backdrop-blur-xl backdrop-filter;
+}
