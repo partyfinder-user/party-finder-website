@@ -48,5 +48,17 @@
 }
 
 .header-bg {
-  @apply bg-primary-500/60 backdrop-blur-xl backdrop-filter;
+  @apply bg-transparent backdrop-blur-xl backdrop-filter;
+}
+
+@layer utilities {
+  .text-neon {
+    color: #ffffff; /* Bianco per maggiore contrasto */
+    text-shadow: 0 0 5px #9d70ff, /* Bagliore vicino, viola */ 0 0 10px #9d70ff,
+      /* Bagliore medio */ 0 0 20px #9d70ff,
+      /* Bagliore più largo */ 0 0 30px #ff00ff,
+      /* Colore neon acceso più intenso, fucsia */ 0 0 40px #ff00ff,
+      /* Bagliore più distante */ 0 0 60px rgba(255, 0, 255, 0.7),
+      /* Bagliore esteso più debole */ 2px 2px 3px rgba(0, 0, 0, 0.75); /* Ombra nera per migliorare leggibilità */
+  }
 }
