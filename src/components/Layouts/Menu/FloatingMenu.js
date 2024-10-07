@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Transition } from '@headlessui/react';
-import { FunnelIcon } from '@heroicons/react/24/outline';
+import { BoltIcon } from '@heroicons/react/24/outline';
 
 const FloatingMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,7 +36,7 @@ const FloatingMenu = () => {
         leaveTo='opacity-0'
       >
         <div
-          onClick={() => setIsMenuOpen(false)} // Cliccare sull'overlay chiude il menu
+          onClick={() => setIsMenuOpen(false)}
           className='fixed inset-0 bg-black bg-opacity-60 z-40'
         ></div>
       </Transition>
@@ -51,21 +51,21 @@ const FloatingMenu = () => {
         leaveTo='transform opacity-0 scale-95'
       >
         <div className='absolute bottom-16 right-0 flex flex-col space-y-2 z-50'>
-          <button className='w-32 p-2 rounded-xl bg-background-800/80 text-white'>Eventi</button>
-          <button className='w-32 p-2 rounded-xl bg-background-800/80 text-white'>Format</button>
-          <button className='w-32 p-2 rounded-xl bg-background-800/80 text-white'>Locali</button>
-          <button className='w-32 p-2 rounded-xl bg-background-800/80 text-white'>Artisti</button>
+          <button className='w-32 p-2 rounded-xl bg-accent-800/80 text-white'>Eventi</button>
+          <button className='w-32 p-2 rounded-xl bg-accent-800/80 text-white'>Format</button>
+          <button className='w-32 p-2 rounded-xl bg-accent-800/80 text-white'>Locali</button>
+          <button className='w-32 p-2 rounded-xl bg-accent-800/80 text-white'>Artisti</button>
         </div>
       </Transition>
 
       {/* Bottone principale, rimane fisso in basso a destra */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className={`w-12 h-12 flex items-center justify-center rounded-full bg-purple-600 text-white transition-transform duration-300 ease-in-out z-50 ${
+        className={`w-12 h-12 flex items-center justify-center rounded-full bg-accent-400 text-white transition-transform duration-300 ease-in-out z-50 ${
           isScrolled ? 'translate-y-0 scale-100' : 'translate-y-20 scale-0'
         }`}
       >
-        <FunnelIcon className='w-6 h-6' />
+        <BoltIcon className='w-6 h-6' />
       </button>
     </div>
   );

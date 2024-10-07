@@ -58,9 +58,9 @@ const FooterNav = () => {
   return (
     <div
       ref={containerRef}
-      className='w-2/3 mx-auto py-2 rounded-xl bg-neutral-800/30 backdrop-blur-lg fixed top-auto bottom-2 inset-x-0 z-30 transition-transform duration-300 ease-in-out'
+      className='w-4/5 mx-auto py-3 rounded-xl bg-neutral-800/30 backdrop-blur-lg fixed top-auto bottom-2 inset-x-0 z-30 transition-transform duration-300 ease-in-out'
     >
-      <div className='flex justify-around mx-auto text-sm text-center'>
+      <div className='flex justify-around mx-auto text-center'>
         {NAV.map((item, index) => {
           const active = pathname === item.link;
           return item.link ? (
@@ -71,7 +71,7 @@ const FooterNav = () => {
                 }`}
               >
                 <item.icon className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
-                <span className='text-[11px] leading-none mt-1'>{item.name}</span>
+                <span className='text-sm leading-none mt-1'>{item.name}</span>
               </div>
             </Link>
           ) : (
@@ -82,7 +82,7 @@ const FooterNav = () => {
               }`}
             >
               <item.icon className='w-6 h-6' />
-              <span className='text-[11px] leading-none mt-1'>{item.name}</span>
+              <span className='text-sm leading-none mt-1'>{item.name}</span>
             </div>
           );
         })}
