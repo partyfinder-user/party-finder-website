@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
         <Header />
         <div className='w-full'>{children}</div>
         <FooterNav />
-        <FloatingMenu />
+        {/* <FloatingMenu /> */}
         <Footer />
       </body>
     </html>
