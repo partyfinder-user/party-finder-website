@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { HeartIcon, MagnifyingGlassIcon, UserCircleIcon, HomeIcon, BoltIcon } from '@heroicons/react/24/outline';
+import FloatingMenu from './FloatingMenu';
 
 const NAV = [
   {
@@ -60,7 +61,7 @@ const FooterNav = () => {
   return (
     <div
       ref={containerRef}
-      className='w-full mx-auto py-2 bg-neutral-800/30 backdrop-blur-lg fixed top-auto bottom-0 inset-x-0 z-30 transition-transform duration-300 ease-in-out'
+      className='w-full mx-auto py-2 bg-background-900/60 backdrop-blur-lg fixed top-auto bottom-0 inset-x-0 z-30 transition-transform duration-300 ease-in-out'
     >
       <div className='flex justify-around mx-auto text-center'>
         <Link href='#'>
@@ -83,9 +84,7 @@ const FooterNav = () => {
             <span className='text-sm leading-none mt-1'>Cerca</span>
           </div>
         </Link>
-        <button className='w-12 h-12 flex items-center justify-center rounded-full bg-accent-400 text-white transition-transform'>
-          <BoltIcon className='w-6 h-6' />
-        </button>
+        <FloatingMenu />
         <Link href='#'>
           <div
             className={`flex flex-col items-center justify-between text-neutral-300/90 ${
