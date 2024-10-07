@@ -388,7 +388,7 @@ export default function Home() {
                         <HeartIcon className="w-6 h-6 text-white" />
                       </div>
 
-                      <div className="absolute top-0 right-0 bg-background-800/80 backdrop-blur-sm text-neon-low text-md px-3.5 py-1.5 rounded-bl-lg">
+                      <div className="absolute top-0 right-0 bg-background-800/80 backdrop-blur-sm text-neon text-md px-3.5 py-1.5 rounded-bl-lg">
                         {event.venue}
                       </div>
 
