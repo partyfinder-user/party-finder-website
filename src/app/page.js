@@ -273,7 +273,7 @@ export default function Home() {
                     key={locale.id}
                     className="flex flex-col items-center justify-center gap-3"
                   >
-                    <div className="relative w-20 h-20 rounded-full p-1 bg-gradient-to-tr from-yellow-500 via-[#b592ff] to-[#5200FF]">
+                    <div className="relative w-20 h-20 rounded-full p-1 bg-gradient-to-tr from-yellow-400 via-accent-500 to-primary-500">
                       <div className="w-full h-full rounded-full">
                         <Image
                           src={locale.image}
@@ -339,7 +339,7 @@ export default function Home() {
                         <HeartIcon className="w-6 h-6 text-white" />
                       </div>
 
-                      <div className="absolute top-0 right-0 bg-background-500/60 border border-background-500 backdrop-blur-sm text-neon text-md px-3.5 py-1.5 rounded-bl-lg">
+                      <div className="absolute top-0 right-0 bg-background-500/60 border border-background-500/30 backdrop-blur-sm text-neon text-md px-3.5 py-1.5 rounded-bl-lg">
                         {event.venue}
                       </div>
 

@@ -53,6 +53,13 @@
 
 @layer utilities {
   .text-neon {
+    color: #9d70ff; /* Colore di base neon viola */
+    text-shadow: 0 0 5px #9d70ff, 0 0 10px #9d70ff,
+      /* Bagliore medio */ 0 0 20px #9d70ff,
+      /* Bagliore più largo */ 0 0 40px #ff00ff,
+      /* Colore neon acceso più intenso */ 0 0 80px #ff00ff; /* Effetto bagliore distante */
+  }
+  .text-neon-low {
     color: #ffffff; /* Bianco per maggiore contrasto */
     text-shadow: 0 0 5px #9d70ff, /* Bagliore vicino, viola */ 0 0 10px #9d70ff,
       /* Bagliore medio */ 0 0 20px #9d70ff,
