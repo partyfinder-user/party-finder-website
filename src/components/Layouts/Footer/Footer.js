@@ -76,8 +76,8 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer>
-      <div className="mx-auto max-w-8xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
+    <footer className="">
+      <div className="mx-auto max-w-8xl overflow-hidden px-6 pb-20 pt-8 sm:py-24 lg:px-8">
         <nav
           aria-label="Footer"
           className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12"

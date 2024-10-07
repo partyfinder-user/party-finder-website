@@ -8,7 +8,7 @@ const FloatingMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className=''>
+    <div className='z-40'>
       <Transition
         show={isMenuOpen}
         enter='transition-opacity duration-300'
@@ -18,13 +18,13 @@ const FloatingMenu = () => {
         leaveFrom='opacity-100'
         leaveTo='opacity-0'
       >
-        <div onClick={() => setIsMenuOpen(false)} className='fixed inset-0 bg-black bg-opacity-60 z-40'></div>
+        <div onClick={() => setIsMenuOpen(false)} className='fixed inset-0 bg-black bg-opacity-60 z-20'></div>
       </Transition>
 
       <Dialog
         open={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
-        className='fixed inset-0 z-50 flex items-end justify-center'
+        className='fixed inset-0 z-30 flex items-end justify-center'
       >
         <Transition
           show={isMenuOpen}
