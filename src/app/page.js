@@ -339,7 +339,7 @@ export default function Home() {
                         <HeartIcon className="w-6 h-6 text-white" />
                       </div>
 
-                      <div className="absolute top-0 right-0 bg-background-500/60 border border-background-500/30 backdrop-blur-sm text-neon text-md px-3.5 py-1.5 rounded-bl-lg">
+                      <div className="absolute top-0 right-0 bg-background-500/60 border border-background-500/30 backdrop-blur-sm text-neon-low font-medium text-md px-3.5 py-1.5 rounded-bl-lg">
                         {event.venue}
                       </div>
 
@@ -388,7 +388,7 @@ export default function Home() {
                         <HeartIcon className="w-6 h-6 text-white" />
                       </div>
 
-                      <div className="absolute top-0 right-0 bg-background-800/80 backdrop-blur-sm text-neon text-md px-3.5 py-1.5 rounded-bl-lg">
+                      <div className="absolute top-0 right-0 bg-background-800/80 backdrop-blur-sm text-neon-low font-medium text-md px-3.5 py-1.5 rounded-bl-lg">
                         {event.venue}
                       </div>
 
@@ -435,10 +435,10 @@ export default function Home() {
 
                   <div className="flex flex-col justify-between px-4 py-2 flex-grow gap-2">
                     <div>
-                      <span className="text-lg font-semibold text-white block">
+                      <span className="text-lg text-white block">
                         {event.title}
                       </span>
-                      <span className="text-accent-500">{event.venue}</span>
+                      <span className="text-accent-500 font-medium">{event.venue}</span>
                     </div>
 
                     <div className="flex flex-col">
