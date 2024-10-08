@@ -31,20 +31,29 @@ const SearchPanel = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closePopup = () => {
-    setIsOpen(!setIsOpen);
+    setIsOpen(false);
     api.start({ y: 0 });
   };
 
+  // Limita la gesture solo alla parte alta del pannello
   const bind = useGesture({
-    onDrag: ({ movement: [, my], direction: [, dy], velocity }) => {
-      if (dy > 0 && velocity > 0.2) {
+    onDrag: ({ event, movement: [, my], direction: [, dy], velocity }) => {
+      const threshold = 100; // Soglia per chiudere il pannello
+      const target = event.target; // Ottieni l'elemento su cui è stato iniziato il drag
+
+      // Controlla se l'elemento è nella parte alta del pannello
+      const isTopArea = target.closest('.top-draggable-area');
+
+      if (isTopArea && (my > threshold || (dy > 0 && velocity > 0.2))) {
+        // Se il trascinamento è nella parte alta e si supera la soglia, chiudi
         closePopup();
-      } else {
+      } else if (isTopArea) {
+        // Solo se sei nella parte alta, gestisci il movimento
         api.start({ y: my < 0 ? 0 : my });
       }
     },
     onDragEnd: () => {
-      api.start({ y: 0 });
+      api.start({ y: 0 }); // Reset della posizione se non si è chiuso
     },
   });
 
@@ -67,13 +76,17 @@ const SearchPanel = () => {
         <DialogBackdrop className='fixed inset-0 bg-black/30' />
 
         <div className='fixed inset-0 flex w-screen h-screen items-center justify-center'>
+          {/* Aggiungi la classe .top-draggable-area per limitare la gesture */}
           <animated.div
             {...bind()}
             style={{ y, touchAction: 'none' }}
             className='w-full h-screen bg-background-900/60 backdrop-blur-lg'
           >
             <DialogPanel className='relative'>
-              <DialogTitle as='h3' className='w-full px-4 pt-4 pb-1 mb-4 border-b border-background-400/50'>
+              <DialogTitle
+                as='h3'
+                className='top-draggable-area w-full px-4 pt-4 pb-1 mb-4 border-b border-background-400/50'
+              >
                 <div className='flex items-center'>
                   <div className='mb-3'>
                     <CaretLeft className='w-6 h-6 text-accent-500' onClick={() => setIsOpen(!isOpen)} />
