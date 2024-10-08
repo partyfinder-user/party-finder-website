@@ -1,8 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["tailwindui.com"],
-    formats: ["image/webp"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'tailwindui.com',
+      },
+    ],
+    formats: ['image/webp'],
   },
 };
 

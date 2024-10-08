@@ -5,6 +5,7 @@ import './globals.css';
 import Header from '@/components/Layouts/Header/Header';
 import Footer from '@/components/Layouts/Footer/Footer';
 import FooterNav from '@/components/Layouts/Menu/FooterNav';
+import { Providers } from '@/Providers/Providers';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -27,10 +28,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang='it'>
       <body className={`${montserrat.className} bg-gradient-to-bl from-[#130033] to-[#161616] text-white`}>
-        <Header />
-        <div className='w-full'>{children}</div>
-        <FooterNav />
-        <Footer />
+        <Providers>
+          <Header />
+          <div className='w-full'>{children}</div>
+          <FooterNav />
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
