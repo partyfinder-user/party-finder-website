@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Transition, Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
+import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import { BoltIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
 function FloatingMenu() {

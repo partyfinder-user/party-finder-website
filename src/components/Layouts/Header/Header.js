@@ -12,11 +12,11 @@ const Header = () => {
           <div className='flex-1'>
             <h1 className='text-accent-200 text-xs -mb-1'>Cerca nei pressi di:</h1>
             <div className='flex items-center'>
-              <h1 className='text-white text-xl'>Bassano del Grappa</h1>
+              <h1 className='text-white text-lg'>Bassano del Grappa</h1>
               <ChevronDownIcon className='mt-1 size-5 text-gray-300' />
             </div>
           </div>
-          <div>
+          <div className="mb-3">
             <Logo />
           </div>
         </div>
