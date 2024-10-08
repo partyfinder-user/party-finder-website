@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { HeartIcon, MagnifyingGlassIcon, UserCircleIcon, HomeIcon, BoltIcon } from '@heroicons/react/24/outline';
-import FloatingMenu from './FloatingMenu';
+import FloatingMenu from './ActionMenu';
 
 const NAV = [
   {

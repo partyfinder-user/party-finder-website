@@ -5,7 +5,6 @@ import './globals.css';
 import Header from '@/components/Layouts/Header/Header';
 import Footer from '@/components/Layouts/Footer/Footer';
 import FooterNav from '@/components/Layouts/Menu/FooterNav';
-import FloatingMenu from '@/components/Layouts/Menu/FloatingMenu';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
