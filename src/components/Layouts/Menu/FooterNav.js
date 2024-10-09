@@ -6,31 +6,9 @@ import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { HeartIcon, MagnifyingGlassIcon, UserCircleIcon, HomeIcon, BoltIcon } from '@heroicons/react/24/outline';
+import { HeartIcon, UserCircleIcon, HomeIcon } from '@heroicons/react/24/outline';
+import { MapPin } from '@phosphor-icons/react';
 import FloatingMenu from './ActionMenu';
-
-const NAV = [
-  {
-    name: 'Home',
-    link: '/',
-    icon: HomeIcon,
-  },
-  {
-    name: 'Cerca',
-    link: '/search',
-    icon: MagnifyingGlassIcon,
-  },
-  {
-    name: 'Preferiti',
-    link: '/events',
-    icon: HeartIcon,
-  },
-  {
-    name: 'Accedi',
-    link: '/account',
-    icon: UserCircleIcon,
-  },
-];
 
 const FooterNav = () => {
   const prevScrollPosRef = useRef(0);
@@ -80,8 +58,8 @@ const FooterNav = () => {
               active ? 'text-neutral-100' : ''
             }`}
           >
-            <MagnifyingGlassIcon className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
-            <span className='text-sm leading-none mt-1'>Cerca</span>
+            <MapPin className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
+            <span className='text-sm leading-none mt-1'>Luogo</span>
           </div>
         </Link>
         <FloatingMenu />
