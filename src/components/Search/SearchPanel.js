@@ -2,13 +2,43 @@
 
 import React, { useState } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
-import { CalendarDots, CurrencyEur, MapPinSimple, MusicNotes, Person } from '@phosphor-icons/react';
+import { CalendarDots, CurrencyEur, MapPinSimple, MusicNotes, Person, X } from '@phosphor-icons/react';
 import Logo from '../Helpers/Logo';
 import SearchInput from './SearchInput';
 import DateRange from './Filter/DateRange';
 
 const SearchPanel = ({ isOpen, setIsOpen }) => {
   const [isOpenDateRange, setIsOpenDateRange] = useState(false);
+  const [dateRange, setDateRange] = useState({ start: '', end: '' });
+  const [dateRangeUI, setDateRangeUI] = useState();
+
+  const formatDateRange = (range) => {
+    const formatDate = (date) => {
+      return date?.toLocaleDateString('it-IT', {
+        day: 'numeric',
+        month: 'short',
+      });
+    };
+
+    if (range.start && range.end && range.start.getTime() === range.end.getTime()) {
+      return formatDate(range.start);
+    } else {
+      return `${formatDate(range.start)} ➔ ${formatDate(range.end)}`;
+    }
+  };
+
+  const handleDateSelect = (range) => {
+    setDateRange(range);
+    setDateRangeUI(formatDateRange(range));
+  };
+
+  const handlerResetDateRange = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    setDateRange({ start: '', end: '' });
+    setDateRangeUI('');
+  };
 
   return (
     <>
@@ -33,23 +63,29 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
             </DialogTitle>
 
             <div className='relative overflow-hidden flex px-4'>
-              <section className='overflow-y-scroll h-[10000px]'>
+              <section className='relative overflow-hidden'>
                 <div className='relative snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
                   <div className='w-full flex flex-row gap-2'>
                     <div className='flex flex-col items-center justify-center gap-3'>
                       <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
                         {/* <MapPin className='w-4 h-4 text-accent-400 mr-1' weight='duotone' /> */}
-                        Bassano del Grappa
+                        Bassano del Grappa <X className='w-4 h-4 text-white ml-2' onClick={handlerResetDateRange} />
                       </div>
                     </div>
                     <div
                       className='flex flex-col items-center justify-center gap-3'
                       onClick={() => setIsOpenDateRange(true)}
                     >
-                      <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                        <CalendarDots className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
-                        Data
-                      </div>
+                      {!dateRangeUI ? (
+                        <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+                          <CalendarDots className='w-4 h-4 text-accent-400 mr-1' weight='duotone' /> Data
+                        </div>
+                      ) : (
+                        <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
+                          <span className='capitalize'>{dateRangeUI}</span>{' '}
+                          <X className='w-4 h-4 text-white ml-2' onClick={handlerResetDateRange} />
+                        </div>
+                      )}
                     </div>
                     <div className='flex flex-col items-center justify-center gap-3'>
                       <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
@@ -82,7 +118,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
             </div>
           </DialogPanel>
         </div>
-        <DateRange isOpen={isOpenDateRange} setIsOpen={setIsOpenDateRange} />
+        <DateRange isOpen={isOpenDateRange} setIsOpen={setIsOpenDateRange} dateSelect={handleDateSelect} />
       </Dialog>
     </>
   );
