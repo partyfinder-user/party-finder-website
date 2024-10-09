@@ -14,7 +14,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
   const [isOpenDistance, setIsOpenDistance] = useState(false);
   const [dateRange, setDateRange] = useState({ start: '', end: '' });
   const [dateRangeUI, setDateRangeUI] = useState();
-  const [distance, setDistance] = useState();
+  const [distance, setDistance] = useState(50);
   const [freeEntry, setFreeEntry] = useState(false);
 
   const formatDateRange = (range) => {
@@ -160,6 +160,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
           setIsOpen={setIsOpenDistance}
           onDistanceSelect={handleDistanceSelect}
           onReset={handlerResetDistance}
+          initialDistance={distance}
         />
         <DateRange isOpen={isOpenDateRange} setIsOpen={setIsOpenDateRange} onDateSelect={handleDateSelect} />
       </Dialog>

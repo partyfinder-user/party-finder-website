@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import { Slider } from '@nextui-org/slider';
 
-const DistanceRange = ({ isOpen, setIsOpen, onDistanceSelect, onReset }) => {
-  const [selectedDistance, setSelectedDistance] = useState(50);
+const DistanceRange = ({ isOpen, setIsOpen, onDistanceSelect, onReset, initialDistance }) => {
+  const [selectedDistance, setSelectedDistance] = useState(initialDistance || 50);
 
   const handleDistanceChange = (value) => {
     setSelectedDistance(value);
@@ -16,7 +16,7 @@ const DistanceRange = ({ isOpen, setIsOpen, onDistanceSelect, onReset }) => {
 
   useEffect(() => {
     if (onReset) {
-      setSelectedDistance(50);
+      setSelectedDistance(initialDistance || 50);
     }
   }, [onReset]);
 
