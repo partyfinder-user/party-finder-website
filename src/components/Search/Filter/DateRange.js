@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import { RangeCalendar } from '@nextui-org/calendar';
+import { I18nProvider } from '@react-aria/i18n';
 import { today, getLocalTimeZone } from '@internationalized/date';
 import { X, ArrowRight } from '@phosphor-icons/react';
 
@@ -63,9 +64,20 @@ const DateRange = ({ isOpen, setIsOpen, dateSelect }) => {
   };
 
   const selectWeek = () => {
-    const start = today(getLocalTimeZone());
-    const end = start.add({ days: 6 });
-    setSelectedRange({ start, end });
+    const todayDate = today(getLocalTimeZone());
+    const dayOfWeek = todayDate.toDate(getLocalTimeZone()).getDay();
+    const daysUntilSunday = 7 - dayOfWeek;
+    const endOfWeek = todayDate.add({ days: daysUntilSunday });
+    setSelectedRange({ start: todayDate, end: endOfWeek });
+  };
+
+  const selectWeekend = () => {
+    const todayDate = today(getLocalTimeZone());
+    const dayOfWeek = todayDate.toDate(getLocalTimeZone()).getDay();
+    const daysUntilFriday = dayOfWeek <= 5 ? 5 - dayOfWeek : 0;
+    const startOfWeekend = todayDate.add({ days: daysUntilFriday });
+    const endOfWeekend = startOfWeekend.add({ days: 2 });
+    setSelectedRange({ start: startOfWeekend, end: endOfWeekend });
   };
 
   const handleDateSelect = (currentRange) => {
@@ -90,25 +102,38 @@ const DateRange = ({ isOpen, setIsOpen, dateSelect }) => {
             />
             <DialogPanel>
               <div className='flex flex-col items-center justify-center px-4'>
-                <div className='flex items-center justify-center  my-4 space-x-2'>
-                  <button onClick={selectToday} className='px-3 py-2 bg-background-700 text-white rounded text-xs'>
-                    Oggi
-                  </button>
-                  <button onClick={selectTomorrow} className='px-3 py-2 bg-background-700 text-white rounded text-xs'>
-                    Domani
-                  </button>
-                  <button onClick={selectWeek} className='px-3 py-2 bg-background-700 text-white rounded text-xs'>
-                    Questa settimana
-                  </button>
+                <div className='relative overflow-hidden mb-2'>
+                  <div className='grid grid-cols-2 grid-rows-2 gap-2'>
+                    <button onClick={selectToday} className='px-2 py-2 bg-background-500 text-white rounded-lg text-xs'>
+                      Oggi
+                    </button>
+                    <button
+                      onClick={selectTomorrow}
+                      className='px-2 py-2 bg-background-500 text-white rounded-lg text-xs'
+                    >
+                      Domani
+                    </button>
+                    <button
+                      onClick={selectWeekend}
+                      className='px-2 py-2 bg-background-500 text-white rounded-lg text-xs'
+                    >
+                      Fine settimana
+                    </button>
+                    <button onClick={selectWeek} className='px-2 py-2 bg-background-500 text-white rounded-lg text-xs'>
+                      Questa settimana
+                    </button>
+                  </div>
                 </div>
 
-                <RangeCalendar
-                  aria-label='Seleziona le date'
-                  locale='it-IT'
-                  value={selectedRange}
-                  onChange={handleDateChange}
-                  minValue={today()}
-                />
+                <I18nProvider locale='it-IT-i-it-italian'>
+                  <RangeCalendar
+                    aria-label='Seleziona le date'
+                    locale='it-IT'
+                    value={selectedRange}
+                    onChange={handleDateChange}
+                    minValue={today()}
+                  />
+                </I18nProvider>
 
                 <DateRangeButton
                   start={selectedRange.start}
