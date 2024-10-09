@@ -16,7 +16,7 @@ const DateRangeButton = ({ start, end, formatDate, onConfirm }) => {
   };
 
   return (
-    <button onClick={handleConfirm} className='mt-4 px-4 py-2 bg-accent-500 text-white rounded'>
+    <button onClick={handleConfirm} className='mt-4 px-6 py-2 bg-accent-500 text-white rounded-lg'>
       {start && (
         <>
           {start.compare(end) === 0 ? (
