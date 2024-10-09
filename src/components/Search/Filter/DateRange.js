@@ -32,7 +32,7 @@ const DateRangeButton = ({ start, end, formatDate, onConfirm }) => {
   );
 };
 
-const DateRange = ({ isOpen, setIsOpen, dateSelect }) => {
+const DateRange = ({ isOpen, setIsOpen, onDateSelect }) => {
   const [selectedRange, setSelectedRange] = useState({
     start: today(getLocalTimeZone()),
     end: today(getLocalTimeZone()),
@@ -81,7 +81,7 @@ const DateRange = ({ isOpen, setIsOpen, dateSelect }) => {
   };
 
   const handleDateSelect = (currentRange) => {
-    dateSelect(currentRange);
+    onDateSelect(currentRange);
     setIsOpen(false);
   };
 

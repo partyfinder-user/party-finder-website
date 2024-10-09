@@ -3,14 +3,18 @@
 import React, { useState } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import { CalendarDots, CurrencyEur, MapPinSimple, MusicNotes, Person, X } from '@phosphor-icons/react';
+
 import Logo from '../Helpers/Logo';
 import SearchInput from './SearchInput';
 import DateRange from './Filter/DateRange';
+import DistanceRange from './Filter/DistanceRange';
 
 const SearchPanel = ({ isOpen, setIsOpen }) => {
   const [isOpenDateRange, setIsOpenDateRange] = useState(false);
+  const [isOpenDistance, setIsOpenDistance] = useState(false);
   const [dateRange, setDateRange] = useState({ start: '', end: '' });
   const [dateRangeUI, setDateRangeUI] = useState();
+  const [distance, setDistance] = useState();
 
   const formatDateRange = (range) => {
     const formatDate = (date) => {
@@ -35,9 +39,18 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
   const handlerResetDateRange = (event) => {
     event.preventDefault();
     event.stopPropagation();
-
     setDateRange({ start: '', end: '' });
     setDateRangeUI('');
+  };
+
+  const handleDistanceSelect = (value) => {
+    setDistance(value);
+  };
+
+  const handlerResetDistance = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setDistance('');
   };
 
   return (
@@ -93,11 +106,21 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                         Freeentry
                       </div>
                     </div>
-                    <div className='flex flex-col items-center justify-center gap-3'>
-                      <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                        <MapPinSimple className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
-                        Distanza
-                      </div>
+                    <div
+                      className='flex flex-col items-center justify-center gap-3'
+                      onClick={() => setIsOpenDistance(true)}
+                    >
+                      {!distance ? (
+                        <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+                          <MapPinSimple className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
+                          Distanza
+                        </div>
+                      ) : (
+                        <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
+                          <span className='capitalize'>Entro {distance} km</span>{' '}
+                          <X className='w-4 h-4 text-white ml-2' onClick={handlerResetDistance} />
+                        </div>
+                      )}
                     </div>
                     <div className='flex flex-col items-center justify-center gap-3'>
                       <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
@@ -118,7 +141,13 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
             </div>
           </DialogPanel>
         </div>
-        <DateRange isOpen={isOpenDateRange} setIsOpen={setIsOpenDateRange} dateSelect={handleDateSelect} />
+        <DistanceRange
+          isOpen={isOpenDistance}
+          setIsOpen={setIsOpenDistance}
+          onDistanceSelect={handleDistanceSelect}
+          onReset={handlerResetDistance}
+        />
+        <DateRange isOpen={isOpenDateRange} setIsOpen={setIsOpenDateRange} onDateSelect={handleDateSelect} />
       </Dialog>
     </>
   );

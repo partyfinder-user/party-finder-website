@@ -13,7 +13,10 @@ const montserrat = Montserrat({
 });
 
 export const viewport = {
-  themeColor: '#281F44',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#281F44' },
+    { media: '(prefers-color-scheme: dark)', color: '#281F44' },
+  ],
 };
 
 export const metadata = {
