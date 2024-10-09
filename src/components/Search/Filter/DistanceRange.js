@@ -61,8 +61,8 @@ const DistanceRange = ({ isOpen, setIsOpen, onDistanceSelect, onReset }) => {
                     step: 'data-[in-range=true]:bg-black/30 dark:data-[in-range=true]:bg-white/50',
                   }}
                   tooltipProps={{
-                    offset: 10,
-                    placement: 'bottom',
+                    offset: 20,
+                    placement: 'top',
                     classNames: {
                       base: ['before:bg-gradient-to-r before:from-secondary-400 before:to-primary-500'],
                       content: ['py-2 shadow-xl', 'text-white bg-gradient-to-r from-secondary-400 to-primary-500'],
