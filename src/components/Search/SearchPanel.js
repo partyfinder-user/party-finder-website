@@ -15,6 +15,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
   const [dateRange, setDateRange] = useState({ start: '', end: '' });
   const [dateRangeUI, setDateRangeUI] = useState();
   const [distance, setDistance] = useState();
+  const [freeEntry, setFreeEntry] = useState(false);
 
   const formatDateRange = (range) => {
     const formatDate = (date) => {
@@ -51,6 +52,12 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
     event.preventDefault();
     event.stopPropagation();
     setDistance('');
+  };
+
+  const handlerResetFreeEntry = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setFreeEntry(false);
   };
 
   return (
@@ -100,11 +107,18 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                         </div>
                       )}
                     </div>
-                    <div className='flex flex-col items-center justify-center gap-3'>
-                      <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                        <CurrencyEur className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
-                        Freeentry
-                      </div>
+                    <div className='flex flex-col items-center justify-center gap-3' onClick={() => setFreeEntry(true)}>
+                      {!freeEntry ? (
+                        <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+                          <CurrencyEur className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
+                          FreeEntry
+                        </div>
+                      ) : (
+                        <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
+                          <span className='capitalize'>FreeEntry</span>{' '}
+                          <X className='w-4 h-4 text-white ml-2' onClick={handlerResetFreeEntry} />
+                        </div>
+                      )}
                     </div>
                     <div
                       className='flex flex-col items-center justify-center gap-3'
