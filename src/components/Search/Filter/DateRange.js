@@ -95,11 +95,7 @@ const DateRange = ({ isOpen, setIsOpen, dateSelect }) => {
       >
         <DialogBackdrop className='fixed inset-0 bg-black/60' />
         <div className='fixed inset-0 z-10 w-screen overflow-y-auto'>
-          <div className='relative flex min-h-full items-center justify-center p-4'>
-            <X
-              className='absolute w-8 h-8 text-white cursor-pointer m-8 right-0 top-0'
-              onClick={() => setIsOpen(false)}
-            />
+          <div className='flex min-h-full items-center justify-center p-4'>
             <DialogPanel>
               <div className='flex flex-col items-center justify-center px-4'>
                 <div className='relative overflow-hidden mb-2'>
