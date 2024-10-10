@@ -6,7 +6,7 @@ import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import { RangeCalendar } from '@nextui-org/calendar';
 import { I18nProvider } from '@react-aria/i18n';
 import { today, getLocalTimeZone } from '@internationalized/date';
-import { X, ArrowRight } from '@phosphor-icons/react';
+import { ArrowRight } from '@phosphor-icons/react';
 
 const DateRangeButton = ({ start, end, formatDate, onConfirm }) => {
   const handleConfirm = () => {
@@ -93,7 +93,7 @@ const DateRange = ({ isOpen, setIsOpen, onDateSelect }) => {
         onClose={() => setIsOpen(false)}
         className='relative z-50 transition duration-100 ease-out data-[closed]:opacity-0'
       >
-        <DialogBackdrop className='fixed inset-0 bg-black/60' />
+        <DialogBackdrop className='fixed inset-0 bg-black/80' />
         <div className='fixed inset-0 z-10 w-screen overflow-y-auto'>
           <div className='flex min-h-full items-center justify-center p-4'>
             <DialogPanel>
