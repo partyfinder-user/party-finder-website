@@ -8,14 +8,18 @@ import Logo from '../Helpers/Logo';
 import SearchInput from './SearchInput';
 import DateRange from './Filter/DateRange';
 import DistanceRange from './Filter/DistanceRange';
+import Genre from './Filter/Genre';
 
 const SearchPanel = ({ isOpen, setIsOpen }) => {
   const [isOpenDateRange, setIsOpenDateRange] = useState(false);
   const [isOpenDistance, setIsOpenDistance] = useState(false);
+  const [isOpenGenre, setIsOpenGenre] = useState(false);
+
   const [dateRange, setDateRange] = useState({ start: '', end: '' });
   const [dateRangeUI, setDateRangeUI] = useState();
   const [distance, setDistance] = useState(50);
   const [freeEntry, setFreeEntry] = useState(false);
+  const [genre, setGenre] = useState('');
 
   const formatDateRange = (range) => {
     const formatDate = (date) => {
@@ -58,6 +62,10 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
     event.preventDefault();
     event.stopPropagation();
     setFreeEntry(false);
+  };
+
+  const handleGenreSelect = (value) => {
+    setGenre(value);
   };
 
   return (
@@ -136,10 +144,13 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                         </div>
                       )}
                     </div>
-                    <div className='flex flex-col items-center justify-center gap-3'>
+                    <div
+                      className='flex flex-col items-center justify-center gap-3'
+                      onClick={() => setIsOpenGenre(true)}
+                    >
                       <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
                         <MusicNotes className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
-                        Genere
+                        Genere {genre}
                       </div>
                     </div>
                     <div className='flex flex-col items-center justify-center gap-3'>
@@ -163,6 +174,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
           initialDistance={distance}
         />
         <DateRange isOpen={isOpenDateRange} setIsOpen={setIsOpenDateRange} onDateSelect={handleDateSelect} />
+        <Genre isOpen={isOpenGenre} setIsOpen={setIsOpenGenre} onDateSelect={handleGenreSelect} />
       </Dialog>
     </>
   );

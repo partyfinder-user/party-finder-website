@@ -18,7 +18,7 @@ const DistanceRange = ({ isOpen, setIsOpen, onDistanceSelect, onReset, initialDi
     if (onReset) {
       setSelectedDistance(initialDistance || 50);
     }
-  }, [onReset]);
+  }, [initialDistance, onReset]);
 
   return (
     <Dialog
