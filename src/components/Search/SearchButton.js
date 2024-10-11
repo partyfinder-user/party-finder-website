@@ -1,9 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { MagnifyingGlass, MapPin } from '@phosphor-icons/react';
+import RootContext from '@/stores/root-context';
 
 const SearchButton = ({ setIsOpen }) => {
+  const rootCtx = useContext(RootContext);
+
   return (
     <button
       onClick={() => setIsOpen(true)}
@@ -15,7 +18,7 @@ const SearchButton = ({ setIsOpen }) => {
         <div className='block text-xs font-light text-white/60'>
           <div className='line-clamp-1 flex items-center'>
             <MapPin className='text-white w-4 h-4 mr-0.5' />
-            <div className='line-clamp-1'>Bassano del Grappa</div>
+            <div className='line-clamp-1'>{rootCtx?.position ? rootCtx.position : 'Ovunque'}</div>
           </div>
         </div>
       </div>

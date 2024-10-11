@@ -1,16 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
-import { CalendarDots, CurrencyEur, MapPinSimple, MusicNotes, Student, X } from '@phosphor-icons/react';
+import { MapPin, CalendarDots, CurrencyEur, MapPinSimple, MusicNotes, Student, X } from '@phosphor-icons/react';
 
 import Logo from '../Helpers/Logo';
 import SearchInput from './SearchInput';
 import DateRange from './Filter/DateRange';
 import DistanceRange from './Filter/DistanceRange';
 import Genre from './Filter/Genre';
+import SerachPosition from './SearchPosition';
+import RootContext from '@/stores/root-context';
 
 const SearchPanel = ({ isOpen, setIsOpen }) => {
+  const rootCtx = useContext(RootContext);
+
+  const [isOpenPosition, setIsOpenPosition] = useState(false);
   const [isOpenDateRange, setIsOpenDateRange] = useState(false);
   const [isOpenDistance, setIsOpenDistance] = useState(false);
   const [isOpenGenre, setIsOpenGenre] = useState(false);
@@ -21,7 +26,9 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
   const [freeEntry, setFreeEntry] = useState(false);
   const [forStudent, setForStudent] = useState(false);
   const [genres, setGenres] = useState();
+
   const [resetGenres, setResetGenres] = useState(false);
+  const [resetPostion, setResetPosition] = useState(false);
 
   const formatDateRange = (range) => {
     const formatDate = (date) => {
@@ -89,6 +96,22 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
     setGenres();
   };
 
+  const handlePositionSelect = (value) => {
+    if (!value) {
+      rootCtx.setPositionCity('');
+      return;
+    }
+
+    setResetPosition(false);
+    rootCtx.setPositionCity(value);
+  };
+
+  const handlerResetPosition = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setResetPosition(true);
+  };
+
   return (
     <>
       <Dialog
@@ -115,11 +138,21 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
               <section className='relative overflow-hidden'>
                 <div className='relative snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
                   <div className='w-full flex flex-row gap-2'>
-                    <div className='flex flex-col items-center justify-center gap-3'>
-                      <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
-                        {/* <MapPin className='w-4 h-4 text-accent-400 mr-1' weight='duotone' /> */}
-                        Bassano del Grappa <X className='w-4 h-4 text-white ml-2' onClick={handlerResetDateRange} />
-                      </div>
+                    <div
+                      className='flex flex-col items-center justify-center gap-3'
+                      onClick={() => setIsOpenPosition(true)}
+                    >
+                      {!rootCtx.position ? (
+                        <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+                          <MapPin className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
+                          Ovunque
+                        </div>
+                      ) : (
+                        <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
+                          <span className='capitalize'>{rootCtx?.position}</span>{' '}
+                          <X className='w-4 h-4 text-white ml-2' onClick={handlerResetPosition} />
+                        </div>
+                      )}
                     </div>
                     <div
                       className='flex flex-col items-center justify-center gap-3'
@@ -127,7 +160,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                     >
                       {!dateRangeUI ? (
                         <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                          <CalendarDots className='w-4 h-4 text-accent-400 mr-1' weight='duotone' /> Data
+                          <CalendarDots className='w-4 h-4 text-accent-400 mr-2' weight='duotone' /> Data
                         </div>
                       ) : (
                         <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
@@ -139,7 +172,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                     <div className='flex flex-col items-center justify-center gap-3' onClick={() => setFreeEntry(true)}>
                       {!freeEntry ? (
                         <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                          <CurrencyEur className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
+                          <CurrencyEur className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
                           FreeEntry
                         </div>
                       ) : (
@@ -155,7 +188,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                     >
                       {!distance ? (
                         <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                          <MapPinSimple className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
+                          <MapPinSimple className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
                           Distanza
                         </div>
                       ) : (
@@ -171,7 +204,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                     >
                       {!genres ? (
                         <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                          <MusicNotes className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
+                          <MusicNotes className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
                           Genere
                         </div>
                       ) : (
@@ -181,10 +214,13 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                         </div>
                       )}
                     </div>
-                    <div className='flex flex-col items-center justify-center gap-3' onClick={() => setForStudent(true)}>
+                    <div
+                      className='flex flex-col items-center justify-center gap-3'
+                      onClick={() => setForStudent(true)}
+                    >
                       {!forStudent ? (
                         <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                          <Student className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
+                          <Student className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
                           Studentesche
                         </div>
                       ) : (
@@ -207,6 +243,12 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
           onSelect={handleDistanceSelect}
           onReset={handlerResetDistance}
           initialDistance={distance}
+        />
+        <SerachPosition
+          isOpen={isOpenPosition}
+          setIsOpen={setIsOpenPosition}
+          onSelect={handlePositionSelect}
+          reset={resetPostion}
         />
         <DateRange isOpen={isOpenDateRange} setIsOpen={setIsOpenDateRange} onSelect={handleDateSelect} />
         <Genre isOpen={isOpenGenre} setIsOpen={setIsOpenGenre} reset={resetGenres} onSelect={handleGenreSelect} />

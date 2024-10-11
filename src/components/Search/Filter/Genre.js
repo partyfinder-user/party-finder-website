@@ -68,7 +68,7 @@ const Genre = ({ isOpen, setIsOpen, onSelect, reset }) => {
               <div className='w-full mb-8'>
                 <div className='flex flex-col gap-1 w-full'>
                   <CheckboxGroup value={groupSelected} onChange={setGroupSelected}>
-                    <ScrollShadow size={100} hideScrollBar className='w-full max-h-[450px]'>
+                    <ScrollShadow size={150} hideScrollBar className='w-full max-h-[450px]'>
                       <div className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 items-center justify-start w-full'>
                         {musicGenres.map((g, idx) => (
                           <CustomCheckbox key={idx} value={g.id}>
