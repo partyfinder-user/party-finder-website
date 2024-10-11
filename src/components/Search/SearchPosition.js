@@ -69,7 +69,7 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
       onClose={() => setIsOpen(false)}
       className='relative z-50 transition duration-100 ease-out data-[closed]:opacity-0'
     >
-      <DialogBackdrop className='fixed inset-0 bg-black/80' />
+      <DialogBackdrop className='fixed inset-0 bg-black/90' />
       <div className='fixed inset-0 z-10 w-screen overflow-y-auto'>
         <div className='flex min-h-full px-2 py-6'>
           <DialogPanel className='w-full'>
