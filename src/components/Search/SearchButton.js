@@ -18,7 +18,7 @@ const SearchButton = ({ setIsOpen }) => {
         <div className='block text-xs font-light text-white/60'>
           <div className='line-clamp-1 flex items-center'>
             <MapPin className='text-white w-4 h-4 mr-0.5' />
-            <div className='line-clamp-1'>{rootCtx?.position ? rootCtx.position : 'Ovunque'}</div>
+            <div className='text-white line-clamp-1 mt-0.5'>{rootCtx?.position ? rootCtx.position : 'Ovunque'}</div>
           </div>
         </div>
       </div>
