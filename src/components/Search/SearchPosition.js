@@ -23,7 +23,7 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
   const handleSearch = async () => {
     if (query.length === 0) {
       setCities([]);
-      return;
+      // return;
     }
 
     setLoading(true);
@@ -72,7 +72,7 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
     >
       <DialogBackdrop className='fixed inset-0 bg-black/80' />
       <div className='fixed inset-0 z-10 w-screen overflow-y-auto'>
-        <div className='flex min-h-full px-4 py-8'>
+        <div className='flex min-h-full px-2 py-6'>
           <DialogPanel className='w-full'>
             <div className='flex flex-col px-4'>
               <div className='flex items-center mb-4'>
@@ -85,8 +85,8 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
               <Input
                 bordered
                 isClearable
+                size={'lg'}
                 onClear={handleClear}
-                labelPlacement='outside'
                 placeholder='Cerca una città'
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
