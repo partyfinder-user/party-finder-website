@@ -73,7 +73,7 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
       <div className='fixed inset-0 z-10 w-screen overflow-y-auto'>
         <div className='flex min-h-full px-2 py-6'>
           <DialogPanel className='w-full'>
-            <div className='flex flex-col px-4'>
+            <div className='flex flex-col px-2'>
               <div className='flex items-center mb-4'>
                 <span className='text-lg font-semibold flex-1 '>Trova la tua città</span>
                 <button onClick={() => setIsOpen(false)} className='p-2 bg-white/40 text-white rounded-lg'>
@@ -81,19 +81,21 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
                 </button>
               </div>
 
-              <div className='relative w-full'>
+              <div className='relative w-full group'>
                 <input
                   type='text'
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder='Cerca una città'
-                  className='w-full pl-10 pr-10 py-3 border rounded-xl bg-default-100 border-background-500 focus:border-accent-200 focus:outline-none focus:ring-0'
+                  placeholder='Cerca una città o la tua provincia'
+                  className='w-full pl-10 pr-10 py-3 border rounded-xl bg-default-100 border-background-500 focus:border-accent-500 focus:outline-none focus:ring-0'
                 />
 
+                {/* Icona all'inizio */}
                 <span className='absolute inset-y-0 left-3 flex items-center pointer-events-none'>
-                  <MagnifyingGlass className='text-xl text-gray-400' />
+                  <MagnifyingGlass className='text-xl text-gray-400 transition-colors duration-200 group-focus-within:text-accent-500' />
                 </span>
 
+                {/* Icona "clear" */}
                 {query && (
                   <button type='button' className='absolute inset-y-0 right-3 flex items-center' onClick={handleClear}>
                     <X className='text-xl text-gray-400 hover:text-gray-600' />

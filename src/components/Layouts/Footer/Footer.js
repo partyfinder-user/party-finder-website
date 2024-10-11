@@ -1,5 +1,3 @@
-import SerachPosition from '@/components/Search/SearchPosition';
-
 const navigation = {
   main: [
     { name: 'About', href: '#' },
@@ -101,7 +99,6 @@ export default function Footer() {
           &copy; {currentYear} PartyFinder.it - All rights reserved.
         </p>
       </div>
-      {/* <SerachPosition /> */}
     </footer>
   );
 }

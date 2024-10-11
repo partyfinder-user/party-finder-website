@@ -16,7 +16,9 @@ export const searchCity = async (query) => {
   const allCities = await loadLocalities();
   const lowerQuery = query.toLowerCase();
   const cities = allCities.filter((c) => c.sigla !== 'EE');
-  const startsWithMatches = cities.filter((city) => city.nome.toLowerCase().startsWith(lowerQuery));
-  const filteredCities = startsWithMatches.sort((a, b) => a.nome.localeCompare(b.nome)).slice(0, 20);
-  return filteredCities;
+  const cityStartsWithMatches = cities.filter((city) => city.nome.toLowerCase().startsWith(lowerQuery)).sort((a, b) => a.nome.localeCompare(b.nome));
+  const provinceStartsWithMatches = cities.filter((city) => city?.provincia?.nome.toLowerCase().includes(lowerQuery)).sort((a, b) => a.nome.localeCompare(b.nome));
+  const startsWithMatches = [...cityStartsWithMatches, ...provinceStartsWithMatches].slice(0, 20);
+  // const filteredCities = startsWithMatches.sort((a, b) => a.nome.localeCompare(b.nome)).slice(0, 20);
+  return startsWithMatches;
 };
