@@ -5,8 +5,15 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/components/(calendar|checkbox|slider|button|ripple|spinner|popover).js"
+    "./node_modules/@nextui-org/theme/dist/components/(calendar|checkbox|scroll-shadow|slider|button|ripple|spinner|popover).js"
   ],
+  theme: {
+    extend: {
+      screens: {
+        xs: '320px',
+      },
+    },
+  },
   plugins: [
     require('tailwind-scrollbar-hide'),
     nextui({

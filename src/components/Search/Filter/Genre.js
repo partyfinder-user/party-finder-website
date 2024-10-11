@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import { CheckboxGroup } from '@nextui-org/checkbox';
+import { ScrollShadow } from '@nextui-org/scroll-shadow';
+import { Trash } from '@phosphor-icons/react';
+
 import { CustomCheckbox } from '@/components/Helpers/CustomeCheckbox';
-import { X } from '@phosphor-icons/react';
 
 const musicGenres = [
   { text: 'Rock', id: 1 },
@@ -27,8 +29,7 @@ const musicGenres = [
   { text: 'Indie', id: 20 },
 ];
 
-const Genre = ({ isOpen, setIsOpen, onSelect, onReset, initialGenre }) => {
-  const [selectedGenre, setSelectedGerne] = useState(initialGenre);
+const Genre = ({ isOpen, setIsOpen, onSelect, reset }) => {
   const [groupSelected, setGroupSelected] = useState([]);
 
   const handleConfirm = () => {
@@ -37,13 +38,13 @@ const Genre = ({ isOpen, setIsOpen, onSelect, onReset, initialGenre }) => {
   };
 
   useEffect(() => {
-    if (onReset) {
-      setSelectedGerne(initialGenre || 50);
+    if (reset) {
+      setGroupSelected([]);
     }
-  }, [initialGenre, onReset]);
+  }, [reset]);
 
   const handleReset = () => {
-    onReset();
+    setGroupSelected([]);
   };
 
   return (
@@ -58,29 +59,38 @@ const Genre = ({ isOpen, setIsOpen, onSelect, onReset, initialGenre }) => {
         <div className='flex min-h-full items-center justify-center p-4'>
           <DialogPanel className='w-full'>
             <div className='p-4 flex items-center'>
-              <span className='text-white flex-1 ml-3'>Generi Musicali</span>
-              <button onClick={handleReset} className='p-2 bg-accent-500/40 text-white rounded-lg'>
-                <X className='text-white w-5 h-5' />
+              <span className='text-white flex-1 mt-3'>Generi Musicali</span>
+              <button onClick={handleReset} className='p-2 bg-white/30 text-white rounded-lg'>
+                <Trash className='text-white w-5 h-5' />
               </button>
             </div>
             <div className='flex flex-col items-center justify-center px-4'>
               <div className='w-full mb-8'>
                 <div className='flex flex-col gap-1 w-full'>
                   <CheckboxGroup value={groupSelected} onChange={setGroupSelected}>
-                    <div className='flex flex-wrap items-center justify-start w-full max-h-[65vh] overflow-y-auto'>
-                      {musicGenres.map((g, idx) => (
-                        <CustomCheckbox key={idx} value={g.text.toLowerCase().replace(' ', '-')}>
-                          {g.text}
-                        </CustomCheckbox>
-                      ))}
-                    </div>
+                    <ScrollShadow size={100} hideScrollBar className='w-full max-h-[450px]'>
+                      <div className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 items-center justify-start w-full'>
+                        {musicGenres.map((g, idx) => (
+                          <CustomCheckbox key={idx} value={g.id}>
+                            {g.text}
+                          </CustomCheckbox>
+                        ))}
+                      </div>
+                    </ScrollShadow>
                   </CheckboxGroup>
                 </div>
               </div>
 
-              <button onClick={handleConfirm} className='px-4 py-2 bg-accent-500 text-white rounded-lg'>
-                {groupSelected.length} generi selezionati
-              </button>
+              {groupSelected?.length && groupSelected?.length > 0 ? (
+                <button onClick={handleConfirm} className='px-4 py-2 bg-accent-500 text-white rounded-lg'>
+                  {groupSelected.length} gener{groupSelected.length > 1 ? 'i' : 'e'} selezionat
+                  {groupSelected.length > 1 ? 'i' : 'o'}
+                </button>
+              ) : (
+                <button onClick={handleConfirm} className='px-4 py-2 bg-accent-500 text-white rounded-lg'>
+                  Nessun genere
+                </button>
+              )}
             </div>
           </DialogPanel>
         </div>

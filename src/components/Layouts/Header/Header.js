@@ -11,9 +11,9 @@ const Header = () => {
 
   return (
     <header className='sticky top-0 w-full left-0 right-0 z-40 header-bg border-b border-b-gray-800'>
-      <div className='container mx-auto p-4'>
+      <div className='p-4'>
         <div className='flex items-center'>
-          <div className='flex-1'>
+          <div className='flex-1 w-full'>
             <SearchButton setIsOpen={setIsOpen} />
           </div>
           <div className='ml-3'>

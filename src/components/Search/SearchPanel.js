@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
-import { CalendarDots, CurrencyEur, MapPinSimple, MusicNotes, Person, X } from '@phosphor-icons/react';
+import { CalendarDots, CurrencyEur, MapPinSimple, MusicNotes, Student, X } from '@phosphor-icons/react';
 
 import Logo from '../Helpers/Logo';
 import SearchInput from './SearchInput';
@@ -19,7 +19,9 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
   const [dateRangeUI, setDateRangeUI] = useState();
   const [distance, setDistance] = useState(50);
   const [freeEntry, setFreeEntry] = useState(false);
-  const [genre, setGenre] = useState('');
+  const [forStudent, setForStudent] = useState(false);
+  const [genres, setGenres] = useState();
+  const [resetGenres, setResetGenres] = useState(false);
 
   const formatDateRange = (range) => {
     const formatDate = (date) => {
@@ -64,8 +66,27 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
     setFreeEntry(false);
   };
 
+  const handlerResetForStudent = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setForStudent(false);
+  };
+
   const handleGenreSelect = (value) => {
-    setGenre(value);
+    if (value?.length <= 0) {
+      setGenres();
+      return;
+    }
+
+    setResetGenres(false);
+    setGenres(value);
+  };
+
+  const handlerResetGenre = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setResetGenres(true);
+    setGenres();
   };
 
   return (
@@ -148,16 +169,30 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                       className='flex flex-col items-center justify-center gap-3'
                       onClick={() => setIsOpenGenre(true)}
                     >
-                      <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                        <MusicNotes className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
-                        Genere {genre}
-                      </div>
+                      {!genres ? (
+                        <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+                          <MusicNotes className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
+                          Genere
+                        </div>
+                      ) : (
+                        <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
+                          {genres?.length} Generi
+                          <X className='w-4 h-4 text-white ml-2' onClick={handlerResetGenre} />
+                        </div>
+                      )}
                     </div>
-                    <div className='flex flex-col items-center justify-center gap-3'>
-                      <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                        <Person className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
-                        Età
-                      </div>
+                    <div className='flex flex-col items-center justify-center gap-3' onClick={() => setForStudent(true)}>
+                      {!forStudent ? (
+                        <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+                          <Student className='w-4 h-4 text-accent-400 mr-1' weight='duotone' />
+                          Studentesche
+                        </div>
+                      ) : (
+                        <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
+                          <span className='capitalize'>Studentesche</span>{' '}
+                          <X className='w-4 h-4 text-white ml-2' onClick={handlerResetForStudent} />
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className='w-0'>&nbsp;</div>
@@ -169,12 +204,12 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
         <DistanceRange
           isOpen={isOpenDistance}
           setIsOpen={setIsOpenDistance}
-          onDistanceSelect={handleDistanceSelect}
+          onSelect={handleDistanceSelect}
           onReset={handlerResetDistance}
           initialDistance={distance}
         />
-        <DateRange isOpen={isOpenDateRange} setIsOpen={setIsOpenDateRange} onDateSelect={handleDateSelect} />
-        <Genre isOpen={isOpenGenre} setIsOpen={setIsOpenGenre} onDateSelect={handleGenreSelect} />
+        <DateRange isOpen={isOpenDateRange} setIsOpen={setIsOpenDateRange} onSelect={handleDateSelect} />
+        <Genre isOpen={isOpenGenre} setIsOpen={setIsOpenGenre} reset={resetGenres} onSelect={handleGenreSelect} />
       </Dialog>
     </>
   );

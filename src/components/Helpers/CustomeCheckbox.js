@@ -1,10 +1,15 @@
-import { useCheckbox, Chip, VisuallyHidden, tv } from '@nextui-org/react';
+import { useCheckbox, Chip, VisuallyHidden, tv, cn } from '@nextui-org/react';
 import { Circle, CheckCircle } from '@phosphor-icons/react';
 
 const checkbox = tv({
   slots: {
-    base: 'min-w-40 border border-1 border-white/10 py-5 px-2 mx-2 my-2',
-    content: 'text-white',
+    base: cn(
+      'inline-flex max-w-md w-full bg-content1 m-0 items-center justify-start',
+      'border border-1 border-white/10 py-5 px-2 md:my-1',
+      'data-[selected=true]:border-accent',
+    ),
+    label: 'w-full',
+    content: 'w-full',
   },
   variants: {
     isSelected: {
@@ -29,7 +34,7 @@ export const CustomCheckbox = (props) => {
   const styles = checkbox({ isSelected, isFocusVisible });
 
   return (
-    <label {...getBaseProps()}>
+    <label {...getBaseProps()} className="w-full">
       <VisuallyHidden>
         <input {...getInputProps()} />
       </VisuallyHidden>
@@ -41,7 +46,7 @@ export const CustomCheckbox = (props) => {
         color='primary'
         startContent={
           isSelected ? (
-            <CheckCircle className='text-white w-5 h-5 mr-0.5 ml-1'  />
+            <CheckCircle className='text-white w-5 h-5 mr-0.5 ml-1' />
           ) : (
             <Circle className='text-white/40 w-5 h-5 mr-0.5 ml-1' />
           )
