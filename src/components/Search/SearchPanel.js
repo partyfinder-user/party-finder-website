@@ -3,6 +3,7 @@
 import React, { useState, useContext } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import { MapPin, CalendarDots, CurrencyEur, MapPinSimple, MusicNotes, Student, X } from '@phosphor-icons/react';
+import { Card, CardFooter } from '@nextui-org/card';
 
 import Logo from '../Helpers/Logo';
 import SearchInput from './SearchInput';
@@ -11,6 +12,20 @@ import DistanceRange from './Filter/DistanceRange';
 import Genre from './Filter/Genre';
 import SerachPosition from './SearchPosition';
 import RootContext from '@/stores/root-context';
+import Image from 'next/image';
+
+const djs = [
+  { name: 'D. Guetta', image: '/stock/bob-sinclar.jpg' },
+  { name: 'C. Harris', image: '/stock/franchino.jpg' },
+  { name: 'M. Garrix', image: '/stock/dj-mixa.webp' },
+  { name: 'V. Buuren', image: '/stock/un-uomo.webp' },
+  { name: 'Tiësto', image: '/stock/bob-sinclar.jpg' },
+  { name: 'Marshmello', image: '/stock/franchino.jpg' },
+  { name: 'S. Aoki', image: '/stock/dj-mixa.webp' },
+  { name: 'D. Vegas', image: '/stock/dj-mixa.webp' },
+  { name: 'Diplo', image: '/stock/un-uomo.webp' },
+  { name: 'Skrillex', image: '/stock/dj-mixa.webp' },
+];
 
 const SearchPanel = ({ isOpen, setIsOpen }) => {
   const rootCtx = useContext(RootContext);
@@ -235,24 +250,51 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                 </div>
               </section>
             </div>
+
+            <div className='relative overflow-hidden px-4'>
+              <h2 className='font-semibold mb-2 text-white'>Artisti</h2>
+              <section className='relative overflow-hidden'>
+                <div className='snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
+                  <div className='w-full flex flex-row justify-between gap-2'>
+                    {djs.map((dj, idx) => (
+                      <div key={idx + 'ab'}>
+                        <Card key={idx + '-b'} isFooterBlurred radius='lg' className='h-32 w-32 border-none'>
+                          <Image
+                            alt='Woman listing to music'
+                            className='h-32 w-32 object-cover'
+                            height={300}
+                            width={300}
+                            src={dj.image}
+                          />
+                          <CardFooter className='justify-between before:bg-white/10 border-white/10 border-1 overflow-hidden py-1 absolute before:rounded-lg rounded-lg bottom-1 w-[calc(100%_-_8px)] ml-1 z-10'>
+                            <p className='text-sm text-white/80'>{dj.name}</p>
+                          </CardFooter>
+                        </Card>
+                      </div>
+                    ))}
+                  </div>
+                  <div className='w-0'>&nbsp;</div>
+                </div>
+              </section>
+            </div>
           </DialogPanel>
         </div>
-        <DistanceRange
-          isOpen={isOpenDistance}
-          setIsOpen={setIsOpenDistance}
-          onSelect={handleDistanceSelect}
-          onReset={handlerResetDistance}
-          initialDistance={distance}
-        />
-        <SerachPosition
-          isOpen={isOpenPosition}
-          setIsOpen={setIsOpenPosition}
-          onSelect={handlePositionSelect}
-          reset={resetPostion}
-        />
-        <DateRange isOpen={isOpenDateRange} setIsOpen={setIsOpenDateRange} onSelect={handleDateSelect} />
-        <Genre isOpen={isOpenGenre} setIsOpen={setIsOpenGenre} reset={resetGenres} onSelect={handleGenreSelect} />
       </Dialog>
+      <DistanceRange
+        isOpen={isOpenDistance}
+        setIsOpen={setIsOpenDistance}
+        onSelect={handleDistanceSelect}
+        onReset={handlerResetDistance}
+        initialDistance={distance}
+      />
+      <SerachPosition
+        isOpen={isOpenPosition}
+        setIsOpen={setIsOpenPosition}
+        onSelect={handlePositionSelect}
+        reset={resetPostion}
+      />
+      <DateRange isOpen={isOpenDateRange} setIsOpen={setIsOpenDateRange} onSelect={handleDateSelect} />
+      <Genre isOpen={isOpenGenre} setIsOpen={setIsOpenGenre} reset={resetGenres} onSelect={handleGenreSelect} />
     </>
   );
 };

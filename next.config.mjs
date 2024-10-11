@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'tailwindui.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'nextui.org',
+      },
     ],
     formats: ['image/webp'],
   },
