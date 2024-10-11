@@ -4,11 +4,10 @@
 
 import React, { useState, useEffect, useContext } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
-import { MagnifyingGlass, X } from '@phosphor-icons/react';
+import { MagnifyingGlass, ArrowBendUpLeft, X } from '@phosphor-icons/react';
 import { Card, CardBody } from '@nextui-org/card';
 import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import { Spinner } from '@nextui-org/spinner';
-import { Input } from '@nextui-org/input';
 
 import RootContext from '@/stores/root-context';
 import { searchCity } from '@/libs/locality-service';
@@ -78,24 +77,29 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
               <div className='flex items-center mb-4'>
                 <span className='text-lg font-semibold flex-1 '>Trova la tua città</span>
                 <button onClick={() => setIsOpen(false)} className='p-2 bg-white/40 text-white rounded-lg'>
-                  <X className='text-white w-5 h-5' />
+                  <ArrowBendUpLeft className='text-white w-5 h-5' />
                 </button>
               </div>
 
-              <Input
-                bordered
-                isClearable
-                size={'lg'}
-                onClear={handleClear}
-                placeholder='Cerca una città'
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                startContent={
-                  <MagnifyingGlass className='text-xl mr-0.5 text-default-400 pointer-events-none flex-shrink-0' />
-                }
-                endContent={<X className='text-white/60 pointer-events-none flex-shrink-0' />}
-                fullWidth
-              />
+              <div className='relative w-full'>
+                <input
+                  type='text'
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder='Cerca una città'
+                  className='w-full pl-10 pr-10 py-3 border rounded-xl bg-default-100 border-background-500 focus:border-accent-200 focus:outline-none focus:ring-0'
+                />
+
+                <span className='absolute inset-y-0 left-3 flex items-center pointer-events-none'>
+                  <MagnifyingGlass className='text-xl text-gray-400' />
+                </span>
+
+                {query && (
+                  <button type='button' className='absolute inset-y-0 right-3 flex items-center' onClick={handleClear}>
+                    <X className='text-xl text-gray-400 hover:text-gray-600' />
+                  </button>
+                )}
+              </div>
 
               {loading && <Spinner className='absolute top-4 right-4' />}
 
