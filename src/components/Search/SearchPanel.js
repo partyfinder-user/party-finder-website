@@ -222,9 +222,9 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
               </div>
             </DialogTitle>
 
-            <div className='overflow-hidden px-4 pb-2' style={{ height: 'calc(100vh - 90px)' }}>
-              <ScrollShadow size={80} hideScrollBar className='w-full max-h-full'>
-                <div className='relative overflow-hidden flex'>
+            <div className='overflow-hidden px-4' style={{ height: 'calc(100vh - 90px)' }}>
+              <div className='w-full max-h-full overflow-auto'>
+                <div className='relative overflow-hidden flex mb-2'>
                   <section className='relative overflow-hidden'>
                     <div className='relative snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
                       <div className='w-full flex flex-row gap-2'>
@@ -324,13 +324,11 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                           )}
                         </div>
                       </div>
-                      <div className='w-0'>&nbsp;</div>
                     </div>
                   </section>
                 </div>
-
                 <div>{results.map((item) => getComponentByType(item))}</div>
-              </ScrollShadow>
+              </div>
             </div>
           </DialogPanel>
         </div>

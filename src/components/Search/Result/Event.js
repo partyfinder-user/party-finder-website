@@ -10,7 +10,7 @@ const Event = ({ item, className = '' }) => (
           width={150}
           height={150}
           alt={item.name}
-          className='object-cover h-16 w-16 rounded-lg'
+          className='object-cover h-16 w-24 rounded-lg'
         />
       </div>
       <div className='flex flex-col justify-between px-2 flex-grow'>

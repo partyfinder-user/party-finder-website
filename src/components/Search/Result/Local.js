@@ -14,7 +14,7 @@ const Local = ({ item, className = '' }) => (
         />
       </div>
       <div className='flex flex-col justify-between px-2 flex-grow'>
-        <span className='text-xl text-white block'>{item.name}</span>
+        <span className='text-lg text-white block'>{item.name}</span>
         <span className='text-white/70 block text-sm'>Locale</span>
       </div>
     </div>
