@@ -222,7 +222,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
               </div>
             </DialogTitle>
 
-            <div className='overflow-hidden px-4' style={{ height: 'calc(100vh - 90px)' }}>
+            <div className='overflow-hidden px-4 pb-2' style={{ height: 'calc(100vh - 90px)' }}>
               <ScrollShadow size={80} hideScrollBar className='w-full max-h-full'>
                 <div className='relative overflow-hidden flex'>
                   <section className='relative overflow-hidden'>
