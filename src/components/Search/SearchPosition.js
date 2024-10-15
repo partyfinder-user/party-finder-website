@@ -75,7 +75,7 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
           <DialogPanel className='w-full'>
             <div className='flex flex-col px-2'>
               <div className='flex items-center mb-4'>
-                <span className='text-lg font-semibold flex-1 '>Trova la tua città</span>
+                <span className='text-lg font-semibold flex-1'>Trova la tua città</span>
                 <button onClick={() => setIsOpen(false)} className='p-2 bg-white/40 text-white rounded-lg'>
                   <ArrowBendUpLeft className='text-white w-5 h-5' />
                 </button>
@@ -105,13 +105,13 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
 
               {loading && <Spinner className='absolute top-4 right-4' />}
 
-              <div className='overflow-hidden' style={{ height: 'calc(100vh - 150px)' }}>
-                <ScrollShadow size={150} hideScrollBar className='w-full max-h-full'>
+              <div className='overflow-hidden' style={{ height: 'calc(100vh - 130px)' }}>
+                <ScrollShadow size={100} hideScrollBar className='w-full max-h-full'>
                   {cities.length > 0 && (
                     <div className='w-full my-1'>
-                      {cities.map((city) => (
+                      {cities.map((city, idx) => (
                         <Card
-                          key={city._id}
+                          key={city._id+'-'+idx}
                           isPressable
                           isHoverable
                           onPress={() => handleConfirm(city)}

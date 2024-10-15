@@ -93,7 +93,7 @@ const DateRange = ({ isOpen, setIsOpen, onSelect }) => {
         onClose={() => setIsOpen(false)}
         className='relative z-50 transition duration-100 ease-out data-[closed]:opacity-0'
       >
-        <DialogBackdrop className='fixed inset-0 bg-black/80' />
+        <DialogBackdrop className='fixed inset-0 bg-black/90' />
         <div className='fixed inset-0 z-10 w-screen overflow-y-auto'>
           <div className='flex min-h-full items-center justify-center p-4'>
             <DialogPanel>
