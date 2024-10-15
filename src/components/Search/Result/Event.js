@@ -10,14 +10,14 @@ const Event = ({ item, className = '' }) => (
           width={150}
           height={150}
           alt={item.name}
-          className='object-cover h-20 w-20 rounded-lg'
+          className='object-cover h-16 w-16 rounded-lg'
         />
       </div>
-      <div className='flex flex-col justify-between px-4 flex-grow'>
+      <div className='flex flex-col justify-between px-2 flex-grow'>
         <div className='flex flex-col'>
           <span className='text-lg text-white block'>{item.title}</span>
-          <span className='text-accent-500 block'>{item.date}</span>
-          <span className='text-white/70 font-medium block'>{item.venue}</span>
+          <span className='text-accent-500 block text-sm'>{item.date}</span>
+          <span className='text-white/70 font-medium block text-sm'>{item.venue}</span>
         </div>
       </div>
     </div>

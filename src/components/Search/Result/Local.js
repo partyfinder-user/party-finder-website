@@ -4,16 +4,16 @@ import Image from 'next/image';
 const Local = ({ item, className = '' }) => (
   <div className={`${className} flex flex-row items-stretch overflow-hidden`}>
     <div className='flex items-center'>
-      <div className='flex-shrink-0 w-20 h-20 flex items-center justify-center rounded-full p-1 bg-gradient-to-tr from-yellow-500 via-accent-500 to-primary-500'>
+      <div className='flex-shrink-0 w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-tr from-yellow-500 via-accent-500 to-primary-500'>
         <Image
           src={item.image}
           width={150}
           height={150}
           alt={item.name}
-          className='object-cover h-[70px] w-[70px] rounded-full'
+          className='object-cover h-[60px] w-[60px] rounded-full'
         />
       </div>
-      <div className='flex flex-col justify-between px-4 flex-grow'>
+      <div className='flex flex-col justify-between px-2 flex-grow'>
         <span className='text-xl text-white block'>{item.name}</span>
         <span className='text-white/70 block'>Locale</span>
       </div>
