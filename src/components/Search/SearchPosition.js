@@ -6,7 +6,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import { MagnifyingGlass, ArrowBendUpLeft, X } from '@phosphor-icons/react';
 import { Card, CardBody } from '@nextui-org/card';
-import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import { Spinner } from '@nextui-org/spinner';
 
 import RootContext from '@/stores/root-context';
@@ -22,7 +21,6 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
   const handleSearch = async () => {
     if (query.length === 0) {
       setCities([]);
-      // return;
     }
 
     setLoading(true);
@@ -90,12 +88,10 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
                   className='w-full pl-10 pr-10 py-3 border rounded-xl bg-default-100 border-background-500 focus:border-accent-500 focus:outline-none focus:ring-0'
                 />
 
-                {/* Icona all'inizio */}
                 <span className='absolute inset-y-0 left-3 flex items-center pointer-events-none'>
                   <MagnifyingGlass className='text-xl text-gray-400 transition-colors duration-200 group-focus-within:text-accent-500' />
                 </span>
 
-                {/* Icona "clear" */}
                 {query && (
                   <button type='button' className='absolute inset-y-0 right-3 flex items-center' onClick={handleClear}>
                     <X className='text-xl text-gray-400 hover:text-gray-600' />
@@ -105,29 +101,27 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
 
               {loading && <Spinner className='absolute top-4 right-4' />}
 
-              <div className='overflow-hidden' style={{ height: 'calc(100vh - 130px)' }}>
-                <ScrollShadow size={100} hideScrollBar className='w-full max-h-full'>
-                  {cities.length > 0 && (
-                    <div className='w-full my-1'>
-                      {cities.map((city, idx) => (
-                        <Card
-                          key={city._id+'-'+idx}
-                          isPressable
-                          isHoverable
-                          onPress={() => handleConfirm(city)}
-                          className='w-full my-4'
-                        >
-                          <CardBody>
-                            <p>{city.nome}</p>
-                            <p className='text-sm text-gray-500'>
-                              {city?.provincia?.nome}, {city?.regione?.nome}
-                            </p>
-                          </CardBody>
-                        </Card>
-                      ))}
-                    </div>
-                  )}
-                </ScrollShadow>
+              <div className='overflow-y-auto max-h-[calc(100vh-150px)]'>
+                {cities.length > 0 && (
+                  <div className='w-full my-1'>
+                    {cities.map((city, idx) => (
+                      <Card
+                        key={city._id + '-' + idx}
+                        isPressable
+                        isHoverable
+                        onPress={() => handleConfirm(city)}
+                        className='w-full my-4'
+                      >
+                        <CardBody>
+                          <p>{city.nome}</p>
+                          <p className='text-sm text-gray-500'>
+                            {city?.provincia?.nome}, {city?.regione?.nome}
+                          </p>
+                        </CardBody>
+                      </Card>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {!loading && cities.length === 0 && query && <p className='text-gray-500'>Nessun risultato trovato</p>}

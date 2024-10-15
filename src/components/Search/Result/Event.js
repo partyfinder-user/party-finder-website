@@ -7,9 +7,9 @@ const Event = ({ item, className = '' }) => (
       <div className='flex-shrink-0'>
         <Image
           src={item.image}
-          width={150}
-          height={150}
-          alt={item.name}
+          width={80}
+          height={100}
+          alt={item.title}
           className='object-cover h-16 w-24 rounded-lg'
         />
       </div>

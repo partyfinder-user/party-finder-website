@@ -7,8 +7,8 @@ const Local = ({ item, className = '' }) => (
       <div className='flex-shrink-0 w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-tr from-yellow-500 via-accent-500 to-primary-500'>
         <Image
           src={item.image}
-          width={150}
-          height={150}
+          width={80}
+          height={80}
           alt={item.name}
           className='object-cover h-[60px] w-[60px] rounded-full'
         />

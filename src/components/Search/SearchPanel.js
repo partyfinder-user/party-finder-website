@@ -3,7 +3,6 @@
 import React, { useState, useContext } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import { MapPin, CalendarDots, CurrencyEur, MapPinSimple, MusicNotes, Student, X } from '@phosphor-icons/react';
-import { ScrollShadow } from '@nextui-org/scroll-shadow';
 
 import Logo from '../Helpers/Logo';
 import SearchInput from './SearchInput';
@@ -222,7 +221,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
               </div>
             </DialogTitle>
 
-            <div className='overflow-hidden px-4' style={{ height: 'calc(100vh - 90px)' }}>
+            <div className='overflow-hidden px-4 max-h-[calc(100vh-100px)] scrollbar-hide'>
               <div className='w-full max-h-full overflow-auto'>
                 <div className='relative overflow-hidden flex mb-2'>
                   <section className='relative overflow-hidden'>
