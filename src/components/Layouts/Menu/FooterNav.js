@@ -33,11 +33,17 @@ const FooterNav = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
-      if (!containerRef.current) return;
+      if (!containerRef.current) {
+        rootCtx.setFooterNavIsVisible(false);
+        return;
+      }
+
       if (currentScrollPos > prevScrollPosRef.current) {
         containerRef.current.classList.add('FooterNav--hide');
+        rootCtx.setFooterNavIsVisible(false);
       } else {
         containerRef.current.classList.remove('FooterNav--hide');
+        rootCtx.setFooterNavIsVisible(true);
       }
       prevScrollPosRef.current = currentScrollPos;
     };

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Image from 'next/image';
 import ToggleDescription from '@/components/Helpers/ToggleDescription';
 
@@ -16,6 +16,9 @@ import {
   DiscoBall,
   MusicNote,
   GoogleLogo,
+  Heart,
+  WhatsappLogo,
+  ShareNetwork,
 } from '@phosphor-icons/react/dist/ssr';
 
 const event = {
@@ -32,13 +35,14 @@ const event = {
   ageRestriction: '+18',
   booking: {
     platform: 'Getfy',
-    contact: 'Prenotazione disponibile su Getfy',
   },
   description:
     "Partecipa al Diss Gacha Show con musica Trap, Rap. L'evento si terrà presso Villa Bonin, un club esclusivo a Vicenza. Partecipa al Diss Gacha Show con musica Trap, Rap. L'evento si terrà presso Villa Bonin, un club esclusivo a Vicenza. Partecipa al Diss Gacha Show con musica Trap, Rap. L'evento si terrà presso Villa Bonin, un club esclusivo a Vicenza",
 };
 
 import { motion, useMotionValue, useTransform } from 'framer-motion';
+import RootContext from '@/stores/root-context';
+import { cx } from '@/tools/tools';
 
 const ParallaxImage = ({ imageSrc }) => {
   const scrollY = useMotionValue(0);
@@ -72,6 +76,8 @@ const ParallaxImage = ({ imageSrc }) => {
 };
 
 export default function EventPage() {
+  const rootCtx = useContext(RootContext);
+
   return (
     <div className='overflow-hidden bg-gradient-to-b from-[#13003388] via-[#130033] to-transparent'>
       <div className='relative h-[45vh] overflow-hidden'>
@@ -87,26 +93,24 @@ export default function EventPage() {
           {event.venue.address}
         </div>
 
-        {/* Social icons */}
         <div className='flex items-center my-4 gap-x-2'>
-          <div className='flex items-center justify-center rounded-full w-12 h-12 border-2 border-white/10'>
+          <div className='flex items-center justify-center rounded-full w-14 h-14 border-2 border-white/10'>
             <Globe className='w-8 h-8 text-white' weight='duotone' />
           </div>
-          <div className='flex items-center justify-center rounded-full w-12 h-12 border-2 border-white/10'>
+          <div className='flex items-center justify-center rounded-full w-14 h-14 border-2 border-white/10'>
             <Phone className='w-8 h-8 text-white' weight='duotone' />
           </div>
-          <div className='flex items-center justify-center rounded-full w-12 h-12 border-2 border-white/10'>
+          <div className='flex items-center justify-center rounded-full w-14 h-14 border-2 border-white/10'>
             <FacebookLogo className='w-8 h-8 text-white' weight='duotone' />
           </div>
-          <div className='flex items-center justify-center rounded-full w-12 h-12 border-2 border-white/10'>
+          <div className='flex items-center justify-center rounded-full w-14 h-14 border-2 border-white/10'>
             <InstagramLogo className='w-8 h-8 text-white' weight='duotone' />
           </div>
-          <div className='flex items-center justify-center rounded-full w-12 h-12 border-2 border-white/10'>
+          <div className='flex items-center justify-center rounded-full w-14 h-14 border-2 border-white/10'>
             <XLogo className='w-8 h-8 text-white' weight='duotone' />
           </div>
         </div>
 
-        {/* Venue and event details */}
         <div className='py-4 my-4 border-t border-b border-white/10'>
           <div className='flex items-center'>
             <Image
@@ -123,34 +127,33 @@ export default function EventPage() {
           </div>
         </div>
 
-        {/* More event details */}
         <div className='flex flex-col gap-y-4'>
           <div className='flex items-center space-x-4'>
-            <MusicNote className='w-12 h-12 text-accent' />
+            <MusicNote className='w-14 h-14 text-accent' />
             <div className='flex flex-col'>
               <span className='text-xs text-white/80 -mb-1'>Generi Musicali</span>
-              <span className='text-xl'>Trap, Rap</span>
+              <span className='text-xl'>{event.musicGenres.join(', ')}</span>
             </div>
           </div>
           <div className='flex items-center space-x-4'>
-            <DiscoBall className='w-12 h-12 text-accent' />
+            <DiscoBall className='w-14 h-14 text-accent' />
             <div className='flex flex-col'>
               <span className='text-xs text-white/80 -mb-1'>Artisti</span>
-              <span className='text-xl'>Diss Gacha</span>
+              <span className='text-xl'>{event.artists.join(', ')}</span>
             </div>
           </div>
           <div className='flex items-center space-x-4'>
-            <CurrencyEur className='w-12 h-12 text-accent' />
+            <CurrencyEur className='w-14 h-14 text-accent' />
             <div className='flex flex-col'>
               <span className='text-xs text-white/80 -mb-1'>Prezzi</span>
-              <span className='text-xl'>FreeEntry</span>
+              <span className='text-xl'>{event.price}</span>
             </div>
           </div>
           <div className='flex items-center space-x-4'>
-            <IdentificationCard className='w-12 h-12 text-accent' />
+            <IdentificationCard className='w-14 h-14 text-accent' />
             <div className='flex flex-col'>
               <span className='text-xs text-white/80 -mb-1'>Età minima</span>
-              <span className='text-xl'>+18</span>
+              <span className='text-xl'>{event.ageRestriction}</span>
             </div>
           </div>
         </div>
@@ -163,11 +166,11 @@ export default function EventPage() {
           >
             <div className='flex items-center'>
               <div className='p-2 h-full bg-yellow-500 mr-4'>
-                <GoogleLogo className='w-12 h-12 text-violet-700' />
+                <GoogleLogo className='w-14 h-14 text-violet-700' />
               </div>
               <div className='flex flex-col'>
                 <span className='font-thin text-left -mb-1'>Prenotazione disponibile su</span>
-                <span className='text-lg text-left'>Getfy</span>
+                <span className='text-lg text-left'>{event.booking.platform}</span>
               </div>
             </div>
           </button>
@@ -177,6 +180,28 @@ export default function EventPage() {
         <div className='w-full'>
           <h2 className='text-xl font-bold mb-2'>Descrizione Evento</h2>
           <ToggleDescription text={event.description} maxChars={120} />
+        </div>
+
+        <div
+          className={cx(
+            'w-full flex items-center fixed left-0 p-4 gap-2',
+            !rootCtx?.footerNavVisible ? 'bottom-0' : 'bottom-16',
+          )}
+        >
+          <div>
+            <button className='rounded-full bg-background p-4 mr-2'>
+              <Heart className='w-8 h-8 text-accent-500' />
+            </button>
+            <button className='rounded-full bg-background p-4'>
+              <ShareNetwork className='w-8 h-8 text-accent-500' />
+            </button>
+          </div>
+          <div className='flex-1 w-full'>
+            <button className='flex items-center w-full rounded-3xl bg-background p-4'>
+              <WhatsappLogo className='w-8 h-8 text-accent-500 mr-2' />
+              Prenota un tavolo
+            </button>
+          </div>
         </div>
       </div>
     </div>
