@@ -61,27 +61,6 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
     }
   }, [reset]);
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsKeyboardOpen(window.innerHeight < 500);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
     <Dialog
       open={isOpen}
