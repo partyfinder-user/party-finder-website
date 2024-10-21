@@ -207,7 +207,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
         onClose={() => setIsOpen(false)}
         className='relative z-50 transition duration-100 ease-out data-[closed]:opacity-0'
       >
-        <DialogBackdrop className='fixed inset-0 bg-black/60' />
+        <DialogBackdrop className='fixed inset-0 bg-black/80' />
         <div className='fixed inset-0 flex w-screen h-screen items-center justify-center'>
           <DialogPanel className='w-full h-screen bg-background-900/60 backdrop-blur-lg flex flex-col'>
             <DialogTitle as='h3' className='w-full px-4 pt-4 pb-1 mb-4 border-b border-background-400/50'>

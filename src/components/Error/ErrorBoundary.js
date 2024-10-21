@@ -17,11 +17,11 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className='bg-white'>
+        <div>
           <main className='mx-auto w-full max-w-8xl px-6 pb-16 sm:pb-24 lg:px-8'>
             <div className='mx-auto mt-10 max-w-2xl text-center sm:mt-12'>
               <p className='text-4xl font-semibold leading-8 text-accent-500'>Ops! Errore Interno</p>
-              <h1 className='mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl'>
+              <h1 className='mt-4 text-3xl font-bold tracking-tight text-accent sm:text-5xl'>
                 Qui c&apos;è qualquadra che non cosa!
               </h1>
               <p className='max-w-2xl mt-4 text-base text-gray-500 sm:mt-6 sm:text-lg'>
