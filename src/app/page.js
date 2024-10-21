@@ -259,7 +259,7 @@ export default function Home() {
               <div className='w-full flex flex-row justify-between gap-2'>
                 {locals.map((locale) => (
                   <div key={locale.id} className='flex flex-col items-center justify-center gap-3'>
-                    <div className='relative w-20 h-20 rounded-full p-1 bg-gradient-to-tr from-yellow-500 via-accent-500 to-primary-500'>
+                    <div className='relative w-20 h-20 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-accent-500 to-primary-500'>
                       <div className='w-full h-full rounded-full'>
                         <Image
                           src={locale.image}

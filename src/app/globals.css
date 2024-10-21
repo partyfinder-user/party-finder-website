@@ -41,6 +41,12 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .safe-height {
+    height: 100vh;
+    min-height: -webkit-fill-available; 
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
 
 .max-w-8xl {

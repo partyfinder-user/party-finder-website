@@ -11,18 +11,19 @@ import { Spinner } from '@nextui-org/spinner';
 import RootContext from '@/stores/root-context';
 import { searchCity } from '@/libs/locality-service';
 
-const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
+const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
   const rootCtx = useContext(RootContext);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [cities, setCities] = useState([]);
   const [typingTimeout, setTypingTimeout] = useState(null);
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
   const handleSearch = async () => {
     if (query.length === 0) {
       setCities([]);
+      return;
     }
-
     setLoading(true);
     const results = await searchCity(query);
     setCities(results);
@@ -31,6 +32,7 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
 
   const handleClear = () => {
     setQuery('');
+    setCities([]);
   };
 
   const handleConfirm = (city) => {
@@ -44,7 +46,6 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
     if (typingTimeout) {
       clearTimeout(typingTimeout);
     }
-
     const timeoutId = setTimeout(() => {
       handleSearch();
     }, 500);
@@ -55,22 +56,42 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
 
   useEffect(() => {
     if (reset) {
-      setCities('');
+      setCities([]);
       rootCtx.setPositionCity('');
     }
   }, [reset]);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsKeyboardOpen(window.innerHeight < 500);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <Dialog
       open={isOpen}
-      transition
       onClose={() => setIsOpen(false)}
       className='relative z-50 transition duration-100 ease-out data-[closed]:opacity-0'
     >
       <DialogBackdrop className='fixed inset-0 bg-black/90' />
-      <div className='fixed inset-0 z-10 w-screen overflow-y-auto'>
+      <div className='fixed inset-0 z-10 w-screen overflow-hidden'>
         <div className='flex min-h-full px-2 py-6'>
-          <DialogPanel className='w-full'>
+          <DialogPanel className={`w-full safe-height flex flex-col`}>
             <div className='flex flex-col px-2'>
               <div className='flex items-center mb-4'>
                 <span className='text-lg font-semibold flex-1'>Trova la tua città</span>
@@ -87,7 +108,6 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
                   placeholder='Cerca una città o la tua provincia'
                   className='w-full pl-10 pr-10 py-3 border rounded-xl bg-default-100 border-background-500 focus:border-accent-500 focus:outline-none focus:ring-0'
                 />
-
                 <span className='absolute inset-y-0 left-3 flex items-center pointer-events-none'>
                   <MagnifyingGlass className='text-xl text-gray-400 transition-colors duration-200 group-focus-within:text-accent-500' />
                 </span>
@@ -124,7 +144,7 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
                 )}
               </div>
 
-              {!loading && cities.length === 0 && query && <p className='text-gray-500'>Nessun risultato trovato</p>}
+              {!loading && cities.length === 0 && query && <p className='text-gray-500 my-2'>Nessun risultato trovato</p>}
             </div>
           </DialogPanel>
         </div>
@@ -133,4 +153,4 @@ const SerachPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
   );
 };
 
-export default SerachPosition;
+export default SearchPosition;
