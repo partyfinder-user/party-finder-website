@@ -12,12 +12,14 @@ import {
   CurrencyEur,
   DiscoBall,
   MusicNote,
+  Heart,
 } from '@phosphor-icons/react/dist/ssr';
 
 import ToggleDescription from '@/components/Helpers/ToggleDescription';
 import ParallaxImage from '@/components/Helpers/ParallaxImage';
 import ContactBar from '@/components/UI/ContactBar';
 import ReserveButton from '@/components/UI/ReserveButton';
+import LineUp from '@/components/Helpers/LineUp';
 
 async function getData() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/mocks/event.json`);
@@ -115,10 +117,56 @@ export default async function EventPage() {
           <ReserveButton platform={event.booking.platform} />
         </div>
 
-        <div className='w-full'>
+        <div className='w-full my-4'>
           <h2 className='text-xl font-bold mb-2'>Descrizione</h2>
           <ToggleDescription text={event.description} maxChars={120} />
         </div>
+
+        <div className='w-full my-4'>
+          <h2 className='text-xl font-bold mb-2'>Line Up</h2>
+          <LineUp artists={event.lineUp} />
+        </div>
+
+        <section className='my-4'>
+          <h2 className='text-xl font-bold mb-2'>Eventi correlati</h2>
+          <div className='relative snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
+            <div className='w-full flex flex-row gap-4'>
+              {event.relatedEvents.map((event, idx) => (
+                <div
+                  key={idx}
+                  className='flex flex-col justify-between gap-2 bg-background-500/60 border border-background-500 rounded-lg shadow-lg min-w-[300px] overflow-hidden'
+                >
+                  <div className='relative'>
+                    <Image
+                      src={event.image}
+                      width={300}
+                      height={150}
+                      alt={event.title}
+                      className='object-fill rounded-t-lg'
+                    />
+
+                    <div className='absolute bottom-3 right-3'>
+                      <Heart className='w-6 h-6 text-white' />
+                    </div>
+
+                    <div className='absolute top-0 right-0 bg-background-500/60 border border-background-500/30 backdrop-blur-sm text-neon-low font-medium text-md px-3.5 py-1.5 rounded-bl-lg'>
+                      {event.venue}
+                    </div>
+
+                    <div className='p-4 flex flex-col justify-between flex-grow gap-2'>
+                      <span className='text-xl text-white leading-tight'>{event.title}</span>
+
+                      <div className='mt-auto flex flex-col gap-1'>
+                        <span className='text-xs text-accent-400'>{event.date}</span>
+                        <span className='text-xs text-background-200'>{event.location}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         <ContactBar />
       </div>

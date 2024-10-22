@@ -24,7 +24,7 @@ const ContactBar = (params) => {
         </button>
       </div>
       <div className='flex-1 w-full'>
-        <button className='w-full flex items-center justify-center rounded-3xl bg-background p-4'>
+        <button className='w-full flex items-center justify-center rounded-full bg-background p-4'>
           <WhatsappLogo className='w-8 h-8 text-accent-500 mr-2' />
           <span className='flex-1 text-center text-large'>Prenota un tavolo</span>
         </button>
