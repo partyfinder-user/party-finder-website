@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import { BoltIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import Link from 'next/link';
 
 function FloatingMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,26 +26,34 @@ function FloatingMenu() {
             </DialogTitle>
             <div className='w-full'>
               <div className='mx-auto w-full divide-y divide-accent-700/30'>
-                <div className='py-3 text-white'>
-                  <div className='flex flex-col items-center space-y-4 border-spacing-1'>
-                    <div className='w-full text-md'>Eventi</div>
+                <Link href='/event'>
+                  <div className='py-3 text-white'>
+                    <div className='flex flex-col items-center space-y-4 border-spacing-1'>
+                      <div className='w-full text-md'>Eventi</div>
+                    </div>
                   </div>
-                </div>
-                <div className='py-3 text-white'>
-                  <div className='flex flex-col items-center space-y-4 border-spacing-1'>
-                    <div className='w-full text-md'>Format</div>
+                </Link>
+                <Link href='/format'>
+                  <div className='py-3 text-white'>
+                    <div className='flex flex-col items-center space-y-4 border-spacing-1'>
+                      <div className='w-full text-md'>Format</div>
+                    </div>
                   </div>
-                </div>
-                <div className='py-3 text-white'>
-                  <div className='flex flex-col items-center space-y-4 border-spacing-1'>
-                    <div className='w-full text-md'>Locali</div>
+                </Link>
+                <Link href='/local'>
+                  <div className='py-3 text-white'>
+                    <div className='flex flex-col items-center space-y-4 border-spacing-1'>
+                      <div className='w-full text-md'>Locali</div>
+                    </div>
                   </div>
-                </div>
-                <div className='py-3 text-white'>
-                  <div className='flex flex-col items-center space-y-4 border-spacing-1'>
-                    <div className='w-full text-md'>Artisti</div>
+                </Link>
+                <Link href='/artist'>
+                  <div className='py-3 text-white'>
+                    <div className='flex flex-col items-center space-y-4 border-spacing-1'>
+                      <div className='w-full text-md'>Artisti</div>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             </div>
           </DialogPanel>

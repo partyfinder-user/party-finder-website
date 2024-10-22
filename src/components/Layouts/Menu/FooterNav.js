@@ -64,7 +64,7 @@ const FooterNav = () => {
         className='w-full mx-auto py-2 bg-background-900/60 backdrop-blur-lg fixed top-auto bottom-0 inset-x-0 z-30 transition-transform duration-300 ease-in-out'
       >
         <div className='flex justify-around mx-auto text-center'>
-          <Link href='#'>
+          <Link href='/'>
             <div
               className={`flex flex-col items-center justify-between text-neutral-300/90 ${
                 active ? 'text-neutral-100' : ''
