@@ -1,0 +1,17 @@
+{
+  "title": "Diss Gacha Show",
+  "date": "Sabato 22 Maggio",
+  "image": "/stock/locandina.jpg",
+  "venue": {
+    "name": "Villa Bonin",
+    "address": "Via del commercio, 49, Vicenza, VI"
+  },
+  "musicGenres": ["Trap", "Rap"],
+  "artists": ["Diss Gacha"],
+  "price": "Freentry",
+  "ageRestriction": "+18",
+  "booking": {
+    "platform": "Getfy"
+  },
+  "description": "Partecipa al Diss Gacha Show con musica Trap, Rap. L'evento si terrà presso Villa Bonin, un club esclusivo a Vicenza. Partecipa al Diss Gacha Show con musica Trap, Rap. L'evento si terrà presso Villa Bonin, un club esclusivo a Vicenza. Partecipa al Diss Gacha Show con musica Trap, Rap. L'evento si terrà presso Villa Bonin, un club esclusivo a Vicenza"
+}
