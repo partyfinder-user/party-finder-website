@@ -13,6 +13,7 @@ import {
   DiscoBall,
   MusicNote,
   Heart,
+  DoorOpen,
 } from '@phosphor-icons/react/dist/ssr';
 
 import ToggleDescription from '@/components/Helpers/ToggleDescription';
@@ -78,6 +79,16 @@ export default async function EventPage() {
             <div className='ml-2'>
               <span className='text-sm text-white/80'>Locale</span>
               <h3 className='text-2xl'> {event.venue.name}</h3>
+              <div className='flex items-center text-xs text-white/80'>
+                <DoorOpen className='w-4 h-4 mr-1' /> Apertura porte ore
+                <span className='font-semibold text-white ml-1'>22.00</span>
+              </div>
+              <div className='text-sm text-white/80 mt-4 flex items-center'>
+                <button className='text-white py-1 px-4 rounded-full border border-white/60 mr-2 flex items-center'>
+                  <MapPin className='w-4 h-4 mr-1' /> Apri su MAPS
+                </button>
+                <button className='text-white py-1 px-4 rounded-full border border-white/60'>Altri eventi</button>
+              </div>
             </div>
           </div>
         </div>
