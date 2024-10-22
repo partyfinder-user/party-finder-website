@@ -158,7 +158,6 @@ export default function EventPage() {
           </div>
         </div>
 
-        {/* Booking button */}
         <div className='w-full my-4'>
           <button
             type='button'
@@ -176,7 +175,6 @@ export default function EventPage() {
           </button>
         </div>
 
-        {/* Event description */}
         <div className='w-full'>
           <h2 className='text-xl font-bold mb-2'>Descrizione Evento</h2>
           <ToggleDescription text={event.description} maxChars={120} />
@@ -185,7 +183,7 @@ export default function EventPage() {
         <div
           className={cx(
             'w-full flex items-center fixed left-0 p-4 gap-2',
-            !rootCtx?.footerNavVisible ? 'bottom-0' : 'bottom-16',
+            !rootCtx?.footerNavVisible ? 'bottom-0' : 'bottom-16 opacity-30',
           )}
         >
           <div>
@@ -197,9 +195,9 @@ export default function EventPage() {
             </button>
           </div>
           <div className='flex-1 w-full'>
-            <button className='flex items-center w-full rounded-3xl bg-background p-4'>
+            <button className='w-full flex items-center justify-center rounded-3xl bg-background p-4'>
               <WhatsappLogo className='w-8 h-8 text-accent-500 mr-2' />
-              Prenota un tavolo
+              <span className='flex-1 text-center text-large'>Prenota un tavolo</span>
             </button>
           </div>
         </div>
