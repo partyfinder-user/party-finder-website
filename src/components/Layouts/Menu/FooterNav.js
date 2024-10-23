@@ -61,7 +61,7 @@ const FooterNav = () => {
     <>
       <div
         ref={containerRef}
-        className='w-full mx-auto py-1 bg-background-900/60 backdrop-blur-sm fixed top-auto bottom-0 inset-x-0 z-30 transition-transform duration-300 ease-in-out'
+        className='w-full mx-auto py-1.5 bg-background-900/60 backdrop-blur-sm fixed top-auto bottom-0 inset-x-0 z-30 transition-transform duration-300 ease-in-out'
       >
         <div className='flex items-center justify-around mx-auto text-center'>
           <Link href='/' className='mt-1'>
