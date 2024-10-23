@@ -62,7 +62,7 @@ function FloatingMenu() {
 
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className='w-10 h-10 flex items-center justify-center rounded-full bg-accent-400 text-white transition-transform duration-300 ease-in-out z-50'
+        className='w-12 h-12 flex items-center justify-center rounded-full bg-accent-400 text-white transition-transform duration-300 ease-in-out z-50'
       >
         <BoltIcon className='w-6 h-6' />
       </button>
