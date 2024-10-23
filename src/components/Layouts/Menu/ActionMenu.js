@@ -26,28 +26,28 @@ function FloatingMenu() {
             </DialogTitle>
             <div className='w-full'>
               <div className='mx-auto w-full divide-y divide-accent-700/30'>
-                <Link href='/event' onClick={() => setIsMenuOpen(false)}>
+                <Link href='/events' onClick={() => setIsMenuOpen(false)}>
                   <div className='py-3 text-white'>
                     <div className='flex flex-col items-center space-y-4 border-spacing-1'>
                       <div className='w-full text-md'>Eventi</div>
                     </div>
                   </div>
                 </Link>
-                <Link href='/format' onClick={() => setIsMenuOpen(false)}>
+                <Link href='/formats' onClick={() => setIsMenuOpen(false)}>
                   <div className='py-3 text-white'>
                     <div className='flex flex-col items-center space-y-4 border-spacing-1'>
                       <div className='w-full text-md'>Format</div>
                     </div>
                   </div>
                 </Link>
-                <Link href='/local' onClick={() => setIsMenuOpen(false)}>
+                <Link href='/locals' onClick={() => setIsMenuOpen(false)}>
                   <div className='py-3 text-white'>
                     <div className='flex flex-col items-center space-y-4 border-spacing-1'>
                       <div className='w-full text-md'>Locali</div>
                     </div>
                   </div>
                 </Link>
-                <Link href='/artist' onClick={() => setIsMenuOpen(false)}>
+                <Link href='/artists' onClick={() => setIsMenuOpen(false)}>
                   <div className='py-3 text-white'>
                     <div className='flex flex-col items-center space-y-4 border-spacing-1'>
                       <div className='w-full text-md'>Artisti</div>

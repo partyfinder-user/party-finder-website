@@ -11,7 +11,7 @@ import {
 } from '@phosphor-icons/react/dist/ssr';
 import ToggleDescription from '@/components/Helpers/ToggleDescription';
 import ParallaxImage from '@/components/Helpers/ParallaxImage';
-import ContactBar from '@/components/UI/ContactBar';
+import ContactBar from '@/components/Shared/ContactBar';
 
 async function getData() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/mocks/artist.json`);

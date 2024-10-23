@@ -58,7 +58,7 @@ const LineUp = ({ artists }) => {
           onClick={() => setIsExpanded(true)}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.4, ease: 'easeInOut' }}
         >
           {artists.slice(0, 3).map((artist, index) =>
             artist.image ? (

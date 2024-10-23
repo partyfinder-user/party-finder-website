@@ -19,8 +19,8 @@ import {
 
 import ToggleDescription from '@/components/Helpers/ToggleDescription';
 import ParallaxImage from '@/components/Helpers/ParallaxImage';
-import ContactBar from '@/components/UI/ContactBar';
-import ReserveButton from '@/components/UI/ReserveButton';
+import ContactBar from '@/components/Shared/ContactBar';
+import ReserveButton from '@/components/Shared/ReserveButton';
 import LineUp from '@/components/Helpers/LineUp';
 
 async function getData() {
@@ -40,11 +40,11 @@ export default async function EventPage() {
       <div className='relative h-[45vh] overflow-hidden'>
         <ParallaxImage imageSrc={event.image} />
         <div className='absolute inset-0 bg-gradient-to-b from-transparent via-[#13003388] to-[#130033]'></div>
-        <div className='absolute bottom-6 right-8'>
+        <div className='absolute bottom-6 right-5'>
           <button>
             <Heart className='w-6 h-6 text-white' />
           </button>
-          <button className='ml-6'>
+          <button className='ml-4'>
             <ShareNetwork className='w-6 h-6 text-white' />
           </button>
         </div>
