@@ -71,7 +71,7 @@ const FooterNav = () => {
               }`}
             >
               <HomeIcon className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
-              <span className='text-xs leading-none mt-1'>Home</span>
+              <span className='text-sm leading-none mt-1'>Home</span>
             </div>
           </Link>
           <button onClick={() => setIsOpenPosition(true)}>
@@ -81,7 +81,7 @@ const FooterNav = () => {
               }`}
             >
               <MapPin className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
-              <span className='text-xs leading-none mt-1'>Luogo</span>
+              <span className='text-sm leading-none mt-1'>Luogo</span>
             </div>
           </button>
           <FloatingMenu />
@@ -92,7 +92,7 @@ const FooterNav = () => {
               }`}
             >
               <HeartIcon className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
-              <span className='text-xs leading-none mt-1'>Preferiti</span>
+              <span className='text-sm leading-none mt-1'>Preferiti</span>
             </div>
           </Link>
           <Link href='#'>
@@ -102,7 +102,7 @@ const FooterNav = () => {
               }`}
             >
               <UserCircleIcon className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
-              <span className='text-xs leading-none mt-1'>Accedi</span>
+              <span className='text-sm leading-none mt-1'>Accedi</span>
             </div>
           </Link>
         </div>

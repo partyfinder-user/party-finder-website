@@ -2,14 +2,14 @@
 
 import React from 'react';
 import { motion, useScroll } from 'framer-motion';
-import { Heart, WhatsappLogo, ShareNetwork } from '@phosphor-icons/react/dist/ssr';
+import { WhatsappLogo } from '@phosphor-icons/react/dist/ssr';
 
 const ContactBar = () => {
   const { scrollYProgress } = useScroll();
 
   return (
     <>
-      <div className='fixed bottom-[52px] left-0 w-full'>
+      <div className='fixed bottom-[54px] left-0 w-full'>
         <div className='w-full flex items-center px-2 py-2 gap-2 bg-accent/80 backdrop-blur-sm'>
           <div className='w-full flex-1'>
             <div className='text-sm text-white'>Informazioni</div>
