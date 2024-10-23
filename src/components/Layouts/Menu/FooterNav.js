@@ -16,7 +16,7 @@ import RootContext from '@/stores/root-context';
 const FooterNav = () => {
   const rootCtx = useContext(RootContext);
   const [isOpenPosition, setIsOpenPosition] = useState(false);
-  const prevScrollPosRef = useRef(0);
+  // const prevScrollPosRef = useRef(0);
   const containerRef = useRef(null);
   const pathname = usePathname();
 
@@ -30,30 +30,30 @@ const FooterNav = () => {
     setIsOpenPosition(false);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      if (!containerRef.current) {
-        rootCtx.setFooterNavIsVisible(false);
-        return;
-      }
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const currentScrollPos = window.pageYOffset;
+  //     if (!containerRef.current) {
+  //       rootCtx.setFooterNavIsVisible(false);
+  //       return;
+  //     }
 
-      if (currentScrollPos > prevScrollPosRef.current) {
-        containerRef.current.classList.add('FooterNav--hide');
-        rootCtx.setFooterNavIsVisible(false);
-      } else {
-        containerRef.current.classList.remove('FooterNav--hide');
-        rootCtx.setFooterNavIsVisible(true);
-      }
-      prevScrollPosRef.current = currentScrollPos;
-    };
+  //     if (currentScrollPos > prevScrollPosRef.current) {
+  //       containerRef.current.classList.add('FooterNav--hide');
+  //       rootCtx.setFooterNavIsVisible(false);
+  //     } else {
+  //       containerRef.current.classList.remove('FooterNav--hide');
+  //       rootCtx.setFooterNavIsVisible(true);
+  //     }
+  //     prevScrollPosRef.current = currentScrollPos;
+  //   };
 
-    window.addEventListener('scroll', handleScroll);
+  //   window.addEventListener('scroll', handleScroll);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
 
   const active = pathname === '';
 
@@ -61,17 +61,17 @@ const FooterNav = () => {
     <>
       <div
         ref={containerRef}
-        className='w-full mx-auto py-2 bg-background-900/60 backdrop-blur-lg fixed top-auto bottom-0 inset-x-0 z-30 transition-transform duration-300 ease-in-out'
+        className='w-full mx-auto py-1 bg-background-900/60 backdrop-blur-sm fixed top-auto bottom-0 inset-x-0 z-30 transition-transform duration-300 ease-in-out'
       >
-        <div className='flex justify-around mx-auto text-center'>
-          <Link href='/'>
+        <div className='flex items-center justify-around mx-auto text-center'>
+          <Link href='/' className='mt-1'>
             <div
               className={`flex flex-col items-center justify-between text-neutral-300/90 ${
                 active ? 'text-neutral-100' : ''
               }`}
             >
               <HomeIcon className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
-              <span className='text-sm leading-none mt-1'>Home</span>
+              <span className='text-xs leading-none mt-1'>Home</span>
             </div>
           </Link>
           <button onClick={() => setIsOpenPosition(true)}>
@@ -81,7 +81,7 @@ const FooterNav = () => {
               }`}
             >
               <MapPin className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
-              <span className='text-sm leading-none mt-1'>Luogo</span>
+              <span className='text-xs leading-none mt-1'>Luogo</span>
             </div>
           </button>
           <FloatingMenu />
@@ -92,7 +92,7 @@ const FooterNav = () => {
               }`}
             >
               <HeartIcon className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
-              <span className='text-sm leading-none mt-1'>Preferiti</span>
+              <span className='text-xs leading-none mt-1'>Preferiti</span>
             </div>
           </Link>
           <Link href='#'>
@@ -102,7 +102,7 @@ const FooterNav = () => {
               }`}
             >
               <UserCircleIcon className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
-              <span className='text-sm leading-none mt-1'>Accedi</span>
+              <span className='text-xs leading-none mt-1'>Accedi</span>
             </div>
           </Link>
         </div>

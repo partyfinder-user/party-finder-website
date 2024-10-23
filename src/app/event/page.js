@@ -14,6 +14,7 @@ import {
   MusicNote,
   Heart,
   DoorOpen,
+  ShareNetwork,
 } from '@phosphor-icons/react/dist/ssr';
 
 import ToggleDescription from '@/components/Helpers/ToggleDescription';
@@ -39,6 +40,14 @@ export default async function EventPage() {
       <div className='relative h-[45vh] overflow-hidden'>
         <ParallaxImage imageSrc={event.image} />
         <div className='absolute inset-0 bg-gradient-to-b from-transparent via-[#13003388] to-[#130033]'></div>
+        <div className='absolute bottom-6 right-8'>
+          <button>
+            <Heart className='w-6 h-6 text-white' />
+          </button>
+          <button className='ml-6'>
+            <ShareNetwork className='w-6 h-6 text-white' />
+          </button>
+        </div>
       </div>
 
       <div className='px-4 mt-4'>
@@ -80,7 +89,7 @@ export default async function EventPage() {
               <span className='text-sm text-white/80'>Locale</span>
               <h3 className='text-2xl'> {event.venue.name}</h3>
               <div className='flex items-center text-xs text-white/80'>
-                <DoorOpen className='w-4 h-4 mr-1' /> Apertura porte ore
+                <DoorOpen className='w-4 h-4 mr-1' /> Apertura porte
                 <span className='font-semibold text-white ml-1'>22.00</span>
               </div>
               <div className='text-sm text-white/80 mt-4 flex items-center'>
@@ -95,28 +104,28 @@ export default async function EventPage() {
 
         <div className='flex flex-col gap-y-4'>
           <div className='flex items-center space-x-4'>
-            <MusicNote className='w-14 h-14 text-accent' />
+            <MusicNote className='w-12 h-12 text-accent' />
             <div className='flex flex-col'>
               <span className='text-xs text-white/80 -mb-1'>Generi musicali</span>
               <span className='text-xl'>{event.musicGenres.join(', ')}</span>
             </div>
           </div>
           <div className='flex items-center space-x-4'>
-            <DiscoBall className='w-14 h-14 text-accent' />
+            <DiscoBall className='w-12 h-12 text-accent' />
             <div className='flex flex-col'>
               <span className='text-xs text-white/80 -mb-1'>Artisti</span>
               <span className='text-xl'>{event.artists.join(', ')}</span>
             </div>
           </div>
           <div className='flex items-center space-x-4'>
-            <CurrencyEur className='w-14 h-14 text-accent' />
+            <CurrencyEur className='w-12 h-12 text-accent' />
             <div className='flex flex-col'>
               <span className='text-xs text-white/80 -mb-1'>Prezzi</span>
               <span className='text-xl'>{event.price}</span>
             </div>
           </div>
           <div className='flex items-center space-x-4'>
-            <IdentificationCard className='w-14 h-14 text-accent' />
+            <IdentificationCard className='w-12 h-12 text-accent' />
             <div className='flex flex-col'>
               <span className='text-xs text-white/80 -mb-1'>Età minima</span>
               <span className='text-xl'>{event.ageRestriction}</span>
@@ -129,7 +138,7 @@ export default async function EventPage() {
         </div>
 
         <div className='w-full my-4'>
-          <h2 className='text-xl font-bold mb-2'>Descrizione</h2>
+          <h2 className='text-xl font-bold mb-2'>A propsito di</h2>
           <ToggleDescription text={event.description} maxChars={120} />
         </div>
 
