@@ -11,7 +11,7 @@ const Header = () => {
 
   return (
     <header className='sticky top-0 w-full left-0 right-0 z-40 header-bg border-b border-b-white/10'>
-      <div className='p-4'>
+      <div className='py-4 px-2'>
         <div className='flex items-center'>
           <div className='flex-1 w-full'>
             <SearchButton setIsOpen={setIsOpen} />

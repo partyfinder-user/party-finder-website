@@ -210,7 +210,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
         <DialogBackdrop className='fixed inset-0 bg-black/70' />
         <div className='fixed inset-0 flex w-screen h-screen items-center justify-center'>
           <DialogPanel className='w-full h-screen bg-background-900/60 backdrop-blur-lg flex flex-col'>
-            <DialogTitle as='h3' className='w-full px-4 pt-4 pb-1 mb-4 border-b border-background-400/50'>
+            <DialogTitle as='h3' className='w-full px-2 pt-4 pb-1 mb-4 border-b border-background-400/50'>
               <div className='flex items-center'>
                 <div className='w-full flex-1 mb-2'>
                   <SearchInput setIsOpen={setIsOpen} />
@@ -221,7 +221,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
               </div>
             </DialogTitle>
 
-            <div className='overflow-hidden px-4 max-h-[calc(100vh-100px)] scrollbar-hide'>
+            <div className='overflow-hidden px-2 max-h-[calc(100vh-100px)] scrollbar-hide'>
               <div className='w-full max-h-full overflow-auto'>
                 <div className='relative overflow-hidden flex mb-2'>
                   <section className='relative overflow-hidden'>
