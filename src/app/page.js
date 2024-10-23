@@ -3,6 +3,9 @@ import Image from 'next/image';
 import Main from '@/components/Layouts/Main';
 import BgGlassmorphism from '@/components/Helpers/BgGlassmorphism';
 import { HeartIcon } from '@heroicons/react/24/outline';
+import LocalSlideCard from '@/components/UI/LocalSlideCard';
+import EventSlideCard from '@/components/UI/EventSlideCard';
+import EventListCard from '@/components/UI/EventListCard';
 
 const locals = [
   {
@@ -258,22 +261,7 @@ export default function Home() {
             <div className='relative snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
               <div className='w-full flex flex-row justify-between gap-2'>
                 {locals.map((locale) => (
-                  <div key={locale.id} className='flex flex-col items-center justify-center gap-3'>
-                    <div className='relative w-20 h-20 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-accent-500 to-primary-500'>
-                      <div className='w-full h-full rounded-full'>
-                        <Image
-                          src={locale.image}
-                          width={80}
-                          height={80}
-                          alt={locale.name}
-                          className='w-full h-full rounded-full object-cover border-gray-800 border'
-                        />
-                      </div>
-                    </div>
-                    <span className='text-xs text-white text-center max-w-[100px] whitespace-nowrap overflow-hidden text-ellipsis'>
-                      {locale.name}
-                    </span>
-                  </div>
+                  <LocalSlideCard key={locale.id} local={locale} />
                 ))}
               </div>
             </div>
@@ -298,38 +286,8 @@ export default function Home() {
             <h2 className='text-lg font-medium mb-2 text-white'>Notte da Leoni</h2>
             <div className='relative snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
               <div className='w-full flex flex-row gap-4'>
-                {topEvents.map((event, idx) => (
-                  <div
-                    key={idx}
-                    className='flex flex-col justify-between gap-2 bg-background-500/60 border border-background-500 rounded-lg shadow-lg min-w-[300px] overflow-hidden'
-                  >
-                    <div className='relative'>
-                      <Image
-                        src={event.image}
-                        width={300}
-                        height={150}
-                        alt={event.title}
-                        className='object-fill rounded-t-lg'
-                      />
-
-                      <div className='absolute bottom-3 right-3'>
-                        <HeartIcon className='w-6 h-6 text-white' />
-                      </div>
-
-                      <div className='absolute top-0 right-0 bg-background-500/60 border border-background-500/30 backdrop-blur-sm text-neon-low font-medium text-md px-3.5 py-1.5 rounded-bl-lg'>
-                        {event.venue}
-                      </div>
-
-                      <div className='p-4 flex flex-col justify-between flex-grow gap-2'>
-                        <span className='text-xl text-white leading-tight'>{event.title}</span>
-
-                        <div className='mt-auto flex flex-col gap-1'>
-                          <span className='text-xs text-accent-400'>{event.date}</span>
-                          <span className='text-xs text-background-200'>{event.location}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                {topEvents.map((event) => (
+                  <EventSlideCard key={event.id} event={event} />
                 ))}
               </div>
             </div>
@@ -339,38 +297,8 @@ export default function Home() {
             <h2 className='text-lg font-medium mb-2 text-white'>Party di fine estate</h2>
             <div className='relative snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
               <div className='w-full flex flex-row gap-4'>
-                {otherEvents.map((event, idx) => (
-                  <div
-                    key={idx}
-                    className='flex flex-col justify-between gap-2 bg-background-500/60 border border-background-500 rounded-lg shadow-lg min-w-[300px] overflow-hidden'
-                  >
-                    <div className='relative'>
-                      <Image
-                        src={event.image}
-                        width={300}
-                        height={150}
-                        alt={event.title}
-                        className='object-fill rounded-t-lg'
-                      />
-
-                      <div className='absolute bottom-3 right-3'>
-                        <HeartIcon className='w-6 h-6 text-white' />
-                      </div>
-
-                      <div className='absolute top-0 right-0 bg-background-800/80 backdrop-blur-sm text-neon-low font-medium text-md px-3.5 py-1.5 rounded-bl-lg'>
-                        {event.venue}
-                      </div>
-
-                      <div className='p-4 flex flex-col justify-between flex-grow gap-2'>
-                        <span className='text-xl text-white leading-tight'>{event.title}</span>
-
-                        <div className='mt-auto flex flex-col gap-1'>
-                          <span className='text-xs text-accent-400'>{event.date}</span>
-                          <span className='text-xs text-background-200'>{event.location}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                {otherEvents.map((event) => (
+                  <EventSlideCard key={event.id} event={event} />
                 ))}
               </div>
             </div>
@@ -379,33 +307,8 @@ export default function Home() {
           <section>
             <h2 className='text-lg font-medium mb-2 text-white'>Altri eventi in programma</h2>
             <div className='w-full flex flex-col gap-4'>
-              {events.map((event, idx) => (
-                <div
-                  key={idx}
-                  className='flex flex-row items-stretch bg-background-500/60 border border-background-500 rounded-lg shadow-sm hover:bg-background-700 transition-all duration-300 overflow-hidden'
-                >
-                  <div className='flex-shrink-0'>
-                    <Image
-                      src={event.image}
-                      width={170}
-                      height={200}
-                      alt={event.title}
-                      className='object-cover h-full rounded-l-lg'
-                    />
-                  </div>
-
-                  <div className='flex flex-col justify-between px-4 py-2 flex-grow gap-2'>
-                    <div>
-                      <span className='text-lg text-white block'>{event.title}</span>
-                      <span className='text-accent-500 font-medium'>{event.venue}</span>
-                    </div>
-
-                    <div className='flex flex-col'>
-                      <span className='text-xs text-white mb-1'>{event.date}</span>
-                      <span className='text-xs text-background-200'>{event.location}</span>
-                    </div>
-                  </div>
-                </div>
+              {events.map((event) => (
+                <EventListCard key={event.id} event={event} />
               ))}
             </div>
           </section>

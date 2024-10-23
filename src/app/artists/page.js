@@ -2,6 +2,7 @@ import React from 'react';
 
 import PaginationList from '@/components/Shared/Pagination';
 import ArtistCard from '@/components/UI/ArtistCard';
+import BgGlassmorphism from '@/components/Helpers/BgGlassmorphism';
 
 const filters = [
   { label: 'Ordinamento: A-z', value: 'date' },
@@ -22,7 +23,8 @@ export default async function ArtistListPage() {
 
   return (
     <div>
-      <div className='text-white p-6'>
+      <BgGlassmorphism />
+      <div className='text-white px-4 py-6'>
         <h1 className='text-3xl'>Artisti</h1>
       </div>
 

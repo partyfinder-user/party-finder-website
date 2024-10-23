@@ -2,6 +2,7 @@ import React from 'react';
 
 import PaginationList from '@/components/Shared/Pagination';
 import EventCard from '@/components/UI/EventCard';
+import BgGlassmorphism from '@/components/Helpers/BgGlassmorphism';
 
 const filters = [
   { label: 'Ordinamento: A-z', value: 'date' },
@@ -22,10 +23,11 @@ async function getData() {
 
 export default async function EventListPage() {
   const events = await getData();
-  
+
   return (
     <div>
-      <div className='text-white p-6'>
+      <BgGlassmorphism />
+      <div className='text-white px-4 py-6'>
         <h1 className='text-3xl'>Eventi</h1>
       </div>
 
