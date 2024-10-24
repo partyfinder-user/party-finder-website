@@ -2,7 +2,7 @@ import React from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { HeartIcon } from '@heroicons/react/24/outline';
+import { Heart } from '@phosphor-icons/react/dist/ssr';
 
 const EventSlideCard = ({ event }) => {
   return (
@@ -12,7 +12,7 @@ const EventSlideCard = ({ event }) => {
           <Image src={event.image} width={300} height={150} alt={event.title} className='object-fill rounded-t-lg' />
 
           <div className='absolute bottom-3 right-3'>
-            <HeartIcon className='w-6 h-6 text-white' />
+            <Heart className='w-6 h-6 text-white' />
           </div>
 
           <div className='absolute top-0 right-0 bg-background-500/60 border border-background-500/30 backdrop-blur-sm text-neon-low font-medium text-md px-3.5 py-1.5 rounded-bl-lg'>

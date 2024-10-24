@@ -1,8 +1,5 @@
-import Image from 'next/image';
-
 import Main from '@/components/Layouts/Main';
 import BgGlassmorphism from '@/components/Helpers/BgGlassmorphism';
-import { HeartIcon } from '@heroicons/react/24/outline';
 import LocalSlideCard from '@/components/UI/LocalSlideCard';
 import EventSlideCard from '@/components/UI/EventSlideCard';
 import EventListCard from '@/components/UI/EventListCard';

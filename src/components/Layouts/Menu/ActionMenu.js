@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
-import { BoltIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
+
+import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
+import { Lightning, X } from '@phosphor-icons/react/dist/ssr';
 
 function FloatingMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +22,7 @@ function FloatingMenu() {
           <DialogPanel className='absolute bottom-0 w-full transform overflow-hidden bg-background-900/60 backdrop-blur-lg px-6 pt-4 pb-4 text-left align-middle shadow-xl transition-all'>
             <DialogTitle as='h3' className='w-full text-xl font-medium leading-6 text-white/80 flex justify-end'>
               <div className='flex items-center'>
-                <XMarkIcon className='w-6 h-6 text-accent-500' onClick={() => setIsMenuOpen(!isMenuOpen)} />
+                <X className='w-6 h-6 text-accent-500' onClick={() => setIsMenuOpen(!isMenuOpen)} />
               </div>
             </DialogTitle>
             <div className='w-full'>
@@ -64,7 +65,7 @@ function FloatingMenu() {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className='w-12 h-12 flex items-center justify-center rounded-full bg-accent-400 text-white transition-transform duration-300 ease-in-out z-50'
       >
-        <BoltIcon className='w-6 h-6' />
+        <Lightning className='w-6 h-6' weight="fill" />
       </button>
     </>
   );
