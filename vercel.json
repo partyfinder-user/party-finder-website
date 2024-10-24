@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/account/:match*",
+      "source": "/user/:match*",
       "destination": "https://staging.d2amcgphi26fib.amplifyapp.com/:match*"
     }
   ]
