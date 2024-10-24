@@ -49,13 +49,13 @@ const FooterNav = () => {
             </div>
           </button>
           <FloatingMenu />
-          <Link href='#'>
+          <Link href='/user/account/favorites'>
             <div className={`flex flex-col items-center justify-between text-white ${active ? 'text-accent-100' : ''}`}>
               <Heart className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
               <span className='text-sm leading-none mt-1'>Preferiti</span>
             </div>
           </Link>
-          <Link href='#'>
+          <Link href='/user/account/'>
             <div className={`flex flex-col items-center justify-between text-white ${active ? 'text-accent-100' : ''}`}>
               <UserCircle className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
               <span className='text-sm leading-none mt-1'>Accedi</span>
