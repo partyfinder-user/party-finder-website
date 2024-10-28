@@ -9,7 +9,7 @@ const ContactBar = () => {
 
   return (
     <>
-      <div className='fixed bottom-[56px] left-0 w-full'>
+      <div className='fixed bottom-[60px] left-0 w-full'>
         <div className='w-full flex items-center px-2 py-2 gap-2 bg-accent/80 backdrop-blur-sm'>
           <div className='w-full flex-1'>
             <div className='text-sm text-white'>Informazioni</div>
@@ -23,7 +23,7 @@ const ContactBar = () => {
           </div>
         </div>
         <div className='-mt-1 w-full bg-accent/80 backdrop-blur-sm'>
-          <motion.div className='h-1 bg-accent-900 origin-left' style={{ scaleX: scrollYProgress }} />
+          <motion.div className='h-1 bg-accent-800 origin-left' style={{ scaleX: scrollYProgress }} />
         </div>
       </div>
     </>

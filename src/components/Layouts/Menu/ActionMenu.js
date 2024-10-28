@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
-import { Lightning, X } from '@phosphor-icons/react/dist/ssr';
+import { X, List } from '@phosphor-icons/react/dist/ssr';
 
 function FloatingMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -65,7 +65,7 @@ function FloatingMenu() {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className='w-12 h-12 flex items-center justify-center rounded-full bg-accent-400 text-white transition-transform duration-300 ease-in-out z-50'
       >
-        <Lightning className='w-6 h-6' weight="fill" />
+        <List className='w-7 h-8' />
       </button>
     </>
   );
