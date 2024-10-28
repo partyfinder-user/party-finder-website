@@ -48,7 +48,7 @@ const FooterNav = () => {
               <span className='text-sm leading-none mt-1'>Luogo</span>
             </div>
           </button>
-          <FloatingMenu />
+          {/* <FloatingMenu /> */}
           <Link href='/user/account/favorites'>
             <div className={`flex flex-col items-center justify-between text-white ${active ? 'text-accent-100' : ''}`}>
               <Heart className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
