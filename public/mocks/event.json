@@ -16,8 +16,9 @@
   "lineUp": [
     { "name": "Dov'è Liana", "time": "23:30", "image": "/stock/dove-liana.jpeg" },
     { "name": "Kiss Nuka", "time": "00:30", "image": "/stock/kiss-nuka.jpg" },
-    { "name": "Fuera", "time": "01:30", "image": "/stock/fuera.jpg" }
-
+    { "name": "Fuera", "time": "01:30", "image": "/stock/fuera.jpg" },
+    { "name": "Crème Solaire", "time": "02:30", "image": null },
+    { "name": "Plié", "time": "03:30", "image": null }
   ],
   "relatedEvents": [
     {
