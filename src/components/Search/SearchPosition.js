@@ -95,7 +95,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
                 )}
               </div>
 
-              {loading && <Spinner className='absolute top-4 right-4' />}
+              {loading && <Spinner className='absolute top-0 right-2' />}
 
               <div className='overflow-y-auto max-h-[calc(100vh-150px)]'>
                 {cities.length > 0 && (
