@@ -128,7 +128,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
             {cities.length <= 0 && (
               <button
                 onClick={() => setIsOpen(false)}
-                className='absolute bottom-9 right-1 p-2 bg-white/40 text-white rounded-full'
+                className='fixed bottom-9 right-1 p-2 bg-white/40 text-white rounded-full'
               >
                 <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
               </button>
