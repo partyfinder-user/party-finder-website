@@ -69,7 +69,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
     >
       <DialogBackdrop className='fixed inset-0 bg-black/90' />
       <div className='fixed inset-0 z-10 w-screen overflow-hidden'>
-        <div className='flex min-h-full px-2 py-6'>
+        <div className='flex min-h-full px-2 py-4'>
           <DialogPanel className='relative w-full safe-height flex flex-col'>
             <div className='flex flex-col px-2'>
               <div className='flex items-center mb-4'>
@@ -128,7 +128,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
             {cities.length <= 0 && (
               <button
                 onClick={() => setIsOpen(false)}
-                className='fixed bottom-9 right-1 p-2 bg-white/40 text-white rounded-full'
+                className='fixed bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'
               >
                 <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
               </button>
