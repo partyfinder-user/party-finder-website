@@ -9,7 +9,7 @@ const ContactBar = () => {
 
   return (
     <>
-      <div className='fixed bottom-[60px] left-0 w-full'>
+      <div className='fixed bottom-[58px] left-0 w-full'>
         <div className='w-full flex items-center px-2 py-2 gap-2 bg-accent/80 backdrop-blur-sm'>
           <div className='w-full flex-1'>
             <div className='text-sm text-white'>Informazioni</div>

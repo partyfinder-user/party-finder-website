@@ -20,19 +20,19 @@ const LocalCard = ({ idx, data }) => {
             className='max-h-60 w-full object-cover rounded-t-lg'
           />
 
-          <div className='absolute bottom-3 right-3'>
-            <Heart className='w-6 h-6 text-white' />
-          </div>
-
           <div className='p-4 flex flex-col justify-between flex-grow gap-2'>
-            <span className='text-xl text-white leading-tight'>{data.title}</span>
-            <span className='text-white leading-tight'>{data.address}</span>
+            <div className='flex'>
+              <div className='flex-1'>
+                <span className='text-xl text-white leading-tight'>{data.title}</span>
+                <span className='text-white leading-tight'>{data.address}</span>
 
-            <div className='mt-auto flex flex-col gap-1'>
-              <span className='text-xs text-accent-400'>{data.genres.join(', ')}</span>
-            </div>
-            <div className='mt-auto flex flex-col gap-1'>
-              <span className='text-xs text-white'>Apertura: {data.opening_days.join(', ')}</span>
+                <div className='mt-auto flex flex-col gap-1'>
+                  <span className='text-xs text-accent-400'>{data.genres.join(', ')}</span>
+                </div>
+              </div>
+              <div className='pl-2 mt-auto'>
+                <Heart className='w-7 h-7 text-white' />
+              </div>
             </div>
           </div>
         </Link>

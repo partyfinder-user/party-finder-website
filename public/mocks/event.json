@@ -14,11 +14,10 @@
     "platform": "Getfy"
   },
   "lineUp": [
-    { "name": "Dov'è Liana", "image": "/stock/dove-liana.jpeg" },
-    { "name": "Kiss Nuka", "image": "/stock/kiss-nuka.jpg" },
-    { "name": "Crème Solaire", "image": null },
-    { "name": "Fuera", "image": "/stock/fuera.jpg" },
-    { "name": "Plié", "image": null }
+    { "name": "Dov'è Liana", "time": "23:30", "image": "/stock/dove-liana.jpeg" },
+    { "name": "Kiss Nuka", "time": "00:30", "image": "/stock/kiss-nuka.jpg" },
+    { "name": "Fuera", "time": "01:30", "image": "/stock/fuera.jpg" }
+
   ],
   "relatedEvents": [
     {

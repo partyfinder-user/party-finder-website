@@ -20,15 +20,17 @@ const FormatCard = ({ idx, data }) => {
             className='max-h-60 w-full object-cover rounded-t-lg'
           />
 
-          <div className='absolute top-3 right-3'>
-            <Heart className='w-6 h-6 text-white' />
-          </div>
-
           <div className='p-4 flex flex-col justify-between flex-grow gap-2'>
-            <span className='text-xl text-white leading-tight'>{data.title}</span>
-
-            <div className='mt-auto flex flex-col gap-1 line-clamp-2'>
-              <span className='text-xs text-accent-400'>{data.description}</span>
+            <div className='flex'>
+              <div className='flex-1'>
+                <span className='text-xl text-white leading-tight'>{data.title}</span>
+                <div className='mt-auto flex flex-col gap-1 line-clamp-2'>
+                  <span className='text-xs text-accent-400'>{data.description}</span>
+                </div>
+              </div>
+              <div className='pl-2 mt-auto'>
+                <Heart className='w-7 h-7 text-white' />
+              </div>
             </div>
           </div>
         </Link>

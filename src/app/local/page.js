@@ -25,7 +25,10 @@ export default async function FormatPage() {
         <div className='absolute inset-0 bg-gradient-to-b from-transparent via-[#13003388] to-[#130033]'></div>
       </div>
 
-      <div className='px-4 my-4'>
+      <div className='relative px-4 my-4'>
+        <div className='absolute rounded-2xl overflow-hidden w-24 h-24 -top-28'>
+          <Image alt={local.name} src={local.logo} width={150} height={150} className='object-cover' />
+        </div>
         <h2 className='text-4xl mb-1'>{local.title}</h2>
         <div className='flex items-center text-xl text-accent'>
           <MapPin className='w-6 h-6' />

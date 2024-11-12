@@ -23,7 +23,7 @@ const EventSlideCard = ({ event }) => {
             <span className='text-xl text-white leading-tight'>{event.title}</span>
 
             <div className='mt-auto flex flex-col gap-1'>
-              <span className='text-xs text-accent-400'>{event.date}</span>
+              <span className='text-accent-400'>{event.date}</span>
               <span className='text-xs text-background-200'>{event.location}</span>
             </div>
           </div>

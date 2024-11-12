@@ -70,13 +70,10 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
       <DialogBackdrop className='fixed inset-0 bg-black/90' />
       <div className='fixed inset-0 z-10 w-screen overflow-hidden'>
         <div className='flex min-h-full px-2 py-6'>
-          <DialogPanel className={`w-full safe-height flex flex-col`}>
+          <DialogPanel className='relative w-full safe-height flex flex-col'>
             <div className='flex flex-col px-2'>
               <div className='flex items-center mb-4'>
                 <span className='text-lg font-semibold flex-1'>Trova la tua città</span>
-                <button onClick={() => setIsOpen(false)} className='p-2 bg-white/40 text-white rounded-lg'>
-                  <ArrowBendUpLeft className='text-white w-5 h-5' />
-                </button>
               </div>
 
               <div className='relative w-full group'>
@@ -123,8 +120,19 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
                 )}
               </div>
 
-              {!loading && cities.length === 0 && query && <p className='text-gray-500 my-2'>Nessun risultato trovato</p>}
+              {!loading && cities.length === 0 && query && (
+                <p className='text-gray-500 my-2'>Nessun risultato trovato</p>
+              )}
             </div>
+
+            {cities.length <= 0 && (
+              <button
+                onClick={() => setIsOpen(false)}
+                className='absolute bottom-9 right-1 p-2 bg-white/40 text-white rounded-full'
+              >
+                <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
+              </button>
+            )}
           </DialogPanel>
         </div>
       </div>

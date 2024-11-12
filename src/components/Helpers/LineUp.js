@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { UserCircleCheck } from '@phosphor-icons/react';
+import { UserCircleCheck, CaretDown } from '@phosphor-icons/react';
 
 const LineUp = ({ artists }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -38,13 +38,19 @@ const LineUp = ({ artists }) => {
                       <UserCircleCheck className='w-8 h-8 text-white' />
                     </div>
                   )}
-                  <span>{artist.name}</span>
+                  <div className='flex flex-col'>
+                    <span>{artist.name}</span>
+                    <span className='text-xs text-white/60'>live ore {artist?.time}</span>
+                  </div>
                 </div>
                 <button className='bg-white text-black py-1 px-3 rounded-full text-sm'>Eventi</button>
               </div>
             ))}
             <div className='w-full flex justify-end'>
-              <button onClick={() => setIsExpanded(false)} className='text-white py-1 px-4 rounded-full border border-white/60'>
+              <button
+                onClick={() => setIsExpanded(false)}
+                className='text-white py-1 px-4 rounded-full border border-white/60'
+              >
                 Mostra meno
               </button>
             </div>
@@ -79,9 +85,16 @@ const LineUp = ({ artists }) => {
               </div>
             ),
           )}
-          <div className='flex items-center justify-center w-12 h-12 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-accent-500 to-primary-500 text-white text-sm'>
-            +{artists.length - 3}
-          </div>
+          {artists.length > 3 && (
+            <div className='flex items-center justify-center w-12 h-12 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-accent-500 to-primary-500 text-white text-sm'>
+              +{artists.length - 3}
+            </div>
+          )}
+          {artists.length <= 3 && (
+            <div className='flex items-center justify-center w-12 h-12 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-accent-500 to-primary-500 text-white text-sm'>
+              <CaretDown className='w-6 h-6 text-white' />
+            </div>
+          )}
         </motion.div>
       )}
     </>
