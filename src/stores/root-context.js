@@ -1,7 +1,7 @@
 import React from 'react';
 
 const RootContext = React.createContext({
-  position: '',
+  position: {},
   footerNavVisible: false,
   setPositionCity: (value) => {},
   setFooterNavIsVisible: (value) => {},

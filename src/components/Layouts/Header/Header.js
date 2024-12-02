@@ -29,11 +29,11 @@ const Header = () => {
           </div>
         </div>
         <div className='flex items-center justify-center'>
-          <div className='mt-2 relative snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
-            <div className='w-full flex flex-row gap-2'>
+          <div className='mt-2 relative xs:w-full snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
+            <div className='w-full flex flex-row xs:justify-between gap-2'>
               {links.map((item, idx) => (
-                <Link href={item.href} key={idx} className='flex flex-col items-center justify-center gap-3'>
-                  <div className='text-sm font-normal px-5 py-1.5 border border-background-400 rounded-full text-white text-opacity-90 whitespace-nowrap'>
+                <Link href={item.href} key={idx} className='flex flex-col items-center justify-center gap-3 xs:flex-1 xs:w-full'>
+                  <div className='xs:w-full text-sm font-normal px-5 py-1.5 border border-background-400 rounded-full text-white text-opacity-90 text-center'>
                     {item.label}
                   </div>
                 </Link>
@@ -41,6 +41,7 @@ const Header = () => {
             </div>
           </div>
         </div>
+
         <SearchPanel isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </header>

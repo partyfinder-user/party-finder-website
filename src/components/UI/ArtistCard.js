@@ -13,19 +13,19 @@ const ArtistCard = ({ idx, data }) => {
       <div className='relative'>
         <Link href='/artist'>
           <Image
-            src={data.image}
+            src={process.env.NEXT_PUBLIC_IMAGE_BASE_URL + data.image}
             width={360}
             height={150}
-            alt={data.title}
+            alt={data.name}
             className='max-h-60 w-full object-cover rounded-t-lg'
           />
 
           <div className='p-4 flex flex-col justify-between flex-grow gap-2'>
             <div className='flex'>
               <div className='flex-1'>
-                <span className='text-xl text-white leading-tight'>{data.title}</span>
+                <span className='text-xl text-white leading-tight'>{data.name}</span>
                 <div className='mt-auto flex flex-col gap-1'>
-                  <span className='text-xs text-accent-400'>{data.genres.join(', ')}</span>
+                  <span className='text-xs text-accent-400'>{data.types.join(', ')}</span>
                 </div>
               </div>
               <div className='pl-2 mt-auto'>

@@ -21,7 +21,7 @@ const ParallaxImage = ({ imageSrc }) => {
   return (
     <motion.div
       style={{
-        backgroundImage: `url(${imageSrc})`,
+        backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${imageSrc})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',

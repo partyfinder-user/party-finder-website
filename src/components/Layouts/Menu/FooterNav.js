@@ -19,7 +19,7 @@ const FooterNav = () => {
 
   const handlePositionSelect = (value) => {
     if (!value) {
-      rootCtx.setPositionCity('');
+      rootCtx.setPositionCity({});
       return;
     }
 

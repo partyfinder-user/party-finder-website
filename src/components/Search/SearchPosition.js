@@ -17,7 +17,6 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
   const [loading, setLoading] = useState(false);
   const [cities, setCities] = useState([]);
   const [typingTimeout, setTypingTimeout] = useState(null);
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
   const handleSearch = async () => {
     if (query.length === 0) {
@@ -35,9 +34,10 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
     setCities([]);
   };
 
-  const handleConfirm = (city) => {
-    rootCtx.setPositionCity(city.nome);
-    onSelect(city.nome);
+  const handleConfirm = (position) => {
+    const selectedPosition = { city: position.nome, geo: position.geo };
+    rootCtx.setPositionCity(selectedPosition);
+    onSelect(selectedPosition);
     setIsOpen(false);
     setQuery('');
   };
@@ -57,7 +57,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
   useEffect(() => {
     if (reset) {
       setCities([]);
-      rootCtx.setPositionCity('');
+      rootCtx.setPositionCity({});
     }
   }, [reset]);
 

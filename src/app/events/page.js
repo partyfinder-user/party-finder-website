@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import PaginationList from '@/components/Shared/Pagination';
 import EventCard from '@/components/UI/EventCard';
 import BgGlassmorphism from '@/components/Helpers/BgGlassmorphism';
+import SkeletonListCard from '@/components/UI/SkeletonListCard';
 
 const filters = [
   { label: 'Ordinamento: A-z', value: 'date' },
@@ -13,7 +14,15 @@ const filters = [
 ];
 
 async function getData() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/mocks/events.json`);
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const response = await fetch(`${process.env.NEXT_API_SERVICE_BASE_URL}builder/events`, requestOptions);
+
   if (!response.ok) {
     throw new Error('Error to handler get data');
   }
@@ -21,9 +30,34 @@ async function getData() {
   return data;
 }
 
-export default async function EventListPage() {
+const List = async () => {
   const events = await getData();
+  return (
+    <div>
+      {events.map((event) => (
+        <EventCard key={event.id} event={event} />
+      ))}
+    </div>
+  );
+};
 
+const Filters = async () => {
+  return (
+    <div className='relative snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide mb-4'>
+      <div className='w-full flex flex-row gap-2'>
+        {filters.map((filter, idx) => (
+          <div key={idx} className='flex flex-col items-center justify-center gap-3'>
+            <div className='text-sm px-5 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+              {filter.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default async function EventListPage() {
   return (
     <div>
       <BgGlassmorphism />
@@ -34,21 +68,10 @@ export default async function EventListPage() {
       <div className='relative'>
         <div className='absolute inset-0 h-16' />
         <div className='relative bg-background-700 rounded-tl-[40px] z-10 p-4'>
-          <div className='relative snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide mb-4'>
-            <div className='w-full flex flex-row gap-2'>
-              {filters.map((filter, idx) => (
-                <div key={idx} className='flex flex-col items-center justify-center gap-3'>
-                  <div className='text-sm px-5 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                    {filter.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {events.map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
+          <Suspense fallback={<SkeletonListCard />}>
+            <Filters />
+            <List />
+          </Suspense>
 
           <PaginationList />
         </div>

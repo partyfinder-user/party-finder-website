@@ -17,7 +17,7 @@ const ToggleDescription = ({ text, visibleChars = 130 }) => {
   return (
     <div>
       <span>
-        {visibleText}
+        <span dangerouslySetInnerHTML={{ __html: visibleText }} />
         <Transition
           show={isExpanded}
           enter='transition-opacity duration-200'
@@ -27,7 +27,7 @@ const ToggleDescription = ({ text, visibleChars = 130 }) => {
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
         >
-          <span>{hiddenText}</span>
+          <span dangerouslySetInnerHTML={{ __html: hiddenText }} />
         </Transition>
       </span>
 

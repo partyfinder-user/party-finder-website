@@ -1,16 +1,25 @@
 import React, { useEffect, useCallback, useState } from 'react';
 
-import { setCookieValue } from '../tools/tools';
+import { setCookieValue, deleteCookieByKey } from '../tools/tools';
 import RootContext from './root-context';
 
 const RootProvider = (props) => {
-  const [position, setPosition] = useState('');
+  const [position, setPosition] = useState({});
   const [footerNavVisible, setFooterNavVisible] = useState('');
 
   useEffect(() => {
-    const position = localStorage.getItem('__pos_prtfn_');
-    setCookieValue('__pos_prtfn_', position, 1000);
-    setPosition(position);
+    const city = localStorage.getItem('__pos_prtfn_');
+    const lat = localStorage.getItem('__geo_lat_prtfn_');
+    const long = localStorage.getItem('__geo_long_prtfn_');
+    setCookieValue('__pos_prtfn_', city, 1000);
+    setCookieValue('__geo_lat_prtfn_', lat, 1000);
+    setCookieValue('__geo_long_prtfn_', long, 1000);
+
+    if (!city) {
+      setPosition({});
+    } else {
+      setPosition({ city, geo: { lat, long } });
+    }
 
     const footerNavStaus = localStorage.getItem('__ftr_nav_show_');
     setCookieValue('__ftr_nav_show_', footerNavStaus, 1000);
@@ -18,8 +27,23 @@ const RootProvider = (props) => {
   }, []);
 
   const setPositionCity = useCallback((value) => {
-    localStorage.setItem('__pos_prtfn_', value);
-    setCookieValue('__pos_prtfn_', value, 1000);
+    if (!value?.city) {
+      localStorage.removeItem('__pos_prtfn_');
+      localStorage.removeItem('__geo_lat_prtfn_');
+      localStorage.removeItem('__geo_long_prtfn_');
+      deleteCookieByKey('__pos_prtfn_')
+      deleteCookieByKey('__geo_lat_prtfn_')
+      deleteCookieByKey('__geo_long_prtfn_')
+      setPosition({});
+      return;
+    }
+
+    localStorage.setItem('__pos_prtfn_', value?.city);
+    localStorage.setItem('__geo_lat_prtfn_', value?.geo?.lat);
+    localStorage.setItem('__geo_long_prtfn_', value?.geo?.long);
+    setCookieValue('__pos_prtfn_', value?.city, 1000);
+    setCookieValue('__geo_lat_prtfn_', value?.geo?.lat, 1000);
+    setCookieValue('__geo_long_prtfn_', value?.geo?.long, 1000);
     setPosition(value);
   }, []);
 

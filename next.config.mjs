@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'nextui.org',
       },
+      {
+        protocol: 'https',
+        hostname: 'party-finder-asset.s3.eu-west-1.amazonaws.com',
+      },
     ],
     formats: ['image/webp'],
   },
