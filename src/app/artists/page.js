@@ -18,7 +18,7 @@ async function getData() {
     },
   };
 
-  const response = await fetch(`${process.env.NEXT_API_SERVICE_BASE_URL}builder/artists`, requestOptions);
+  const response = await fetch(`${process.env.API_SERVICE_BASE_URL}builder/artists`, requestOptions);
 
   if (!response.ok) {
     throw new Error('Error to handler get data');

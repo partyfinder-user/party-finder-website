@@ -15,7 +15,7 @@ async function getData() {
     },
   };
 
-  const response = await fetch(`${process.env.NEXT_API_SERVICE_BASE_URL}builder/formats`, requestOptions);
+  const response = await fetch(`${process.env.API_SERVICE_BASE_URL}builder/formats`, requestOptions);
 
   if (!response.ok) {
     throw new Error('Error to handler get data');

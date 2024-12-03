@@ -27,7 +27,7 @@ import CopyTextButton from '@/components/Helpers/CopyTextButton';
 import Link from 'next/link';
 
 async function getData(slug) {
-  const response = await fetch(`${process.env.NEXT_API_SERVICE_BASE_URL}builder/event/${slug}`);
+  const response = await fetch(`${process.env.API_SERVICE_BASE_URL}builder/event/${slug}`);
 
   if (!response.ok) {
     throw new Error('Error to handler get data');
