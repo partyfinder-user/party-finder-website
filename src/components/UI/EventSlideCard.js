@@ -1,15 +1,21 @@
 import React from 'react';
-
-import Image from 'next/image';
 import Link from 'next/link';
+
 import { Heart } from '@phosphor-icons/react/dist/ssr';
+import LazyImage from '@/components/Helpers/LazyImage';
 
 const EventSlideCard = ({ event }) => {
   return (
     <Link href='/event'>
       <div className='flex flex-col justify-between gap-2 bg-background-500/60 border border-background-500 rounded-lg shadow-lg min-w-[300px] overflow-hidden'>
         <div className='relative'>
-          <Image src={event.image} width={300} height={150} alt={event.title} className='object-fill rounded-t-lg' />
+          <LazyImage
+            src={event.image}
+            width={300}
+            height={150}
+            alt={event.title}
+            className='object-fill rounded-t-lg'
+          />
 
           <div className='absolute bottom-3 right-3'>
             <Heart className='w-6 h-6 text-white' />

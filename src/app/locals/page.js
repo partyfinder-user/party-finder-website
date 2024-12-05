@@ -33,8 +33,8 @@ const List = async () => {
   const locals = await getData();
   return (
     <div>
-      {locals.map((data) => (
-        <LocalCard key={data.id} data={data} />
+      {locals.map((data, idx) => (
+        <LocalCard key={idx} data={data} />
       ))}
     </div>
   );

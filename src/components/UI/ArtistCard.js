@@ -1,19 +1,22 @@
 import React from 'react';
-
-import Image from 'next/image';
 import Link from 'next/link';
+
 import { Heart } from '@phosphor-icons/react/dist/ssr';
+import LazyImage from '@/components/Helpers/LazyImage';
+import { isValidImage } from '@/tools/tools';
 
 const ArtistCard = ({ idx, data }) => {
+  const imageSrc = isValidImage(data.image) ? process.env.NEXT_PUBLIC_IMAGE_BASE_URL + data.image : '';
+
   return (
     <div
       key={idx}
       className='flex flex-col justify-between gap-2 bg-background-500/60 border border-background-500 rounded-lg shadow-lg min-w-[300px] overflow-hidden mb-4'
     >
       <div className='relative'>
-        <Link href='/artist'>
-          <Image
-            src={process.env.NEXT_PUBLIC_IMAGE_BASE_URL + data.image}
+        <Link href={'/artist/' + data.slug}>
+          <LazyImage
+            src={imageSrc}
             width={360}
             height={150}
             alt={data.name}

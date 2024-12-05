@@ -28,8 +28,8 @@ const List = async () => {
   const formats = await getData();
   return (
     <div>
-      {formats.map((data) => (
-        <FormatCard key={data.id} data={data} />
+      {formats.map((data, idx) => (
+        <FormatCard key={idx} data={data} />
       ))}
     </div>
   );

@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
+
 import { motion } from 'framer-motion';
 import { UserCircleCheck, CaretDown } from '@phosphor-icons/react';
+import LazyImage from './LazyImage';
 
 const LineUp = ({ lineup }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -24,7 +25,7 @@ const LineUp = ({ lineup }) => {
                   {data.artist.image ? (
                     <div className='relative w-12 h-12 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-accent-500 to-primary-500'>
                       <div className='w-full h-full rounded-full'>
-                        <Image
+                        <LazyImage
                           src={process.env.NEXT_PUBLIC_IMAGE_BASE_URL + data.artist.image.key}
                           alt={data.artist.name}
                           width={60}
@@ -68,7 +69,7 @@ const LineUp = ({ lineup }) => {
         >
           {lineup.slice(0, 3).map((data, index) =>
             data.artist.image ? (
-              <Image
+              <LazyImage
                 key={index}
                 src={process.env.NEXT_PUBLIC_IMAGE_BASE_URL + data.artist.image.key}
                 alt={data.artist.name}

@@ -1,17 +1,23 @@
 import React from 'react';
-
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { Heart } from '@phosphor-icons/react/dist/ssr';
+import LazyImage from '@/components/Helpers/LazyImage';
+import { isValidImage, parseTime } from '@/tools/tools';
 
 const EventCard = ({ idx, event }) => {
+  const imageSrc = isValidImage(event.image) ? process.env.NEXT_PUBLIC_IMAGE_BASE_URL + event.image : '';
+
   const date = new Date(event.dateStart);
-  date.setHours(event.hourStart);
+
+  const { hours, minutes } = parseTime(event.hourStart);
+  date.setHours(hours);
+  date.setMinutes(minutes);
+
   const options = {
-    weekday: 'long',
+    weekday: 'short',
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
@@ -25,8 +31,8 @@ const EventCard = ({ idx, event }) => {
     >
       <div className='relative'>
         <Link href={'/event/' + event.slug}>
-          <Image
-            src={process.env.NEXT_PUBLIC_IMAGE_BASE_URL + event.image}
+          <LazyImage
+            src={imageSrc}
             width={360}
             height={150}
             alt={event.name}
@@ -43,8 +49,8 @@ const EventCard = ({ idx, event }) => {
                 <span className='text-xl text-white leading-tight'>{event.name}</span>
 
                 <div className='mt-auto flex flex-col gap-1'>
-                  <span className='text-accent-400'>{readableDate}</span>
-                  <span className='text-xs text-background-200'>{event.place.address}</span>
+                  <span className='text-accent-400 capitalize'>{readableDate}</span>
+                  <span className='text-white/80'>{event.place.city}</span>
                 </div>
               </div>
               <div className='pl-2 mt-auto'>

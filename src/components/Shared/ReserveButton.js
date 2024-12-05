@@ -1,12 +1,10 @@
 import React from 'react';
-import { GoogleLogo, CaretRight, Ticket } from '@phosphor-icons/react/dist/ssr';
 import Link from 'next/link';
-import Image from 'next/image';
+
+import { CaretRight, Ticket } from '@phosphor-icons/react/dist/ssr';
+import LazyImage from '../Helpers/LazyImage';
 
 const ReserveButton = ({ affiliation, tickets }) => {
-  console.log(affiliation);
-  console.log(tickets);
-  
   const isTicketsAvailable = tickets && tickets.length > 0;
   const link = isTicketsAvailable ? tickets[0].link : affiliation;
   const providerName = isTicketsAvailable ? tickets[0].provider?.name : 'PartyFinder';
@@ -22,7 +20,7 @@ const ReserveButton = ({ affiliation, tickets }) => {
       <div className='w-full flex items-center'>
         <div className='p-2 h-full bg-yellow-500 mr-4'>
           {isTicketsAvailable && logo ? (
-            <Image
+            <LazyImage
               src={process.env.NEXT_PUBLIC_IMAGE_BASE_URL + logo}
               alt={tickets[0].provider?.logo?.alt || 'party finder'}
               width={60}

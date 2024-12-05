@@ -57,3 +57,26 @@ export function capitalizeText(text) {
 
   return text?.charAt(0).toUpperCase() + text?.slice(1).toLowerCase();
 }
+
+export function parseTime(inputTime) {
+  const timeRegexes = [/^(\d{1,2})$/, /^(\d{1,2})\.(\d{1,2})$/, /^(\d{1,2}):(\d{1,2})$/];
+
+  for (const regex of timeRegexes) {
+    const match = inputTime.match(regex);
+    if (match) {
+      const hours = parseInt(match[1], 10);
+      const minutes = match[2] ? parseInt(match[2], 10) : 0;
+
+      if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60) {
+        return { hours, minutes };
+      }
+    }
+  }
+
+  throw new Error(`Invalid time format: ${inputTime}`);
+}
+
+export function isValidImage(src) {
+  const resolvedSrc = typeof src === 'object' && src?.src ? src.src : src;
+  return typeof resolvedSrc === 'string' && resolvedSrc.trim() !== '';
+}

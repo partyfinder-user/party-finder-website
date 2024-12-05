@@ -1,14 +1,14 @@
 import React from 'react';
-
-import Image from 'next/image';
 import Link from 'next/link';
+
+import LazyImage from '@/components/Helpers/LazyImage';
 
 const EventListCard = ({ event }) => {
   return (
     <Link href='/event'>
       <div className='flex flex-row items-stretch bg-background-500/60 border border-background-500 rounded-lg shadow-sm hover:bg-background-700 transition-all duration-300 overflow-hidden'>
         <div className='flex-shrink-0'>
-          <Image
+          <LazyImage
             src={event.image}
             width={170}
             height={200}

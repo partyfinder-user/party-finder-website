@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 import {
   MapPin,
@@ -25,6 +24,8 @@ import LineUp from '@/components/Helpers/LineUp';
 import EventSlideCard from '@/components/UI/EventSlideCard';
 import CopyTextButton from '@/components/Helpers/CopyTextButton';
 import Link from 'next/link';
+import LazyImage from '@/components/Helpers/LazyImage';
+import SocialIcons from '@/components/Helpers/SocialIcons';
 
 async function getData(slug) {
   const response = await fetch(`${process.env.API_SERVICE_BASE_URL}builder/event/${slug}`);
@@ -48,11 +49,13 @@ export default async function EventPage({ params }) {
   };
   const date = new Date(event.dateStart);
   const readableDate = date.toLocaleString('it-IT', options);
+  const eventSocials =
+    event?.social?.length > 0 ? event.social : event?.place?.social?.length > 0 ? event?.place?.social : [];
 
   return (
     <div className='overflow-hidden bg-gradient-to-b from-[#13003388] via-[#130033] to-transparent'>
       <div className='relative h-[45vh] overflow-hidden'>
-        <ParallaxImage imageSrc={event.images[0].key} />
+        <ParallaxImage imageSrc={event?.images[0]?.key} />
         <div className='absolute inset-0 bg-gradient-to-b from-transparent via-[#13003388] to-[#130033]'></div>
         <div className='absolute bottom-6 right-5'>
           <button>
@@ -74,27 +77,11 @@ export default async function EventPage({ params }) {
           {event.city}
         </div>
 
-        <div className='flex items-center my-4 gap-x-2'>
-          <div className='flex items-center justify-center rounded-full w-12 h-12 border-2 border-white/10'>
-            <Globe className='w-6 h-6 text-white' />
-          </div>
-          <div className='flex items-center justify-center rounded-full w-12 h-12 border-2 border-white/10'>
-            <Phone className='w-6 h-6 text-white' />
-          </div>
-          <div className='flex items-center justify-center rounded-full w-12 h-12 border-2 border-white/10'>
-            <FacebookLogo className='w-6 h-6 text-white' />
-          </div>
-          <div className='flex items-center justify-center rounded-full w-12 h-12 border-2 border-white/10'>
-            <InstagramLogo className='w-6 h-6 text-white' />
-          </div>
-          <div className='flex items-center justify-center rounded-full w-12 h-12 border-2 border-white/10'>
-            <XLogo className='w-6 h-6 text-white' />
-          </div>
-        </div>
+        {eventSocials.length > 0 && <SocialIcons socials={eventSocials} />}
 
         <div className='py-4 my-4 border-t border-b border-white/10'>
           <div className='flex items-center'>
-            <Image
+            <LazyImage
               src={process.env.NEXT_PUBLIC_IMAGE_BASE_URL + event.place.logo.key}
               alt={event.name}
               width={80}
@@ -171,7 +158,7 @@ export default async function EventPage({ params }) {
           <ToggleDescription text={event.description} maxChars={120} />
         </div>
 
-        {(event?.lineup || event?.lineup?.length > 0) && (
+        {event?.lineup && event?.lineup?.length > 0 && (
           <div className='w-full my-4'>
             <h2 className='text-xl font-bold mb-2'>Line Up</h2>
             <LineUp lineup={event.lineup} />

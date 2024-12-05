@@ -34,8 +34,8 @@ const List = async () => {
   const events = await getData();
   return (
     <div>
-      {events.map((event) => (
-        <EventCard key={event.id} event={event} />
+      {events.map((event, idx) => (
+        <EventCard key={idx} event={event} />
       ))}
     </div>
   );

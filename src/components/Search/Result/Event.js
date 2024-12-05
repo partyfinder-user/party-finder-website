@@ -1,11 +1,12 @@
 import React from 'react';
-import Image from 'next/image';
+
+import LazyImage from '@/components/Helpers/LazyImage';
 
 const Event = ({ item, className = '' }) => (
   <div className={`${className} flex flex-row items-stretch overflow-hidden`}>
     <div className='flex items-center'>
       <div className='flex-shrink-0'>
-        <Image
+        <LazyImage
           src={item.image}
           width={80}
           height={100}

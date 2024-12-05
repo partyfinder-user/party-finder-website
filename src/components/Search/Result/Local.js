@@ -1,11 +1,12 @@
 import React from 'react';
-import Image from 'next/image';
+
+import LazyImage from '@/components/Helpers/LazyImage';
 
 const Local = ({ item, className = '' }) => (
   <div className={`${className} flex flex-row items-stretch overflow-hidden`}>
     <div className='flex items-center'>
       <div className='flex-shrink-0 w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-tr from-yellow-500 via-accent-500 to-primary-500'>
-        <Image
+        <LazyImage
           src={item.image}
           width={80}
           height={80}

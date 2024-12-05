@@ -31,8 +31,8 @@ const List = async () => {
   const artists = await getData();
   return (
     <div>
-      {artists.map((data) => (
-        <ArtistCard key={data.id} data={data} />
+      {artists.map((data, idx) => (
+        <ArtistCard key={idx} data={data} />
       ))}
     </div>
   );
