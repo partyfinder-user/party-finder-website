@@ -5,15 +5,16 @@ import React, { useContext, useState, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { MapPin, Heart, UserCircle, HouseLine } from '@phosphor-icons/react';
+import { MapPin, Heart, UserCircle, HouseLine, MagnifyingGlass } from '@phosphor-icons/react';
 
-import FloatingMenu from './ActionMenu';
 import SearchPosition from '@/components/Search/SearchPosition';
 import RootContext from '@/stores/root-context';
+import SearchPanel from '@/components/Search/SearchPanel';
 
 const FooterNav = () => {
   const rootCtx = useContext(RootContext);
   const [isOpenPosition, setIsOpenPosition] = useState(false);
+  const [isOpenSerach, setIsOpenSearch] = useState(false);
   const containerRef = useRef(null);
   const pathname = usePathname();
 
@@ -48,7 +49,12 @@ const FooterNav = () => {
               <span className='text-sm leading-none mt-1'>Luogo</span>
             </div>
           </button>
-          {/* <FloatingMenu /> */}
+          <button onClick={() => setIsOpenSearch(true)}>
+            <div className={`flex flex-col items-center justify-between text-white ${active ? 'text-accent-100' : ''}`}>
+              <MagnifyingGlass className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
+              <span className='text-sm leading-none mt-1'>Cerca</span>
+            </div>
+          </button>
           <Link href='/user/account/favorites'>
             <div className={`flex flex-col items-center justify-between text-white ${active ? 'text-accent-100' : ''}`}>
               <Heart className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
@@ -63,7 +69,9 @@ const FooterNav = () => {
           </Link>
         </div>
       </div>
+
       <SearchPosition isOpen={isOpenPosition} setIsOpen={setIsOpenPosition} onSelect={handlePositionSelect} />
+      <SearchPanel isOpen={isOpenSerach} setIsOpen={setIsOpenSearch} />
     </>
   );
 };

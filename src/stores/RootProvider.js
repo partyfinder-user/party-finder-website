@@ -1,9 +1,11 @@
 import React, { useEffect, useCallback, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { setCookieValue, deleteCookieByKey } from '../tools/tools';
 import RootContext from './root-context';
 
 const RootProvider = (props) => {
+  const router = useRouter();
   const [position, setPosition] = useState({});
   const [footerNavVisible, setFooterNavVisible] = useState('');
 
@@ -26,26 +28,31 @@ const RootProvider = (props) => {
     setFooterNavVisible(footerNavStaus);
   }, []);
 
-  const setPositionCity = useCallback((value) => {
-    if (!value?.city) {
-      localStorage.removeItem('__pos_prtfn_');
-      localStorage.removeItem('__geo_lat_prtfn_');
-      localStorage.removeItem('__geo_long_prtfn_');
-      deleteCookieByKey('__pos_prtfn_')
-      deleteCookieByKey('__geo_lat_prtfn_')
-      deleteCookieByKey('__geo_long_prtfn_')
-      setPosition({});
-      return;
-    }
+  const setPositionCity = useCallback(
+    (value) => {
+      if (!value?.city) {
+        localStorage.removeItem('__pos_prtfn_');
+        localStorage.removeItem('__geo_lat_prtfn_');
+        localStorage.removeItem('__geo_long_prtfn_');
+        deleteCookieByKey('__pos_prtfn_');
+        deleteCookieByKey('__geo_lat_prtfn_');
+        deleteCookieByKey('__geo_long_prtfn_');
+        setPosition({});
+        router.refresh();
+        return;
+      }
 
-    localStorage.setItem('__pos_prtfn_', value?.city);
-    localStorage.setItem('__geo_lat_prtfn_', value?.geo?.lat);
-    localStorage.setItem('__geo_long_prtfn_', value?.geo?.long);
-    setCookieValue('__pos_prtfn_', value?.city, 1000);
-    setCookieValue('__geo_lat_prtfn_', value?.geo?.lat, 1000);
-    setCookieValue('__geo_long_prtfn_', value?.geo?.long, 1000);
-    setPosition(value);
-  }, []);
+      localStorage.setItem('__pos_prtfn_', value?.city);
+      localStorage.setItem('__geo_lat_prtfn_', value?.geo?.lat);
+      localStorage.setItem('__geo_long_prtfn_', value?.geo?.long);
+      setCookieValue('__pos_prtfn_', value?.city, 1000);
+      setCookieValue('__geo_lat_prtfn_', value?.geo?.lat, 1000);
+      setCookieValue('__geo_long_prtfn_', value?.geo?.long, 1000);
+      setPosition(value);
+      router.refresh();
+    },
+    [router],
+  );
 
   const setFooterNavIsVisible = useCallback((value) => {
     localStorage.setItem('__ftr_nav_show_', value);
