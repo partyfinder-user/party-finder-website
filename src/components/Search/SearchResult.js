@@ -38,7 +38,7 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad }) => {
         {term?.length > 0 ? (
           <span>Uhm, non abbiamo trovato nulla per &quot;{term}&quot</span>
         ) : (
-          <span>Uhm, sembri esigente, qui non c&apos;è nulla! Prova ad allentare un po&apos; i tuoi filtri</span>
+          <span>Uhm, sembri esigente, qui non c&apos;è nulla! Prova ad allentare un po&apos; i tuoi filtri?</span>
         )}
       </p>
     );
