@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
 
 import Artist from './Result/Artist';
 import Local from './Result/Local';
 import Event from './Result/Event';
 import Format from './Result/Format';
+import { Spinner } from '@nextui-org/spinner';
 
 const getComponentByType = (item) => {
   switch (item.type) {
@@ -24,40 +24,25 @@ const getComponentByType = (item) => {
 };
 
 const SearchResults = ({ term, results, isLoading }) => {
-  const [currentResults, setCurrentResults] = useState(results || []);
-
-  useEffect(() => {
-    if (!isLoading && results) {
-      setCurrentResults(results);
-    }
-  }, [isLoading, results]);
-
-  const noResults = !isLoading && currentResults.length === 0;
+  if (isLoading) {
+    return (
+      <div className='w-full mt-20 flex items-center justify-center'>
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <>
-      {noResults && (
-        <p className='p-4 absolute inset-0 flex items-center justify-center text-center text-white/80 text-lg font-thin'>
+      {results.length > 0 ? (
+        <div className='relative w-full max-h-full overflow-auto'>
+          {results.map((item) => getComponentByType(item))}
+        </div>
+      ) : (
+        <p className='w-full p-4 mt-20 flex items-center justify-center text-center text-white/80 text-lg font-thin'>
           Uhm, non abbiamo trovato nulla per &quot;{term}&quot;
         </p>
       )}
-
-      <div className='relative w-full max-h-full overflow-auto'>
-        <AnimatePresence>
-          {currentResults.length > 0 && (
-            <motion.div
-              key='results'
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className='relative'
-            >
-              {currentResults.map((item) => getComponentByType(item))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
     </>
   );
 };
