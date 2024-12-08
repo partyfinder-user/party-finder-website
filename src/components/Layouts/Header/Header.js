@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation'; // Importa usePathname
 
 import Logo from '@/components/Helpers/Logo';
 import SearchPanel from '@/components/Search/SearchPanel';
@@ -16,6 +17,7 @@ const links = [
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className='sticky top-0 w-full left-0 right-0 z-40 header-bg border-b border-b-white/10'>
@@ -31,13 +33,26 @@ const Header = () => {
         <div className='flex items-center justify-center'>
           <div className='mt-2 relative xs:w-full snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
             <div className='w-full flex flex-row xs:justify-between gap-2'>
-              {links.map((item, idx) => (
-                <Link href={item.href} key={idx} className='flex flex-col items-center justify-center gap-3 xs:flex-1 xs:w-full'>
-                  <div className='xs:w-full text-sm font-normal px-5 py-1.5 border border-background-400 rounded-full text-white text-opacity-90 text-center'>
-                    {item.label}
-                  </div>
-                </Link>
-              ))}
+              {links.map((item, idx) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    href={item.href}
+                    key={idx}
+                    className='flex flex-col items-center justify-center gap-3 xs:flex-1 xs:w-full'
+                  >
+                    <div
+                      className={`xs:w-full text-sm font-normal px-5 py-1.5 rounded-full text-center ${
+                        isActive
+                          ? 'bg-gradient-to-r from-sky-300 via-accent-500 to-yellow-400 text-white'
+                          : 'text-white text-opacity-90 border border-background-400'
+                      }`}
+                    >
+                      {item.label}
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
