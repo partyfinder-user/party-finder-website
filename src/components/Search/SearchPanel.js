@@ -333,6 +333,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                   isLoading={!isFirstLoad && isLoading}
                   isFirstLoad={isFirstLoad}
                   term={searchTerm}
+                  onClick={() => setIsOpen(false)}
                 />
               </div>
             </div>

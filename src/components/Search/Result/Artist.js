@@ -1,15 +1,15 @@
 import React from 'react';
+import Link from 'next/link';
 
 import LazyImage from '@/components/Helpers/LazyImage';
 import { isValidImage } from '@/tools/tools';
-import Link from 'next/link';
 
-const Artist = ({ item, className = '' }) => {
+const Artist = ({ item, className = '', onClick }) => {
   const imageSrc = isValidImage(item.image) ? process.env.NEXT_PUBLIC_IMAGE_BASE_URL + item.image : '';
 
   return (
     <div className={`${className} flex flex-row items-stretch overflow-hidden`}>
-      <Link href={'/artist/' + item.slug} className='flex items-center'>
+      <Link href={'/artist/' + item.slug} onClick={onClick} className='flex items-center'>
         <div className='flex-shrink-0 w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-tr from-background-500 via-primary-500 to-accent-500'>
           <LazyImage
             src={imageSrc}

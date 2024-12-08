@@ -8,22 +8,29 @@ import Event from './Result/Event';
 import Format from './Result/Format';
 import { Spinner } from '@nextui-org/spinner';
 
-const getComponentByType = (item) => {
+const getComponentByType = (item, onClick) => {
+  const commonProps = {
+    key: item.id,
+    item,
+    className: 'py-2 border-b border-b-background-500',
+    onClick,
+  };
+
   switch (item.type) {
     case 'event':
-      return <Event key={item.id} item={item} className='py-2 border-b border-b-background-500' />;
+      return <Event {...commonProps} />;
     case 'artist':
-      return <Artist key={item.id} item={item} className='py-2 border-b border-b-background-500' />;
+      return <Artist {...commonProps} />;
     case 'local':
-      return <Local key={item.id} item={item} className='py-2 border-b border-b-background-500' />;
+      return <Local {...commonProps} />;
     case 'format':
-      return <Format key={item.id} item={item} className='py-2 border-b border-b-background-500' />;
+      return <Format {...commonProps} />;
     default:
       return null;
   }
 };
 
-const SearchResults = ({ term, results, isLoading, isFirstLoad }) => {
+const SearchResults = ({ term, results, isLoading, isFirstLoad, onClick }) => {
   if (isLoading) {
     return (
       <div className='w-full mt-20 flex items-center justify-center'>
@@ -45,7 +52,9 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad }) => {
   }
 
   return (
-    <div className='relative w-full max-h-full overflow-auto'>{results.map((item) => getComponentByType(item))}</div>
+    <div className='relative w-full max-h-full overflow-auto'>
+      {results.map((item) => getComponentByType(item, onClick))}
+    </div>
   );
 };
 
