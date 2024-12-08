@@ -23,7 +23,7 @@ const getComponentByType = (item) => {
   }
 };
 
-const SearchResults = ({ term, results, isLoading }) => {
+const SearchResults = ({ term, results, isLoading, isFirstLoad }) => {
   if (isLoading) {
     return (
       <div className='w-full mt-20 flex items-center justify-center'>
@@ -32,18 +32,20 @@ const SearchResults = ({ term, results, isLoading }) => {
     );
   }
 
+  if (!isFirstLoad && results.length === 0) {
+    return (
+      <p className='w-full p-4 mt-20 flex items-center justify-center text-center text-white/80 text-lg font-thin'>
+        {term?.length > 0 ? (
+          <span>Uhm, non abbiamo trovato nulla per &quot;{term}&quot</span>
+        ) : (
+          <span>Uhm, sembri esigente, qui non c&apos;è nulla! Prova ad allentare un po&apos; i tuoi filtri</span>
+        )}
+      </p>
+    );
+  }
+
   return (
-    <>
-      {results.length > 0 ? (
-        <div className='relative w-full max-h-full overflow-auto'>
-          {results.map((item) => getComponentByType(item))}
-        </div>
-      ) : (
-        <p className='w-full p-4 mt-20 flex items-center justify-center text-center text-white/80 text-lg font-thin'>
-          Uhm, non abbiamo trovato nulla per &quot;{term}&quot;
-        </p>
-      )}
-    </>
+    <div className='relative w-full max-h-full overflow-auto'>{results.map((item) => getComponentByType(item))}</div>
   );
 };
 

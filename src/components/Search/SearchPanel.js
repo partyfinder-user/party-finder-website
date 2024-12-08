@@ -17,6 +17,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
   const rootCtx = useContext(RootContext);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [isOpenPosition, setIsOpenPosition] = useState(false);
   const [isOpenDateRange, setIsOpenDateRange] = useState(false);
   const [isOpenDistance, setIsOpenDistance] = useState(false);
@@ -147,8 +148,6 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
       coordinates: position?.city ? setGeo(position.geo) : undefined,
     };
 
-    console.log(filters);
-
     const filteredFilters = Object.fromEntries(Object.entries(filters).filter(([_, value]) => value !== undefined));
 
     return filteredFilters;
@@ -156,6 +155,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
 
   const fetchSearchResults = useCallback(async (filters) => {
     try {
+      setIsFirstLoad(false);
       const response = await fetch(`${process.env.NEXT_PUBLIC_SERVICE_BASE_URL}builder/search`, {
         method: 'POST',
         headers: {
@@ -181,6 +181,8 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
     const filters = prepareFilters();
 
     if (!filters.term && Object.keys(filters).length === 1) {
+      setIsLoading(false);
+      setIsFirstLoad(true);
       setSearchResults([]);
       return;
     }
@@ -326,7 +328,12 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                     </div>
                   </section>
                 </div>
-                <SearchResults results={searchResults} isLoading={isLoading} term={searchTerm} />
+                <SearchResults
+                  results={searchResults}
+                  isLoading={!isFirstLoad && isLoading}
+                  isFirstLoad={isFirstLoad}
+                  term={searchTerm}
+                />
               </div>
             </div>
           </DialogPanel>
