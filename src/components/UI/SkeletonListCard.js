@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Card, Skeleton } from '@nextui-org/react';
 
 function SkeletonButton({ width = 100, height = 40 }) {

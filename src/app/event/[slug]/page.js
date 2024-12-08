@@ -2,11 +2,6 @@ import React from 'react';
 
 import {
   MapPin,
-  Globe,
-  FacebookLogo,
-  Phone,
-  XLogo,
-  InstagramLogo,
   IdentificationCard,
   CurrencyEur,
   DiscoBall,

@@ -1,112 +1,28 @@
 'use client';
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import { MapPin, CalendarDots, CurrencyEur, MapPinSimple, MusicNotes, Student, X } from '@phosphor-icons/react';
 
 import Logo from '../Helpers/Logo';
+import Genre from './Filter/Genre';
 import SearchInput from './SearchInput';
 import DateRange from './Filter/DateRange';
-import DistanceRange from './Filter/DistanceRange';
+import SearchResults from './SearchResult';
 import SerachPosition from './SearchPosition';
+import DistanceRange from './Filter/DistanceRange';
 import RootContext from '@/stores/root-context';
-import Genre from './Filter/Genre';
-import Artist from './Result/Artist';
-import Local from './Result/Local';
-import Event from './Result/Event';
-
-const results = [
-  { id: 4, name: 'V. Buuren', image: '/stock/un-uomo.webp', type: 'artist' },
-  { id: 10, name: 'Skrillex', image: '/stock/dj-mixa.webp', type: 'artist' },
-  { id: 1, name: 'D. Guetta', image: '/stock/bob-sinclar.jpg', type: 'artist' },
-  { id: 18, name: 'Fabrique', image: '/stock/local-8.jpg', type: 'local' },
-  { id: 11, name: 'Villa Bonin', image: '/stock/local-2.jpg', type: 'local' },
-  {
-    id: 26,
-    title: 'Vida Loca',
-    venue: 'Club Papaya',
-    date: 'Sabato 29 Ottobre',
-    location: 'Via Roma, 12, Milano',
-    image: '/stock/image-3.png',
-    type: 'event',
-  },
-  {
-    id: 27,
-    title: 'Mamacita',
-    venue: 'Villa Bonin',
-    date: 'Sabato 22 Ottobre',
-    location: 'Via del commercio, 49, Vicenza',
-    image: '/stock/image-1.png',
-    type: 'event',
-  },
-  {
-    id: 28,
-    title: 'Techno Night',
-    venue: 'Fabrique',
-    date: 'Venerdì 28 Ottobre',
-    location: 'Via Fantasia, 89, Firenze',
-    image: '/stock/image-5.png',
-    type: 'event',
-  },
-  {
-    id: 25,
-    title: 'Mr. Charlie Lignano',
-    venue: 'Mr. Charlie',
-    date: 'Venerdì 21 Ottobre',
-    location: 'Via Napoli, 27, Lignano Sabbiadoro',
-    image: '/stock/image-2.png',
-    type: 'event',
-  },
-  {
-    id: 23,
-    title: 'Afrobeat Vibes',
-    venue: 'Hollywood Club',
-    date: 'Sabato 5 Novembre',
-    location: 'Corso Como, 15, Milano',
-    image: '/stock/image-6.png',
-    type: 'event',
-  },
-  {
-    id: 29,
-    title: 'Afrobeat Vibes',
-    venue: 'Hollywood Club',
-    date: 'Sabato 5 Novembre',
-    location: 'Corso Como, 15, Milano',
-    image: '/stock/image-7.png',
-    type: 'event',
-  },
-  {
-    id: 24,
-    title: 'Ibiza Party',
-    venue: 'Amnesia',
-    date: 'Domenica 23 Ottobre',
-    location: 'Via Ibiza, 34, Roma',
-    image: '/stock/image-4.png',
-    type: 'event',
-  },
-];
-
-const getComponentByType = (item) => {
-  switch (item.type) {
-    case 'event':
-      return <Event key={item.id} item={item} className='py-2 border-b border-b-background-500' />;
-    case 'artist':
-      return <Artist key={item.id} item={item} className='py-2 border-b border-b-background-500' />;
-    case 'local':
-      return <Local key={item.id} item={item} className='py-2 border-b border-b-background-500' />;
-    default:
-      return null;
-  }
-};
 
 const SearchPanel = ({ isOpen, setIsOpen }) => {
   const rootCtx = useContext(RootContext);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isOpenPosition, setIsOpenPosition] = useState(false);
   const [isOpenDateRange, setIsOpenDateRange] = useState(false);
   const [isOpenDistance, setIsOpenDistance] = useState(false);
   const [isOpenGenre, setIsOpenGenre] = useState(false);
 
+  const [searchTerm, setSearchTerm] = useState('');
   const [dateRange, setDateRange] = useState({ start: '', end: '' });
   const [dateRangeUI, setDateRangeUI] = useState();
   const [distance, setDistance] = useState(50);
@@ -116,6 +32,8 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
 
   const [resetGenres, setResetGenres] = useState(false);
   const [resetPostion, setResetPosition] = useState(false);
+
+  const [searchResults, setSearchResults] = useState([]);
 
   const formatDateRange = (range) => {
     const formatDate = (date) => {
@@ -199,6 +117,88 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
     setResetPosition(true);
   };
 
+  const prepareFilters = useCallback(() => {
+    const position = rootCtx?.position || {};
+
+    const setStartOfDay = (date) => {
+      const newDate = new Date(date);
+      newDate.setHours(0, 0, 0, 0);
+      return newDate;
+    };
+
+    const setEndOfDay = (date) => {
+      const newDate = new Date(date);
+      newDate.setHours(23, 59, 59, 999);
+      return newDate;
+    };
+
+    const setGeo = (geo) => {
+      return { coordinates: [geo.long, geo.lat] };
+    };
+
+    const filters = {
+      term: searchTerm || undefined,
+      radius: distance || undefined,
+      types: genres?.length ? genres : undefined,
+      free: freeEntry || undefined,
+      under18: forStudent || undefined,
+      dateStart: dateRange.start ? setStartOfDay(dateRange.start) : undefined,
+      dateEnd: dateRange.end ? setEndOfDay(dateRange.end) : undefined,
+      coordinates: position?.city ? setGeo(position.geo) : undefined,
+    };
+
+    console.log(filters);
+
+    const filteredFilters = Object.fromEntries(Object.entries(filters).filter(([_, value]) => value !== undefined));
+
+    return filteredFilters;
+  }, [searchTerm, rootCtx.position, distance, genres, freeEntry, forStudent, dateRange]);
+
+  const fetchSearchResults = useCallback(async (filters) => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVICE_BASE_URL}builder/search`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(filters),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Errore nella ricerca: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Errore durante la ricerca:', error);
+      return [];
+    }
+  }, []);
+
+  const handleSearch = useCallback(async () => {
+    setIsLoading(true);
+    const filters = prepareFilters();
+
+    if (!filters.term && Object.keys(filters).length === 1) {
+      setSearchResults([]);
+      return;
+    }
+
+    const results = await fetchSearchResults(filters);
+    setSearchResults(results);
+    setIsLoading(false);
+  }, [prepareFilters, fetchSearchResults]);
+
+  const handlerResetTerm = useCallback(() => {
+    setSearchTerm('');
+    handleSearch();
+  }, [handleSearch]);
+
+  useEffect(() => {
+    handleSearch();
+  }, [handleSearch]);
+
   return (
     <>
       <Dialog
@@ -213,7 +213,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
             <DialogTitle as='h3' className='w-full px-2 pt-3 pb-1 mb-3 border-b border-background-400/50'>
               <div className='flex items-center'>
                 <div className='w-full flex-1 mb-2'>
-                  <SearchInput setIsOpen={setIsOpen} />
+                  <SearchInput setIsOpen={setIsOpen} onSearch={setSearchTerm} onTermReset={handlerResetTerm} />
                 </div>
                 <div className='mb-2'>
                   <Logo />
@@ -326,12 +326,13 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                     </div>
                   </section>
                 </div>
-                <div>{results.map((item) => getComponentByType(item))}</div>
+                <SearchResults results={searchResults} isLoading={isLoading} term={searchTerm} />
               </div>
             </div>
           </DialogPanel>
         </div>
       </Dialog>
+
       <DistanceRange
         isOpen={isOpenDistance}
         setIsOpen={setIsOpenDistance}

@@ -1,11 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CaretLeft, X } from '@phosphor-icons/react';
 
-const SearchInput = ({ setIsOpen }) => {
+const SearchInput = ({ setIsOpen, onSearch, onTermReset }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedTerm, setDebouncedTerm] = useState(searchTerm);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedTerm(searchTerm);
+    }, 600);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (debouncedTerm?.trim() !== '') {
+      onSearch(debouncedTerm);
+    } else if (debouncedTerm === '') {
+      onTermReset();
+    }
+  }, [debouncedTerm, onSearch, onTermReset]);
 
   const clearSearch = () => {
     setSearchTerm('');
+    setDebouncedTerm('');
   };
 
   return (
