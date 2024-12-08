@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 import LazyImage from '@/components/Helpers/LazyImage';
 import { isValidImage } from '@/tools/tools';
@@ -8,7 +9,7 @@ const Format = ({ item, className = '' }) => {
 
   return (
     <div className={`${className} flex flex-row items-stretch overflow-hidden`}>
-      <div className='flex items-center'>
+      <Link href={'/format/' + item.slug} className='flex items-center'>
         <div className='flex-shrink-0 w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-tr from-background-500 via-primary-500 to-accent-500'>
           <LazyImage
             src={imageSrc}
@@ -22,7 +23,7 @@ const Format = ({ item, className = '' }) => {
           <span className='text-lg text-white block'>{item.name}</span>
           <span className='text-white/70 block text-sm'>Format</span>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
