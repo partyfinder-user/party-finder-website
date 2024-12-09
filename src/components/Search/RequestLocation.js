@@ -37,7 +37,7 @@ function RequestLocation({ onSelect }) {
           if (!city) {
             throw new Error('City not found!');
           }
-          
+
           onSelect({ nome: city, geo: { lat: latitude, long: longitude } });
         },
         (error) => {
@@ -56,17 +56,20 @@ function RequestLocation({ onSelect }) {
   };
 
   return (
-    <div className='flex items-center justify-center mt-5'>
+    <div className='w-full flex flex-col items-center justify-center mt-5'>
+      <span className='text-white/80 font-thin'>oppure</span>
       <button
         onClick={requestLocation}
         className='flex items-center mt-4 pl-4 pr-6 py-2.5 bg-accent-500 text-white rounded-lg'
       >
         <Crosshair className='h-5 w-5 mr-1' />
-        La mia posizione
+        Usa la tua posizione
       </button>
       {loading && <Spinner className='absolute top-0 right-2' />}
       {error && (
-        <p className='text-white/80'>Impossibile usare la tua posizione, per favore cerca manualmente la tua città</p>
+        <div className='text-white/80 text-center mt-4'>
+          Impossibile usare la tua posizione, per favore cerca manualmente la tua città
+        </div>
       )}
     </div>
   );
