@@ -203,7 +203,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
   }, [prepareFilters, fetchSearchResults]);
 
   const handlerResetTerm = useCallback(() => {
-    setSearchTerm('');
+    setSearchTerm((prev) => '');
     handleSearch();
   }, [handleSearch]);
 
@@ -338,6 +338,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                     </div>
                   </section>
                 </div>
+
                 <SearchResults
                   term={searchTerm}
                   results={searchResults}

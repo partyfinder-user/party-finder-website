@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import { ArrowBendUpLeft } from '@phosphor-icons/react/dist/ssr';
+
 import Artist from './Result/Artist';
 import Local from './Result/Local';
 import Event from './Result/Event';
@@ -39,21 +41,32 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad, isEmptyFilter, o
     );
   }
 
-  if (!isEmptyFilter && !isFirstLoad && results.length === 0) {
+  if (!isEmptyFilter && !isFirstLoad && results?.length === 0) {
     return (
-      <p className='w-full p-4 mt-20 flex items-center justify-center text-center text-white/80 text-lg font-thin'>
-        {term?.length > 0 ? (
-          <span>Uhm, non abbiamo trovato nulla per &quot;{term}&quot</span>
-        ) : (
-          <span>Uhm, sembri esigente, qui non c&apos;è nulla! Prova ad allentare un po&apos; i tuoi filtri?</span>
-        )}
-      </p>
+      <>
+        <p className='w-full p-4 mt-20 flex items-center justify-center text-center text-white/80 text-lg font-thin'>
+          {term?.length > 0 ? (
+            <span>Uhm, non abbiamo trovato nulla per &quot;{term}&quot;</span>
+          ) : (
+            <span>Uhm, sembri esigente, che dici di allentare un po&apos; i tuoi filtri?</span>
+          )}
+        </p>
+        <button onClick={onClick} className='fixed bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'>
+          <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
+        </button>
+      </>
     );
   }
 
   return (
     <div className='relative w-full max-h-full overflow-auto'>
       {results.map((item) => getComponentByType(item, onClick))}
+
+      {results?.length === 0 && (
+        <button onClick={onClick} className='fixed bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'>
+          <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
+        </button>
+      )}
     </div>
   );
 };
