@@ -10,6 +10,7 @@ import { Spinner } from '@nextui-org/spinner';
 
 import RootContext from '@/stores/root-context';
 import { searchCity } from '@/libs/locality-service';
+import RequestLocation from './RequestLocation';
 
 const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
   const rootCtx = useContext(RootContext);
@@ -95,8 +96,9 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
                 )}
               </div>
 
-              {loading && <Spinner className='absolute top-0 right-2' />}
+              {!loading && cities.length <= 0 && <RequestLocation onSelect={handleConfirm} />}
 
+              {loading && <Spinner className='absolute top-0 right-2' />}
               <div className='overflow-y-auto max-h-[calc(100vh-150px)]'>
                 {cities.length > 0 && (
                   <div className='w-full my-1'>
@@ -119,7 +121,6 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
                   </div>
                 )}
               </div>
-
               {!loading && cities.length === 0 && query && (
                 <p className='text-gray-500 my-2'>Nessun risultato trovato</p>
               )}
