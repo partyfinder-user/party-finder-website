@@ -12,12 +12,14 @@ import SearchResults from './SearchResult';
 import SerachPosition from './SearchPosition';
 import DistanceRange from './Filter/DistanceRange';
 import RootContext from '@/stores/root-context';
+import { isNullOrEmpty } from '@/tools/tools';
 
 const SearchPanel = ({ isOpen, setIsOpen }) => {
   const rootCtx = useContext(RootContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [isEmptyFilter, setEmptyFilter] = useState(true);
   const [isOpenPosition, setIsOpenPosition] = useState(false);
   const [isOpenDateRange, setIsOpenDateRange] = useState(false);
   const [isOpenDistance, setIsOpenDistance] = useState(false);
@@ -26,7 +28,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [dateRange, setDateRange] = useState({ start: '', end: '' });
   const [dateRangeUI, setDateRangeUI] = useState();
-  const [distance, setDistance] = useState(50);
+  const [distance, setDistance] = useState();
   const [freeEntry, setFreeEntry] = useState(false);
   const [forStudent, setForStudent] = useState(false);
   const [genres, setGenres] = useState();
@@ -120,6 +122,8 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
 
   const prepareFilters = useCallback(() => {
     const position = rootCtx?.position || {};
+    const filterUnder18 = forStudent ? forStudent : undefined;
+    const filterFreeEntry = freeEntry ? freeEntry : undefined;
 
     const setStartOfDay = (date) => {
       const newDate = new Date(date);
@@ -141,14 +145,20 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
       term: searchTerm || undefined,
       radius: distance || undefined,
       types: genres?.length ? genres : undefined,
-      free: freeEntry || undefined,
-      under18: forStudent || undefined,
+      free: filterFreeEntry,
+      under18: filterUnder18,
       dateStart: dateRange.start ? setStartOfDay(dateRange.start) : undefined,
       dateEnd: dateRange.end ? setEndOfDay(dateRange.end) : undefined,
       coordinates: position?.city ? setGeo(position.geo) : undefined,
     };
 
     const filteredFilters = Object.fromEntries(Object.entries(filters).filter(([_, value]) => value !== undefined));
+
+    if (isNullOrEmpty(filteredFilters)) {
+      setEmptyFilter(true);
+    } else {
+      setEmptyFilter(false);
+    }
 
     return filteredFilters;
   }, [searchTerm, rootCtx.position, distance, genres, freeEntry, forStudent, dateRange]);
@@ -180,7 +190,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
     setIsLoading(true);
     const filters = prepareFilters();
 
-    if (!filters.term && Object.keys(filters).length === 1) {
+    if (!filters.term && isNullOrEmpty(filters)) {
       setIsLoading(false);
       setIsFirstLoad(true);
       setSearchResults([]);
@@ -329,10 +339,11 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                   </section>
                 </div>
                 <SearchResults
+                  term={searchTerm}
                   results={searchResults}
                   isLoading={!isFirstLoad && isLoading}
+                  isEmptyFilter={isEmptyFilter}
                   isFirstLoad={isFirstLoad}
-                  term={searchTerm}
                   onClick={() => setIsOpen(false)}
                 />
               </div>

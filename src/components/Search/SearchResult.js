@@ -30,7 +30,7 @@ const getComponentByType = (item, onClick) => {
   }
 };
 
-const SearchResults = ({ term, results, isLoading, isFirstLoad, onClick }) => {
+const SearchResults = ({ term, results, isLoading, isFirstLoad, isEmptyFilter, onClick }) => {
   if (isLoading) {
     return (
       <div className='w-full mt-20 flex items-center justify-center'>
@@ -39,7 +39,7 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad, onClick }) => {
     );
   }
 
-  if (!isFirstLoad && results.length === 0) {
+  if (!isEmptyFilter && !isFirstLoad && results.length === 0) {
     return (
       <p className='w-full p-4 mt-20 flex items-center justify-center text-center text-white/80 text-lg font-thin'>
         {term?.length > 0 ? (

@@ -3,7 +3,7 @@ import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import { Slider } from '@nextui-org/slider';
 
 const DistanceRange = ({ isOpen, setIsOpen, onSelect, onReset, initialDistance }) => {
-  const [selectedDistance, setSelectedDistance] = useState(initialDistance || 50);
+  const [selectedDistance, setSelectedDistance] = useState(initialDistance);
 
   const handleDistanceChange = (value) => {
     setSelectedDistance(value);
@@ -16,7 +16,7 @@ const DistanceRange = ({ isOpen, setIsOpen, onSelect, onReset, initialDistance }
 
   useEffect(() => {
     if (onReset) {
-      setSelectedDistance(initialDistance || 50);
+      setSelectedDistance(initialDistance);
     }
   }, [initialDistance, onReset]);
 

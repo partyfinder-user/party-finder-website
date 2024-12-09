@@ -20,6 +20,10 @@ export const deleteCookieByKey = (key) => {
   Cookies.remove(key, { path: '/' });
 };
 
+export const isNullOrEmpty = (obj) => {
+  return !obj || Object.entries(obj).length === 0 || obj.lenght == 0;
+};
+
 export function cx(...classNames) {
   return classNames.filter(Boolean).join(' ');
 }
