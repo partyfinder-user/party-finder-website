@@ -233,7 +233,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
               </div>
             </DialogTitle>
 
-            <div className='overflow-hidden px-2 max-h-[calc(100vh-100px)] scrollbar-hide'>
+            <div className='overflow-hidden px-2 max-h-[calc(100vh-100px)]'>
               <div className='w-full max-h-full overflow-auto'>
                 <div className='relative overflow-hidden flex mb-2'>
                   <section className='relative overflow-hidden'>
