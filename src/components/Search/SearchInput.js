@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { CaretLeft, X } from '@phosphor-icons/react';
 
 const SearchInput = ({ setIsOpen, onSearch, onTermReset }) => {
+  const inputRef = useRef(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedTerm, setDebouncedTerm] = useState(searchTerm);
 
@@ -28,6 +29,12 @@ const SearchInput = ({ setIsOpen, onSearch, onTermReset }) => {
     setDebouncedTerm('');
   };
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   return (
     <div className='relative w-full max-w-md mx-auto'>
       <div className='mr-3 flex items-center border-white/20 bg-white/10 rounded-full px-4 py-3.5 border'>
@@ -37,6 +44,7 @@ const SearchInput = ({ setIsOpen, onSearch, onTermReset }) => {
           className='bg-transparent text-white ml-2 w-full focus:outline-none placeholder-white/60'
           placeholder='Cerca eventi, artisti, locali, e tanto altro..'
           value={searchTerm}
+          ref={inputRef}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         {searchTerm && <X className='w-6 h-6 text-white/60 cursor-pointer ml-2' onClick={clearSearch} />}
