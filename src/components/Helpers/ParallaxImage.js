@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
-import defaultImage from '/public/images/default-image.png';
+import defaultImage from '/public/images/image-unavailable.webp';
 
 const ParallaxImage = ({ imageSrc }) => {
   const resolvedSrc = typeof imageSrc === 'object' && imageSrc?.src ? imageSrc.src : imageSrc;
