@@ -37,12 +37,6 @@
   --c-accent-900: 91, 60, 155;
 }
 
-body {
-  height: 100vh;
-  overflow: hidden;
-  overscroll-behavior: none;
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
