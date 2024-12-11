@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Heart } from '@phosphor-icons/react/dist/ssr';
+import { Heart, MapPin } from '@phosphor-icons/react/dist/ssr';
 import LazyImage from '@/components/Helpers/LazyImage';
 import { isValidImage, parseTime } from '@/tools/tools';
 
@@ -50,7 +50,9 @@ const EventCard = ({ idx, event }) => {
 
                 <div className='mt-auto flex flex-col gap-1'>
                   <span className='text-accent-400 capitalize'>{readableDate}</span>
-                  <span className='text-white/80'>{event.place.city}</span>
+                  <div className='flex items-center text-white/80'>
+                    <MapPin className='h-4 w-4 mr-0.5' /> <span>{event.place.city}</span>
+                  </div>
                 </div>
               </div>
               <div className='pl-2 mt-auto'>

@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-import defaultImage from '/public/images/default-image.png';
+import defaultImage from '/public/images/image-unavailable.webp';
 import { cx } from '@/tools/tools';
 
 const lazyLoader = ({ src, width, quality }) => {
