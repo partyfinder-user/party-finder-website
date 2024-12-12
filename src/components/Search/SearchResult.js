@@ -56,9 +56,9 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad, isEmptyFilter, o
   }
 
   return (
-    // <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 200px)' }}>
-    <>{results?.map((item) => getComponentByType(item, onClick))} </>
-    // </ScrollShadow>
+    <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 200px)' }}>
+      {results?.map((item) => getComponentByType(item, onClick))}{' '}
+    </ScrollShadow>
   );
 };
 
