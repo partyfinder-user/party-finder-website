@@ -220,8 +220,8 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
       className='relative z-50 transition duration-100 ease-out data-[closed]:opacity-0'
     >
       <DialogBackdrop className='fixed inset-0 bg-black/70' />
-      <div className='fixed inset-0 z-10 w-screen'>
-        <div className='flex min-h-full'>
+      <div className='fixed inset-0 z-10 w-screen min-h-[100dvh]'>
+        <div className='flex'>
           <DialogPanel className='relative w-full safe-height flex flex-col bg-background-900/60 backdrop-blur-lg'>
             <DialogTitle className='w-full px-2 pt-3 pb-1 mb-3 border-b border-background-400/50'>
               <div className='flex items-center'>

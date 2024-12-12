@@ -13,6 +13,8 @@ const montserrat = Montserrat({
 });
 
 export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#281F44' },
     { media: '(prefers-color-scheme: dark)', color: '#281F44' },
@@ -20,7 +22,6 @@ export const viewport = {
 };
 
 export const metadata = {
-  viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
   title: {
     template: '%s — PartyFinder.it',
     default: 'PartyFinder.it — cerca eventi nella tua zona',

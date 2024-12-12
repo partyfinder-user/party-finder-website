@@ -33,7 +33,7 @@ const ReserveButton = ({ affiliation, tickets }) => {
         </div>
         <div className='w-full flex items-center justify-between'>
           <div className='flex flex-col flex-1'>
-            <div className='font-thin text-left -mb-1'>Acquista il tuo biglietto su</div>
+            <div className='font-extralight text-left -mb-1'>Acquista il tuo biglietto su</div>
             <div className='text-lg text-left'>{providerName}</div>
           </div>
           <CaretRight className='w-8 h-8 text-white/60 mr-4' />

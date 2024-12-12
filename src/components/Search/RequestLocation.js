@@ -57,7 +57,7 @@ function RequestLocation({ onSelect }) {
 
   return (
     <div className='w-full flex flex-col items-center justify-center mt-5'>
-      <span className='text-white/80 font-thin'>oppure</span>
+      <span className='text-white/80 font-extralight'>oppure</span>
       <button
         onClick={requestLocation}
         className='flex items-center mt-4 pl-4 pr-6 py-2.5 bg-accent-500 text-white rounded-lg'

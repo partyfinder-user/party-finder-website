@@ -76,8 +76,8 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
       className='relative z-50 transition duration-100 ease-out data-[closed]:opacity-0'
     >
       <DialogBackdrop className='fixed inset-0 bg-black/70' />
-      <div className='fixed inset-0 z-10 w-screen'>
-        <div className='flex min-h-full'>
+      <div className='fixed inset-0 z-10 w-screen min-h-[100dvh]'>
+        <div className='flex'>
           <DialogPanel className='px-2 py-4 w-full safe-height flex flex-col bg-background-900/60 backdrop-blur-lg'>
             <div className='flex flex-col px-2'>
               <div className='flex items-center mb-4'>
@@ -90,7 +90,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder='Cerca una città o la tua provincia'
-                  className='w-full pl-10 pr-10 py-3 border rounded-xl bg-default-100 border-background-500 focus:border-accent-500 focus:outline-none focus:ring-0'
+                  className='w-full pl-10 pr-10 py-3 border border-white/20 bg-white/10 rounded-full focus:border-accent-500 focus:outline-none focus:ring-0'
                 />
                 <span className='absolute inset-y-0 left-3 flex items-center pointer-events-none'>
                   <MagnifyingGlass className='text-xl text-gray-400 transition-colors duration-200 group-focus-within:text-accent-500' />
@@ -120,7 +120,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
                       >
                         <CardBody>
                           <p>{city.nome}</p>
-                          <p className='text-sm text-gray-500'>
+                          <p className='text-sm text-gray-300'>
                             {city?.provincia?.nome}, {city?.regione?.nome}
                           </p>
                         </CardBody>
@@ -138,7 +138,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
             {cities?.length <= 0 && (
               <button
                 onClick={() => setIsOpen(false)}
-                className='absolute bottom-[4dvh] right-4 p-2 bg-white/40 text-white rounded-full'
+                className='fixed bottom-[4dvh] right-4 p-2 bg-white/40 text-white rounded-full'
                 style={{ marginBottom: 'env(safe-area-inset-bottom, 20px)' }}
               >
                 <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />

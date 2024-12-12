@@ -44,7 +44,7 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad, isEmptyFilter, o
   if (!isEmptyFilter && !isFirstLoad && results?.length === 0) {
     return (
       <>
-        <p className='w-full p-4 mt-20 flex items-center justify-center text-center text-white/80 text-lg font-thin'>
+        <p className='w-full p-4 mt-20 flex items-center justify-center text-center text-white/80 text-lg font-extralight'>
           {term?.length > 0 ? (
             <span>Uhm, non abbiamo trovato nulla per &quot;{term}&quot;</span>
           ) : (
@@ -69,7 +69,7 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad, isEmptyFilter, o
       {(isFirstLoad || isEmptyFilter || results?.length <= 0) && (
         <button
           onClick={onClick}
-          className='absolute bottom-[4dvh] right-4 p-2 bg-white/40 text-white rounded-full'
+          className='fixed bottom-[2dvh] right-4 p-2 bg-white/40 text-white rounded-full'
           style={{ marginBottom: 'env(safe-area-inset-bottom, 20px)' }}
         >
           <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
