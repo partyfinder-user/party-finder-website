@@ -99,27 +99,29 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
               {!loading && cities.length <= 0 && <RequestLocation onSelect={handleConfirm} />}
 
               {loading && <Spinner className='absolute top-0 right-2' />}
-              <div className='overflow-y-auto max-h-[calc(100vh-150px)]'>
-                {cities.length > 0 && (
-                  <div className='w-full my-1'>
-                    {cities.map((city, idx) => (
-                      <Card
-                        key={city._id + '-' + idx}
-                        isPressable
-                        isHoverable
-                        onPress={() => handleConfirm(city)}
-                        className='w-full my-4'
-                      >
-                        <CardBody>
-                          <p>{city.nome}</p>
-                          <p className='text-sm text-gray-500'>
-                            {city?.provincia?.nome}, {city?.regione?.nome}
-                          </p>
-                        </CardBody>
-                      </Card>
-                    ))}
-                  </div>
-                )}
+              <div className='overflow-y-auto max-h-[calc(100%+150px)]'>
+                <div className='max-h-full overflow-auto'>
+                  {cities.length > 0 && (
+                    <div className='w-full my-1'>
+                      {cities.map((city, idx) => (
+                        <Card
+                          key={city._id + '-' + idx}
+                          isPressable
+                          isHoverable
+                          onPress={() => handleConfirm(city)}
+                          className='w-full my-4'
+                        >
+                          <CardBody>
+                            <p>{city.nome}</p>
+                            <p className='text-sm text-gray-500'>
+                              {city?.provincia?.nome}, {city?.regione?.nome}
+                            </p>
+                          </CardBody>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
               {!loading && cities.length === 0 && query && (
                 <p className='text-gray-500 my-2'>Nessun risultato trovato</p>

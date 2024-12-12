@@ -220,136 +220,140 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
         className='relative z-50 transition duration-100 ease-out data-[closed]:opacity-0'
       >
         <DialogBackdrop className='fixed inset-0 bg-black/70' />
-        <div className='fixed inset-0 flex w-screen h-screen items-center justify-center'>
-          <DialogPanel className='w-full h-screen bg-background-900/60 backdrop-blur-lg flex flex-col'>
-            <DialogTitle as='h3' className='w-full px-2 pt-3 pb-1 mb-3 border-b border-background-400/50'>
-              <div className='flex items-center'>
-                <div className='w-full flex-1 mb-2'>
-                  <SearchInput setIsOpen={setIsOpen} onSearch={setSearchTerm} onTermReset={handlerResetTerm} />
+        <div className='fixed inset-0 z-10 w-screen overflow-hidden'>
+          <div className='flex min-h-full'>
+            <DialogPanel className='frelative w-full safe-height flex flex-col bg-background-900/60 backdrop-blur-lg'>
+              <DialogTitle className='w-full px-2 pt-3 pb-1 mb-3 border-b border-background-400/50'>
+                <div className='flex items-center'>
+                  <div className='w-full flex-1 mb-2'>
+                    <SearchInput setIsOpen={setIsOpen} onSearch={setSearchTerm} onTermReset={handlerResetTerm} />
+                  </div>
+                  <div className='mb-2'>
+                    <Logo />
+                  </div>
                 </div>
-                <div className='mb-2'>
-                  <Logo />
-                </div>
-              </div>
-            </DialogTitle>
+              </DialogTitle>
 
-            <div className='overflow-hidden px-2 max-h-[calc(100vh-100px)]'>
-              <div className='w-full max-h-full overflow-auto'>
-                <div className='relative overflow-hidden flex mb-2'>
-                  <section className='relative overflow-hidden'>
-                    <div className='relative snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
-                      <div className='w-full flex flex-row gap-2'>
-                        <div
-                          className='flex flex-col items-center justify-center gap-3'
-                          onClick={() => setIsOpenPosition(true)}
-                        >
-                          {!rootCtx?.position?.city ? (
-                            <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                              <MapPin className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
-                              Ovunque
-                            </div>
-                          ) : (
-                            <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
-                              <span className='capitalize'>{rootCtx?.position?.city}</span>{' '}
-                              <X className='w-4 h-4 text-white ml-2' onClick={handlerResetPosition} />
-                            </div>
-                          )}
-                        </div>
-                        <div
-                          className='flex flex-col items-center justify-center gap-3'
-                          onClick={() => setIsOpenDateRange(true)}
-                        >
-                          {!dateRangeUI ? (
-                            <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                              <CalendarDots className='w-4 h-4 text-accent-400 mr-2' weight='duotone' /> Data
-                            </div>
-                          ) : (
-                            <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
-                              <span className='capitalize'>{dateRangeUI}</span>{' '}
-                              <X className='w-4 h-4 text-white ml-2' onClick={handlerResetDateRange} />
-                            </div>
-                          )}
-                        </div>
-                        <div
-                          className='flex flex-col items-center justify-center gap-3'
-                          onClick={() => setFreeEntry(true)}
-                        >
-                          {!freeEntry ? (
-                            <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                              <CurrencyEur className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
-                              FreeEntry
-                            </div>
-                          ) : (
-                            <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
-                              <span className='capitalize'>FreeEntry</span>{' '}
-                              <X className='w-4 h-4 text-white ml-2' onClick={handlerResetFreeEntry} />
-                            </div>
-                          )}
-                        </div>
-                        <div
-                          className='flex flex-col items-center justify-center gap-3'
-                          onClick={() => setIsOpenDistance(true)}
-                        >
-                          {!distance ? (
-                            <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                              <MapPinSimple className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
-                              Distanza
-                            </div>
-                          ) : (
-                            <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
-                              <span className='capitalize'>Entro {distance} km</span>{' '}
-                              <X className='w-4 h-4 text-white ml-2' onClick={handlerResetDistance} />
-                            </div>
-                          )}
-                        </div>
-                        <div
-                          className='flex flex-col items-center justify-center gap-3'
-                          onClick={() => setIsOpenGenre(true)}
-                        >
-                          {!genres ? (
-                            <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                              <MusicNotes className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
-                              Genere
-                            </div>
-                          ) : (
-                            <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
-                              {genres?.length} Generi
-                              <X className='w-4 h-4 text-white ml-2' onClick={handlerResetGenre} />
-                            </div>
-                          )}
-                        </div>
-                        <div
-                          className='flex flex-col items-center justify-center gap-3'
-                          onClick={() => setForStudent(true)}
-                        >
-                          {!forStudent ? (
-                            <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                              <Student className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
-                              Studentesche
-                            </div>
-                          ) : (
-                            <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
-                              <span className='capitalize'>Studentesche</span>{' '}
-                              <X className='w-4 h-4 text-white ml-2' onClick={handlerResetForStudent} />
-                            </div>
-                          )}
+              <div className='px-2'>
+                <div className='w-full'>
+                  <div className='relative flex mb-2'>
+                    <section className='relative overflow-hidden'>
+                      <div className='relative snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
+                        <div className='w-full flex flex-row gap-2'>
+                          <div
+                            className='flex flex-col items-center justify-center gap-3'
+                            onClick={() => setIsOpenPosition(true)}
+                          >
+                            {!rootCtx?.position?.city ? (
+                              <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+                                <MapPin className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
+                                Ovunque
+                              </div>
+                            ) : (
+                              <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
+                                <span className='capitalize'>{rootCtx?.position?.city}</span>{' '}
+                                <X className='w-4 h-4 text-white ml-2' onClick={handlerResetPosition} />
+                              </div>
+                            )}
+                          </div>
+                          <div
+                            className='flex flex-col items-center justify-center gap-3'
+                            onClick={() => setIsOpenDateRange(true)}
+                          >
+                            {!dateRangeUI ? (
+                              <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+                                <CalendarDots className='w-4 h-4 text-accent-400 mr-2' weight='duotone' /> Data
+                              </div>
+                            ) : (
+                              <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
+                                <span className='capitalize'>{dateRangeUI}</span>{' '}
+                                <X className='w-4 h-4 text-white ml-2' onClick={handlerResetDateRange} />
+                              </div>
+                            )}
+                          </div>
+                          <div
+                            className='flex flex-col items-center justify-center gap-3'
+                            onClick={() => setFreeEntry(true)}
+                          >
+                            {!freeEntry ? (
+                              <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+                                <CurrencyEur className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
+                                FreeEntry
+                              </div>
+                            ) : (
+                              <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
+                                <span className='capitalize'>FreeEntry</span>{' '}
+                                <X className='w-4 h-4 text-white ml-2' onClick={handlerResetFreeEntry} />
+                              </div>
+                            )}
+                          </div>
+                          <div
+                            className='flex flex-col items-center justify-center gap-3'
+                            onClick={() => setIsOpenDistance(true)}
+                          >
+                            {!distance ? (
+                              <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+                                <MapPinSimple className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
+                                Distanza
+                              </div>
+                            ) : (
+                              <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
+                                <span className='capitalize'>Entro {distance} km</span>{' '}
+                                <X className='w-4 h-4 text-white ml-2' onClick={handlerResetDistance} />
+                              </div>
+                            )}
+                          </div>
+                          <div
+                            className='flex flex-col items-center justify-center gap-3'
+                            onClick={() => setIsOpenGenre(true)}
+                          >
+                            {!genres ? (
+                              <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+                                <MusicNotes className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
+                                Genere
+                              </div>
+                            ) : (
+                              <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
+                                {genres?.length} Generi
+                                <X className='w-4 h-4 text-white ml-2' onClick={handlerResetGenre} />
+                              </div>
+                            )}
+                          </div>
+                          <div
+                            className='flex flex-col items-center justify-center gap-3'
+                            onClick={() => setForStudent(true)}
+                          >
+                            {!forStudent ? (
+                              <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+                                <Student className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
+                                Studentesche
+                              </div>
+                            ) : (
+                              <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
+                                <span className='capitalize'>Studentesche</span>{' '}
+                                <X className='w-4 h-4 text-white ml-2' onClick={handlerResetForStudent} />
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </section>
-                </div>
+                    </section>
+                  </div>
 
-                <SearchResults
-                  term={searchTerm}
-                  results={searchResults}
-                  isLoading={!isFirstLoad && isLoading}
-                  isEmptyFilter={isEmptyFilter}
-                  isFirstLoad={isFirstLoad}
-                  onClick={() => setIsOpen(false)}
-                />
+                  <div className='overflow-y-auto max-h-[calc(100%+150px)] scrollbar-hide'>
+                    <SearchResults
+                      term={searchTerm}
+                      results={searchResults}
+                      isLoading={!isFirstLoad && isLoading}
+                      isEmptyFilter={isEmptyFilter}
+                      isFirstLoad={isFirstLoad}
+                      onClick={() => setIsOpen(false)}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-          </DialogPanel>
+            </DialogPanel>
+          </div>
         </div>
       </Dialog>
 
