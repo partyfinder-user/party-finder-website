@@ -7,6 +7,7 @@ import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import { MagnifyingGlass, ArrowBendUpLeft, X } from '@phosphor-icons/react';
 import { Card, CardBody } from '@nextui-org/card';
 import { Spinner } from '@nextui-org/spinner';
+import { ScrollShadow } from '@nextui-org/scroll-shadow';
 
 import RootContext from '@/stores/root-context';
 import { searchCity } from '@/libs/locality-service';
@@ -17,14 +18,18 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [cities, setCities] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState(null);
 
   const handleSearch = async () => {
     if (query.length === 0) {
       setCities([]);
+      setHasSearched(false);
       return;
     }
+
     setLoading(true);
+    setHasSearched(true);
     const results = await searchCity(query);
     setCities(results);
     setLoading(false);
@@ -33,6 +38,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
   const handleClear = () => {
     setQuery('');
     setCities([]);
+    setHasSearched(false);
   };
 
   const handleConfirm = (position) => {
@@ -99,36 +105,36 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
               {!loading && cities.length <= 0 && <RequestLocation onSelect={handleConfirm} />}
 
               {loading && <Spinner className='absolute top-0 right-2' />}
-              <div className='overflow-y-auto h-[calc(100%+150px)]'>
-                <div className='max-h-full overflow-auto'>
-                  {cities.length > 0 && (
-                    <div className='w-full my-1'>
-                      {cities.map((city, idx) => (
-                        <Card
-                          key={city._id + '-' + idx}
-                          isPressable
-                          isHoverable
-                          onPress={() => handleConfirm(city)}
-                          className='w-full my-4'
-                        >
-                          <CardBody>
-                            <p>{city.nome}</p>
-                            <p className='text-sm text-gray-500'>
-                              {city?.provincia?.nome}, {city?.regione?.nome}
-                            </p>
-                          </CardBody>
-                        </Card>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-              {!loading && cities.length === 0 && query && (
+
+              <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 150px)' }}>
+                {cities.length > 0 && (
+                  <div className='w-full my-1'>
+                    {cities.map((city, idx) => (
+                      <Card
+                        key={city._id + '-' + idx}
+                        isPressable
+                        isHoverable
+                        onPress={() => handleConfirm(city)}
+                        className='w-full my-4'
+                      >
+                        <CardBody>
+                          <p>{city.nome}</p>
+                          <p className='text-sm text-gray-500'>
+                            {city?.provincia?.nome}, {city?.regione?.nome}
+                          </p>
+                        </CardBody>
+                      </Card>
+                    ))}
+                  </div>
+                )}
+              </ScrollShadow>
+
+              {!loading && hasSearched && cities?.length <= 0 && query && (
                 <p className='text-gray-500 my-2'>Nessun risultato trovato</p>
               )}
             </div>
 
-            {cities.length <= 0 && (
+            {cities?.length <= 0 && (
               <button
                 onClick={() => setIsOpen(false)}
                 className='fixed bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'
