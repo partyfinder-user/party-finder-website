@@ -14,7 +14,7 @@ const getComponentByType = (item, onClick) => {
   const commonProps = {
     key: item.id,
     item,
-    className: 'py-2 border-b border-b-background-500',
+    className: 'py-2 border-b border-b-white/20',
     onClick,
   };
 
@@ -56,8 +56,8 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad, isEmptyFilter, o
   }
 
   return (
-    <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 200px)' }}>
-      {results?.map((item) => getComponentByType(item, onClick))}{' '}
+    <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 100px)' }}>
+      <div className='pb-28'>{results?.map((item) => getComponentByType(item, onClick))} </div>
     </ScrollShadow>
   );
 };

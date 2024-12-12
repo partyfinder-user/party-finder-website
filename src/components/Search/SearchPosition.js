@@ -111,9 +111,9 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
 
               {loading && <Spinner className='absolute top-3 right-3' />}
 
-              <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 200px)' }}>
+              <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 100px)' }}>
                 {cities.length > 0 && (
-                  <div className='w-full my-1'>
+                  <div className='w-full my-1 pb-20'>
                     {cities.map((city, idx) => (
                       <Card
                         key={city._id + '-' + idx}
