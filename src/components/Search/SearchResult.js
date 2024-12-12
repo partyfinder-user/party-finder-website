@@ -63,7 +63,7 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad, isEmptyFilter, o
   }
 
   return (
-    <div className='w-full max-h-full overflow-auto'>
+    <div className='w-full'>
       {results?.map((item) => getComponentByType(item, onClick))}
 
       {(isFirstLoad || isEmptyFilter || results?.length <= 0) && (

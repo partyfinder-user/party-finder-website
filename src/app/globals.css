@@ -37,6 +37,16 @@
   --c-accent-900: 91, 60, 155;
 }
 
+.content-popup-header {
+  min-height: calc(100vh - 6rem);
+}
+
+@supports (height: 100svh) {
+  .content-popup-header {
+    min-height: calc(100svh - 6rem);
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
