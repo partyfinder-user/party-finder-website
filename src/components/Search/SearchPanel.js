@@ -233,6 +233,19 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
         <div className='fixed inset-0 z-10 w-screen'>
           <div className='flex min-h-full'>
             <DialogPanel className='relative w-full bg-background-900/60 backdrop-blur-lg'>
+              <div className='flex flex-col items-center justify-center gap-3' onClick={() => setIsOpenPosition(true)}>
+                {!rootCtx?.position?.city ? (
+                  <div className='flex items-center text-sm px-4 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
+                    <MapPin className='w-4 h-4 text-accent-400 mr-2' weight='duotone' />
+                    Ovunque
+                  </div>
+                ) : (
+                  <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
+                    <span className='capitalize'>{rootCtx?.position?.city}</span>{' '}
+                    <X className='w-4 h-4 text-white ml-2' onClick={handlerResetPosition} />
+                  </div>
+                )}
+              </div>
               {/* <DialogTitle className='w-full px-2 pt-3 pb-1 mb-3 border-b border-background-400/50'>
                 <div className='flex items-center'>
                   <div className='w-full flex-1 mb-2'>
