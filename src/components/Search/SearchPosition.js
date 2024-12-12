@@ -105,7 +105,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
 
               {!loading && cities.length <= 0 && <RequestLocation onSelect={handleConfirm} />}
 
-              {loading && <Spinner className='absolute top-0 right-2' />}
+              {loading && <Spinner className='absolute top-3 right-3' />}
 
               <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 150px)' }}>
                 {cities.length > 0 && (
@@ -138,7 +138,8 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
             {cities?.length <= 0 && (
               <button
                 onClick={() => setIsOpen(false)}
-                className='absolute bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'
+                className='fixed bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'
+                style={{ marginBottom: 'env(safe-area-inset-bottom, 20px)' }}
               >
                 <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
               </button>
