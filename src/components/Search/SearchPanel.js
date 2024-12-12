@@ -232,8 +232,8 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
         <DialogBackdrop className='fixed inset-0 bg-black/70' />
         <div className='fixed inset-0 z-10 w-screen'>
           <div className='flex min-h-full'>
-            <DialogPanel className='relative w-full safe-height flex flex-col bg-background-900/60 backdrop-blur-lg'>
-              <DialogTitle className='w-full px-2 pt-3 pb-1 mb-3 border-b border-background-400/50'>
+            <DialogPanel className='relative w-full bg-background-900/60 backdrop-blur-lg'>
+              {/* <DialogTitle className='w-full px-2 pt-3 pb-1 mb-3 border-b border-background-400/50'>
                 <div className='flex items-center'>
                   <div className='w-full flex-1 mb-2'>
                     <SearchInput setIsOpen={setIsOpen} onSearch={setSearchTerm} onTermReset={handlerResetTerm} />
@@ -242,9 +242,9 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                     <Logo />
                   </div>
                 </div>
-              </DialogTitle>
+              </DialogTitle> */}
 
-              <div className='px-2 w-full'>
+              {/* <div className='px-2 w-full'>
                 <div className='flex mb-2'>
                   <section className='relative overflow-hidden'>
                     <div className='snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
@@ -359,16 +359,15 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                     onClick={() => setIsOpen(false)}
                   />
                 </ScrollShadow>
-              </div>
-
-              {(isFirstLoad || isEmptyFilter || searchResults?.length <= 0) && (
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className='absolute bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'
-                >
-                  <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
-                </button>
-              )}
+              </div> */}
+              {/* {(isFirstLoad || isEmptyFilter || searchResults?.length <= 0) && (
+              )} */}
+              <button
+                onClick={() => setIsOpen(false)}
+                className='absolute bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'
+              >
+                <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
+              </button>
             </DialogPanel>
           </div>
         </div>

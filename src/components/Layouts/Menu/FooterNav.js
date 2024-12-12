@@ -50,9 +50,8 @@ const FooterNav = () => {
             </div>
           </button>
           <button onClick={() => setIsOpenSearch(true)}>
-            <div className={`flex flex-col items-center justify-between text-white ${active ? 'text-accent-100' : ''}`}>
+            <div className={`w-12 h-12 flex items-center justify-center rounded-full bg-accent-400 text-white transition-transform duration-300 ease-in-out z-50 ${active ? 'text-accent-100' : ''}`}>
               <MagnifyingGlass className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
-              <span className='text-sm leading-none mt-1'>Cerca</span>
             </div>
           </button>
           <Link href='/user/account/favorites'>
