@@ -99,7 +99,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
               {!loading && cities.length <= 0 && <RequestLocation onSelect={handleConfirm} />}
 
               {loading && <Spinner className='absolute top-0 right-2' />}
-              <div className='overflow-y-auto max-h-[calc(100%+150px)]'>
+              <div className='overflow-y-auto h-[calc(100%+150px)]'>
                 <div className='max-h-full overflow-auto'>
                   {cities.length > 0 && (
                     <div className='w-full my-1'>
