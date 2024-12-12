@@ -243,10 +243,10 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                   </div>
                 </div>
               </DialogTitle>
-              {/* 
+
               <div className='px-2 w-full'>
                 <div className='flex mb-2'>
-                  <section className='relative overflow-hidden'>
+                  <section className='relative'>
                     <div className='snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
                       <div className='w-full flex flex-row gap-2'>
                         <div
@@ -349,7 +349,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                   </section>
                 </div>
 
-                <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 200px)' }}>
+                {/* <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 200px)' }}>
                   <SearchResults
                     term={searchTerm}
                     results={searchResults}
@@ -358,7 +358,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                     isFirstLoad={isFirstLoad}
                     onClick={() => setIsOpen(false)}
                   />
-                </ScrollShadow>
+                </ScrollShadow> */}
               </div>
 
               {(isFirstLoad || isEmptyFilter || searchResults?.length <= 0) && (
@@ -368,7 +368,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                 >
                   <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
                 </button>
-              )} */}
+              )}
             </DialogPanel>
           </div>
         </div>
