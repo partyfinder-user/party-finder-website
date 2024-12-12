@@ -76,7 +76,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
       className='relative z-50 transition duration-100 ease-out data-[closed]:opacity-0'
     >
       <DialogBackdrop className='fixed inset-0 bg-black/70' />
-      <div className='fixed inset-0 z-10 w-screen min-h-[100dvh]'>
+      <div className='fixed inset-0 z-10 w-screen min-h-full'>
         <div className='flex'>
           <DialogPanel className='px-2 py-4 w-full safe-height flex flex-col bg-background-900/60 backdrop-blur-lg'>
             <div className='flex flex-col px-2'>
