@@ -233,7 +233,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
         <div className='fixed inset-0 z-10 w-screen'>
           <div className='flex min-h-full'>
             <DialogPanel className='relative w-full bg-background-900/60 backdrop-blur-lg'>
-              {/* <DialogTitle className='w-full px-2 pt-3 pb-1 mb-3 border-b border-background-400/50'>
+              <DialogTitle className='w-full px-2 pt-3 pb-1 mb-3 border-b border-background-400/50'>
                 <div className='flex items-center'>
                   <div className='w-full flex-1 mb-2'>
                     <SearchInput setIsOpen={setIsOpen} onSearch={setSearchTerm} onTermReset={handlerResetTerm} />
@@ -242,7 +242,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                     <Logo />
                   </div>
                 </div>
-              </DialogTitle> */}
+              </DialogTitle>
 
               {/* <div className='px-2 w-full'>
                 <div className='flex mb-2'>
