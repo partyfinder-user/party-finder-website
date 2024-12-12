@@ -51,7 +51,7 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad, isEmptyFilter, o
             <span>Uhm, sembri esigente, che dici di allentare un po&apos; i tuoi filtri?</span>
           )}
         </p>
-        <button onClick={onClick} className='fixed bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'>
+        <button onClick={onClick} className='absolute bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'>
           <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
         </button>
       </>
@@ -59,11 +59,11 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad, isEmptyFilter, o
   }
 
   return (
-    <div className='relative w-full max-h-full overflow-auto'>
-      {results.map((item) => getComponentByType(item, onClick))}
+    <div className='w-full max-h-full overflow-auto'>
+      {results?.map((item) => getComponentByType(item, onClick))}
 
-      {results?.length === 0 && (
-        <button onClick={onClick} className='fixed bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'>
+      {(isFirstLoad || isEmptyFilter || results?.length <= 0) && (
+        <button onClick={onClick} className='absolute bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'>
           <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
         </button>
       )}
