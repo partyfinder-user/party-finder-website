@@ -365,7 +365,6 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                 <button
                   onClick={() => setIsOpen(false)}
                   className='absolute bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'
-                  style={{ marginBottom: 'env(safe-area-inset-bottom, 20px)' }}
                 >
                   <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
                 </button>
