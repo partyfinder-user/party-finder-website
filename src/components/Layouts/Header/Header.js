@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'; // Importa usePathname
+import { usePathname } from 'next/navigation';
 
 import Logo from '@/components/Helpers/Logo';
 import SearchPanel from '@/components/Search/SearchPanel';

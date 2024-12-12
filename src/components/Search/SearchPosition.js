@@ -71,13 +71,14 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
   return (
     <Dialog
       open={isOpen}
+      transition
       onClose={() => setIsOpen(false)}
       className='relative z-50 transition duration-100 ease-out data-[closed]:opacity-0'
     >
-      <DialogBackdrop className='fixed inset-0 bg-black/90' />
+      <DialogBackdrop className='fixed inset-0 bg-black/70' />
       <div className='fixed inset-0 z-10 w-screen overflow-hidden'>
-        <div className='flex min-h-full px-2 py-4'>
-          <DialogPanel className='relative w-full safe-height flex flex-col'>
+        <div className='flex min-h-full'>
+          <DialogPanel className='px-2 py-4 relative w-full safe-height flex flex-col bg-background-900/60 backdrop-blur-lg'>
             <div className='flex flex-col px-2'>
               <div className='flex items-center mb-4'>
                 <span className='text-lg font-semibold flex-1'>Trova la tua città</span>
