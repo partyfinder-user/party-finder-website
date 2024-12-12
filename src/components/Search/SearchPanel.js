@@ -216,7 +216,6 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
     <>
       <Dialog
         open={isOpen}
-        transition
         onClose={() => setIsOpen(false)}
         className='relative z-50 transition duration-100 ease-out data-[closed]:opacity-0'
       >
