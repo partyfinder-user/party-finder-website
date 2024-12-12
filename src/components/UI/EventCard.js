@@ -1,15 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Heart, MapPin } from '@phosphor-icons/react/dist/ssr';
+import { MapPin } from '@phosphor-icons/react/dist/ssr';
+
+import Favorite from '../Helpers/Favorite';
 import LazyImage from '@/components/Helpers/LazyImage';
 import { isValidImage, parseTime } from '@/tools/tools';
 
 const EventCard = ({ idx, event }) => {
   const imageSrc = isValidImage(event.image) ? process.env.NEXT_PUBLIC_IMAGE_BASE_URL + event.image : '';
-
   const date = new Date(event.dateStart);
-
   const { hours, minutes } = parseTime(event.hourStart);
   date.setHours(hours);
   date.setMinutes(minutes);
@@ -22,6 +22,7 @@ const EventCard = ({ idx, event }) => {
     hour: '2-digit',
     minute: '2-digit',
   };
+  
   const readableDate = date.toLocaleString('it-IT', options);
 
   return (
@@ -56,7 +57,7 @@ const EventCard = ({ idx, event }) => {
                 </div>
               </div>
               <div className='pl-2 mt-auto'>
-                <Heart className='w-7 h-7 text-white' />
+                <Favorite itemSlug={event.slug} type='events' />
               </div>
             </div>
           </div>
