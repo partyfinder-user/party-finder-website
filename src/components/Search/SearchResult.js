@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-import { ArrowBendUpLeft } from '@phosphor-icons/react/dist/ssr';
-
 import Artist from './Result/Artist';
 import Local from './Result/Local';
 import Event from './Result/Event';
@@ -51,32 +49,11 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad, isEmptyFilter, o
             <span>Uhm, sembri esigente, che dici di allentare un po&apos; i tuoi filtri?</span>
           )}
         </p>
-        <button
-          onClick={onClick}
-          className='absolute bottom-[4dvh] right-4 p-2 bg-white/40 text-white rounded-full'
-          style={{ marginBottom: 'env(safe-area-inset-bottom, 20px)' }}
-        >
-          <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
-        </button>
       </>
     );
   }
 
-  return (
-    <div className='w-full'>
-      {results?.map((item) => getComponentByType(item, onClick))}
-
-      {(isFirstLoad || isEmptyFilter || results?.length <= 0) && (
-        <button
-          onClick={onClick}
-          className='fixed bottom-[4dvh] right-4 p-2 bg-white/40 text-white rounded-full'
-          style={{ marginBottom: 'env(safe-area-inset-bottom, 20px)' }}
-        >
-          <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
-        </button>
-      )}
-    </div>
-  );
+  return <div className='w-full'>{results?.map((item) => getComponentByType(item, onClick))}</div>;
 };
 
 export default SearchResults;

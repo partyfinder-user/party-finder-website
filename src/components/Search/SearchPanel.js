@@ -2,7 +2,16 @@
 
 import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
-import { MapPin, CalendarDots, CurrencyEur, MapPinSimple, MusicNotes, Student, X } from '@phosphor-icons/react';
+import {
+  MapPin,
+  CalendarDots,
+  CurrencyEur,
+  MapPinSimple,
+  MusicNotes,
+  Student,
+  X,
+  ArrowBendUpLeft,
+} from '@phosphor-icons/react';
 import { ScrollShadow } from '@nextui-org/scroll-shadow';
 
 import Logo from '../Helpers/Logo';
@@ -351,11 +360,21 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                   />
                 </ScrollShadow>
               </div>
+
+              {(isFirstLoad || isEmptyFilter || searchResults?.length <= 0) && (
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className='fixed bottom-[4dvh] right-4 p-2 bg-white/40 text-white rounded-full'
+                  style={{ marginBottom: 'env(safe-area-inset-bottom, 20px)' }}
+                >
+                  <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
+                </button>
+              )}
             </DialogPanel>
           </div>
         </div>
       </Dialog>
-      
+
       <DistanceRange
         isOpen={isOpenDistance}
         setIsOpen={setIsOpenDistance}
