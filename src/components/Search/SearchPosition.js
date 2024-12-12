@@ -76,8 +76,8 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
       className='relative z-50 transition duration-100 ease-out data-[closed]:opacity-0'
     >
       <DialogBackdrop className='fixed inset-0 bg-black/70' />
-      <div className='fixed inset-0 z-10 w-screen min-h-full'>
-        <div className='flex'>
+      <div className='fixed inset-0 z-10 w-screen'>
+        <div className='flex min-h-full'>
           <DialogPanel className='px-2 py-4 w-full safe-height flex flex-col bg-background-900/60 backdrop-blur-lg'>
             <div className='flex flex-col px-2'>
               <div className='flex items-center mb-4'>
@@ -107,7 +107,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
 
               {loading && <Spinner className='absolute top-3 right-3' />}
 
-              <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 150px)' }}>
+              <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 200px)' }}>
                 {cities.length > 0 && (
                   <div className='w-full my-1'>
                     {cities.map((city, idx) => (
@@ -120,7 +120,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
                       >
                         <CardBody>
                           <p>{city.nome}</p>
-                          <p className='text-sm text-gray-300'>
+                          <p className='text-sm text-gray-500'>
                             {city?.provincia?.nome}, {city?.regione?.nome}
                           </p>
                         </CardBody>
@@ -138,7 +138,7 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
             {cities?.length <= 0 && (
               <button
                 onClick={() => setIsOpen(false)}
-                className='fixed bottom-[4dvh] right-4 p-2 bg-white/40 text-white rounded-full'
+                className='absolute bottom-[4dvh] right-4 p-2 bg-white/40 text-white rounded-full'
                 style={{ marginBottom: 'env(safe-area-inset-bottom, 20px)' }}
               >
                 <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
