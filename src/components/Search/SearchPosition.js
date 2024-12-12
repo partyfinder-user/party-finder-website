@@ -103,6 +103,10 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
                 )}
               </div>
 
+              {!loading && hasSearched && cities?.length <= 0 && query && (
+                <p className='text-gray-400 ml-2 my-4'>Nessun risultato trovato</p>
+              )}
+
               {!loading && cities.length <= 0 && <RequestLocation onSelect={handleConfirm} />}
 
               {loading && <Spinner className='absolute top-3 right-3' />}
@@ -129,10 +133,6 @@ const SearchPosition = ({ isOpen, setIsOpen, onSelect, reset }) => {
                   </div>
                 )}
               </ScrollShadow>
-
-              {!loading && hasSearched && cities?.length <= 0 && query && (
-                <p className='text-gray-500 my-2'>Nessun risultato trovato</p>
-              )}
             </div>
           </DialogPanel>
           {cities?.length <= 0 && (
