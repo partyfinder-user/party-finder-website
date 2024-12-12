@@ -2,11 +2,13 @@
 
 import React from 'react';
 
+import { Spinner } from '@nextui-org/spinner';
+import { ScrollShadow } from '@nextui-org/scroll-shadow';
+
 import Artist from './Result/Artist';
 import Local from './Result/Local';
 import Event from './Result/Event';
 import Format from './Result/Format';
-import { Spinner } from '@nextui-org/spinner';
 
 const getComponentByType = (item, onClick) => {
   const commonProps = {
@@ -53,7 +55,11 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad, isEmptyFilter, o
     );
   }
 
-  return <div className='w-full'>{results?.map((item) => getComponentByType(item, onClick))}</div>;
+  return (
+    <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 200px)' }}>
+      {results?.map((item) => getComponentByType(item, onClick))}{' '}
+    </ScrollShadow>
+  );
 };
 
 export default SearchResults;

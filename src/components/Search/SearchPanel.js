@@ -12,7 +12,6 @@ import {
   X,
   ArrowBendUpLeft,
 } from '@phosphor-icons/react';
-import { ScrollShadow } from '@nextui-org/scroll-shadow';
 
 import Logo from '../Helpers/Logo';
 import Genre from './Filter/Genre';
@@ -349,7 +348,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                   </section>
                 </div>
 
-                {/* <ScrollShadow hideScrollBar className='w-full' style={{ maxHeight: 'calc(100vh - 200px)' }}>
+                <div className='w-full'>
                   <SearchResults
                     term={searchTerm}
                     results={searchResults}
@@ -358,7 +357,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                     isFirstLoad={isFirstLoad}
                     onClick={() => setIsOpen(false)}
                   />
-                </ScrollShadow> */}
+                </div>
               </div>
 
               {(isFirstLoad || isEmptyFilter || searchResults?.length <= 0) && (
