@@ -53,7 +53,7 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad, isEmptyFilter, o
         </p>
         <button
           onClick={onClick}
-          className='fixed bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'
+          className='absolute bottom-[2dvh] right-4 p-2 bg-white/40 text-white rounded-full'
           style={{ marginBottom: 'env(safe-area-inset-bottom, 20px)' }}
         >
           <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
@@ -69,7 +69,7 @@ const SearchResults = ({ term, results, isLoading, isFirstLoad, isEmptyFilter, o
       {(isFirstLoad || isEmptyFilter || results?.length <= 0) && (
         <button
           onClick={onClick}
-          className='fixed bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'
+          className='absolute bottom-[2dvh] right-4 p-2 bg-white/40 text-white rounded-full'
           style={{ marginBottom: 'env(safe-area-inset-bottom, 20px)' }}
         >
           <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />
