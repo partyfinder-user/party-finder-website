@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState, useContext, useEffect, useCallback } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
+
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import {
   MapPin,
@@ -24,6 +26,8 @@ import RootContext from '@/stores/root-context';
 import { isNullOrEmpty } from '@/tools/tools';
 
 const SearchPanel = ({ isOpen, setIsOpen }) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const rootCtx = useContext(RootContext);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -220,12 +224,24 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
     handleSearch();
   }, [handleSearch]);
 
+  const handleClose = () => {
+    setIsOpen && setIsOpen(false);
+    router.replace('/');
+  };
+
+  useEffect(() => {
+    const searchQuery = searchParams.get('search');
+    if (searchQuery) {
+      setIsOpen(true);
+    }
+  }, [searchParams, setIsOpen]);
+
   return (
     <>
       <Dialog
         open={isOpen}
         transition
-        onClose={() => setIsOpen(false)}
+        onClose={handleClose}
         className='relative z-50 transition duration-100 ease-out data-[closed]:opacity-0'
       >
         <DialogBackdrop className='fixed inset-0 bg-black/70' />
@@ -235,7 +251,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
               <DialogTitle className='w-full px-2 pt-3 pb-1 mb-3 border-b border-background-400/50'>
                 <div className='flex items-center'>
                   <div className='w-full flex-1 mb-2'>
-                    <SearchInput setIsOpen={setIsOpen} onSearch={setSearchTerm} onTermReset={handlerResetTerm} />
+                    <SearchInput setIsOpen={handleClose} onSearch={setSearchTerm} onTermReset={handlerResetTerm} />
                   </div>
                   <div className='mb-2'>
                     <Logo />
@@ -362,7 +378,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
 
               {(isFirstLoad || isEmptyFilter || searchResults?.length <= 0) && (
                 <button
-                  onClick={() => setIsOpen(false)}
+                  onClick={handleClose}
                   className='absolute bottom-4 right-4 p-2 bg-white/40 text-white rounded-full'
                 >
                   <ArrowBendUpLeft className='text-white w-6 h-6 mx-3 my-1' />

@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Heart } from '@phosphor-icons/react/dist/ssr';
 import LazyImage from '@/components/Helpers/LazyImage';
+import Favorite from '../Helpers/Favorite';
 
 const EventSlideCard = ({ event }) => {
   return (
@@ -18,7 +18,7 @@ const EventSlideCard = ({ event }) => {
           />
 
           <div className='absolute bottom-3 right-3'>
-            <Heart className='w-6 h-6 text-white' />
+            <Favorite itemId={event._id} type='events' />
           </div>
 
           <div className='absolute top-0 right-0 bg-background-500/60 border border-background-500/30 backdrop-blur-sm text-neon-low font-medium text-md px-3.5 py-1.5 rounded-bl-lg'>

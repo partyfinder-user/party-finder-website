@@ -57,7 +57,7 @@ const EventCard = ({ idx, event }) => {
                 </div>
               </div>
               <div className='pl-2 mt-auto'>
-                <Favorite itemSlug={event.slug} type='events' />
+                <Favorite itemId={event._id} type='events' />
               </div>
             </div>
           </div>

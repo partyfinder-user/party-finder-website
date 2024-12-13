@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Heart, MapPin } from '@phosphor-icons/react/dist/ssr';
+import { MapPin } from '@phosphor-icons/react/dist/ssr';
 import LazyImage from '@/components/Helpers/LazyImage';
 import { isValidImage } from '@/tools/tools';
+import Favorite from '../Helpers/Favorite';
 
 const LocalCard = ({ idx, data }) => {
   const imageSrc = isValidImage(data.image) ? process.env.NEXT_PUBLIC_IMAGE_BASE_URL + data.image : '';
@@ -33,7 +34,7 @@ const LocalCard = ({ idx, data }) => {
                 </div>
               </div>
               <div className='pl-2 mt-auto'>
-                <Heart className='w-7 h-7 text-white' />
+                <Favorite itemId={data._id} type='places' />
               </div>
             </div>
           </div>

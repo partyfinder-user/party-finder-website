@@ -10,11 +10,11 @@ const FavoriteProvider = (props) => {
   const [userUUID, setUserUUID] = useState('');
   const [accessToken, setAccessToken] = useState('');
   const [favoriteCount, setFavoriteCount] = useState({});
-  const [favoriteSlugs, setFavoriteSlugs] = useState([]);
+  const [favoriteIds, setFavoriteIds] = useState([]);
   const [lastFavoriteUpdate, setLastFavoriteUpdate] = useState('');
 
-  const checkExsitFavorie = (slug) => {
-    return favoriteSlugs?.find((s) => s === slug);
+  const checkExsitFavorie = (itemId) => {
+    return favoriteIds?.find((id) => id === itemId);
   };
 
   const getFavoriteCount = useCallback(async (userUUID, token) => {
@@ -45,7 +45,7 @@ const FavoriteProvider = (props) => {
         formats: value?.formats?.length,
       };
       const totalCount = Object.values(counts).reduce((acc, count) => acc + count, 0);
-      const slugs = [
+      const ids = [
         ...(value?.events ?? []),
         ...(value?.artists ?? []),
         ...(value?.places ?? []),
@@ -53,22 +53,22 @@ const FavoriteProvider = (props) => {
       ];
 
       setFavoriteCount(totalCount);
-      setFavoriteSlugs(slugs);
+      setFavoriteIds(ids);
     } catch (error) {
       console.error(error);
     }
   }, []);
 
-  const addToFavorites = async ({ slug, type }) => {
+  const addToFavorites = async ({ id, type }) => {
     if (!userUUID || !authCtx?.token) {
       return;
     }
 
-    const item = { type, value: slug };
+    const item = { type, value: id };
 
     try {
       setOnFetch(true);
-      setOnFetchItem(slug);
+      setOnFetchItem(id);
       const options = {
         headers: {
           usruuid: userUUID,
@@ -97,16 +97,16 @@ const FavoriteProvider = (props) => {
     }
   };
 
-  const removeFromFavorites = async ({ slug, type }) => {
+  const removeFromFavorites = async ({ id, type }) => {
     if (!userUUID || !authCtx?.token) {
       return;
     }
 
-    const item = { type, value: slug };
+    const item = { type, value: id };
 
     try {
       setOnFetch(true);
-      setOnFetchItem(slug);
+      setOnFetchItem(id);
       const options = {
         headers: {
           usruuid: userUUID,
@@ -169,7 +169,7 @@ const FavoriteProvider = (props) => {
   const favoriteContext = {
     onFetch: onFetch,
     onFetchItem: onFetchItem,
-    favorites: favoriteSlugs,
+    favorites: favoriteIds,
     count: !isNaN(Number(favoriteCount)) ? favoriteCount.toString() : '0',
     addToFavorites,
     checkExsitFavorie,

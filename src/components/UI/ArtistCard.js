@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Heart } from '@phosphor-icons/react/dist/ssr';
 import LazyImage from '@/components/Helpers/LazyImage';
+import Favorite from '../Helpers/Favorite';
 import { isValidImage } from '@/tools/tools';
 
 const ArtistCard = ({ idx, data }) => {
@@ -32,7 +32,7 @@ const ArtistCard = ({ idx, data }) => {
                 </div>
               </div>
               <div className='pl-2 mt-auto'>
-                <Heart className='w-7 h-7 text-white' />
+                <Favorite itemId={data._id} type='artists' />
               </div>
             </div>
           </div>

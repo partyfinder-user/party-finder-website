@@ -3,18 +3,18 @@
 import React, { useContext } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { cx } from '@/tools/tools';
 import { staticUrl } from '@/libs/static-url';
-import { Heart } from '@phosphor-icons/react/dist/ssr';
+import { Heart } from '@phosphor-icons/react';
+import { Spinner } from '@nextui-org/spinner';
 import AuthContext from '@/stores/auth-context';
 import FavoritesContext from '@/stores/favorite-context';
 
-const Favorite = ({ itemSlug, type }) => {
+const Favorite = ({ itemId, type }) => {
   const router = useRouter();
   const authCtx = useContext(AuthContext);
   const favoriteCtx = useContext(FavoritesContext);
 
-  const addToFavorites = (e, slug) => {
+  const addToFavorites = (e, id) => {
     e.nativeEvent.stopImmediatePropagation();
     e.stopPropagation();
     e.preventDefault();
@@ -23,10 +23,10 @@ const Favorite = ({ itemSlug, type }) => {
       router.push(staticUrl.signin);
     }
 
-    favoriteCtx.addToFavorites({ slug, type });
+    favoriteCtx.addToFavorites({ id, type });
   };
 
-  const removeFromFavorites = (e, slug) => {
+  const removeFromFavorites = (e, id) => {
     e.nativeEvent.stopImmediatePropagation();
     e.stopPropagation();
     e.preventDefault();
@@ -35,29 +35,27 @@ const Favorite = ({ itemSlug, type }) => {
       router.push(staticUrl.signin);
     }
 
-    favoriteCtx.removeFromFavorites({ slug, type });
+    favoriteCtx.removeFromFavorites({ id, type });
   };
+
+  if (favoriteCtx.onFetch && favoriteCtx.onFetchItem === itemId) {
+    return <Spinner size='sm' />;
+  }
 
   return (
     <>
-      {favoriteCtx.checkExsitFavorie(itemSlug) ? (
+      {favoriteCtx.checkExsitFavorie(itemId) ? (
         <Heart
           weight='fill'
-          className={cx(
-            favoriteCtx.onFetch && favoriteCtx.onFetchItem === itemSlug ? 'animate-ping' : '',
-            'w-7 h-7 text-white',
-          )}
+          className='w-7 h-7 text-white cursor-pointer'
           aria-hidden='true'
-          onClick={(e) => removeFromFavorites(e, itemSlug)}
+          onClick={(e) => removeFromFavorites(e, itemId)}
         />
       ) : (
         <Heart
-          className={cx(
-            favoriteCtx.onFetch && favoriteCtx.onFetchItem === itemSlug ? 'animate-ping' : '',
-            'w-7 h-7 text-white',
-          )}
+          className='w-7 h-7 text-white cursor-pointer'
           aria-hidden='true'
-          onClick={(e) => addToFavorites(e, itemSlug)}
+          onClick={(e) => addToFavorites(e, itemId)}
         />
       )}
     </>

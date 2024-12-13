@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Heart } from '@phosphor-icons/react/dist/ssr';
 import LazyImage from '@/components/Helpers/LazyImage';
 import { isValidImage } from '@/tools/tools';
+import Favorite from '../Helpers/Favorite';
 
 const FormatCard = ({ idx, data }) => {
   const imageSrc = isValidImage(data.image) ? process.env.NEXT_PUBLIC_IMAGE_BASE_URL + data.image : '';
@@ -29,7 +29,7 @@ const FormatCard = ({ idx, data }) => {
                 <span className='text-xl text-white leading-tight'>{data.name}</span>
               </div>
               <div className='pl-2 mt-auto'>
-                <Heart className='w-7 h-7 text-white' />
+                <Favorite itemId={data._id} type='formats' />
               </div>
             </div>
           </div>

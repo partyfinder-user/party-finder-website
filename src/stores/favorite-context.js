@@ -5,7 +5,7 @@ const FavoritesContext = React.createContext({
   favorites: [],
   onFetch: false,
   onFetchItem: '',
-  checkExsitFavorie: (slug) => {},
+  checkExsitFavorie: (itemId) => {},
   addToFavorites: (params) => {},
   removeFromFavorites: (params) => {},
   refreshFavorites: () => {},

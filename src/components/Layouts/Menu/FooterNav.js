@@ -65,10 +65,16 @@ const FooterNav = () => {
             </div>
           </button>
           <Link href={staticUrl.favorites}>
-            <div className={`relative flex flex-col items-center justify-between text-white ${active ? 'text-accent-100' : ''}`}>
+            <div
+              className={`relative flex flex-col items-center justify-between text-white ${
+                active ? 'text-accent-100' : ''
+              }`}
+            >
               <Heart className={`w-6 h-6 ${active ? 'text-accent-500' : ''}`} />
               <span className='text-sm leading-none mt-1'>Preferiti</span>
-              <span className='absolute top-0 left-1.5 text-xs rounded-full bg-accent w-4 h-4'>{favoriteCtx.count}</span>
+              <span className='absolute top-0 left-1.5 text-xs rounded-full bg-accent w-4 h-4'>
+                {favoriteCtx?.count}
+              </span>
             </div>
           </Link>
           <Link href={staticUrl.account}>
