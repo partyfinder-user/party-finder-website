@@ -1,12 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import Link from 'next/link';
+// import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 
 import Logo from '@/components/Helpers/Logo';
-import SearchPanel from '@/components/Search/SearchPanel';
 import SearchButton from '@/components/Search/SearchButton';
+import SearchPanel from '@/components/Search/SearchPanel';
+
+// const SearchPanel = dynamic(() => import('@/components/Search/SearchPanel'), { ssr: false });
 
 const links = [
   { label: 'Eventi', href: '/events' },
@@ -57,7 +60,9 @@ const Header = () => {
           </div>
         </div>
 
-        <SearchPanel isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Suspense>
+          <SearchPanel isOpen={isOpen} setIsOpen={setIsOpen} />
+        </Suspense>
       </div>
     </header>
   );

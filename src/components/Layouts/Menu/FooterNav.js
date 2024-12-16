@@ -1,12 +1,11 @@
 'use client';
 
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useState, useRef, Suspense } from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { MapPin, Heart, UserCircle, HouseLine, MagnifyingGlass } from '@phosphor-icons/react';
-
 import SearchPosition from '@/components/Search/SearchPosition';
 import RootContext from '@/stores/root-context';
 import SearchPanel from '@/components/Search/SearchPanel';
@@ -87,7 +86,9 @@ const FooterNav = () => {
       </div>
 
       <SearchPosition isOpen={isOpenPosition} setIsOpen={setIsOpenPosition} onSelect={handlePositionSelect} />
-      <SearchPanel isOpen={isOpenSerach} setIsOpen={setIsOpenSearch} />
+      <Suspense>
+        <SearchPanel isOpen={isOpenSerach} setIsOpen={setIsOpenSearch} />
+      </Suspense>
     </>
   );
 };
