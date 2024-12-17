@@ -166,6 +166,20 @@ const FavoriteProvider = (props) => {
     getFavoriteCount(userUUID, accessToken).catch((error) => console.error(error));
   }, [getFavoriteCount, userUUID, accessToken]);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const storedUpdate = localStorage.getItem('favorite-updated');
+      if (storedUpdate !== lastFavoriteUpdate) {
+        setLastFavoriteUpdate(storedUpdate);
+        refreshFavorites();
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [lastFavoriteUpdate, refreshFavorites]);
+
   const favoriteContext = {
     onFetch: onFetch,
     onFetchItem: onFetchItem,
