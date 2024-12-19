@@ -9,8 +9,7 @@ export async function middleware(req) {
   const ipList = ipWhiteList.split(',');
 
   const detectedIp = req.ip;
-  console.log(detectedIp);
-  console.log(process.env.ENV);
+  console.log('ENV', process.env.ENV);
   
   if (process.env.ENV === 'staging' && !ipList?.includes(detectedIp)) {
     if (!isAuthenticated(req)) {
