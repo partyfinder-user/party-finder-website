@@ -236,6 +236,12 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
     }
   }, [searchParams, setIsOpen]);
 
+  useEffect(() => {
+    if (rootCtx.selectedGenres) {
+      setGenres(rootCtx.selectedGenres);
+    }
+  }, [rootCtx.selectedGenres]);
+
   return (
     <>
       <Dialog
@@ -261,7 +267,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
 
               <div className='px-2 w-full'>
                 <div className='flex mb-2'>
-                  <section className='relative'>
+                  <section className='relative overflow-hidden'>
                     <div className='snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
                       <div className='w-full flex flex-row gap-2'>
                         <div
@@ -338,7 +344,7 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
                             </div>
                           ) : (
                             <div className='flex items-center text-sm px-4 py-2 bg-accent-500/70 border border-accent-400 rounded-full text-white whitespace-nowrap'>
-                              {genres?.length} Generi
+                              {genres?.length} Gener{genres?.length === 1 ? 'e' : 'i'}
                               <X className='w-4 h-4 text-white ml-2' onClick={handlerResetGenre} />
                             </div>
                           )}
@@ -403,7 +409,13 @@ const SearchPanel = ({ isOpen, setIsOpen }) => {
         reset={resetPostion}
       />
       <DateRange isOpen={isOpenDateRange} setIsOpen={setIsOpenDateRange} onSelect={handleDateSelect} />
-      <Genre isOpen={isOpenGenre} setIsOpen={setIsOpenGenre} reset={resetGenres} onSelect={handleGenreSelect} />
+      <Genre
+        isOpen={isOpenGenre}
+        reset={resetGenres}
+        defaultSelectedGenres={genres}
+        setIsOpen={setIsOpenGenre}
+        onSelect={handleGenreSelect}
+      />
     </>
   );
 };

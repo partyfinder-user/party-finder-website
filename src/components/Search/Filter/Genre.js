@@ -1,35 +1,41 @@
 import React, { useState, useEffect } from 'react';
+
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
+import { Spinner } from '@nextui-org/react';
 import { CheckboxGroup } from '@nextui-org/checkbox';
 import { Trash } from '@phosphor-icons/react';
+import useSWR from 'swr';
 
 import { CustomCheckbox } from '@/components/Helpers/CustomeCheckbox';
 
-const musicGenres = [
-  { text: 'Rock', id: 1 },
-  { text: 'Pop', id: 2 },
-  { text: 'Hip-Hop', id: 3 },
-  { text: 'Jazz', id: 4 },
-  { text: 'Classical', id: 5 },
-  { text: 'Electronic', id: 6 },
-  { text: 'Blues', id: 7 },
-  { text: 'Reggae', id: 8 },
-  { text: 'Country', id: 9 },
-  { text: 'R&B', id: 10 },
-  { text: 'Folk', id: 11 },
-  { text: 'Metal', id: 12 },
-  { text: 'Punk', id: 13 },
-  { text: 'Disco', id: 14 },
-  { text: 'Soul', id: 15 },
-  { text: 'Funk', id: 16 },
-  { text: 'Ska', id: 17 },
-  { text: 'Latin', id: 18 },
-  { text: 'Gospel', id: 19 },
-  { text: 'Indie', id: 20 },
-];
+const fetcher = async (url) => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Failed to fetch genres');
+  }
+  const data = await response.json();
+  return data;
+};
 
-const Genre = ({ isOpen, setIsOpen, onSelect, reset }) => {
+const Genre = ({ defaultSelectedGenres = [], isOpen, setIsOpen, onSelect, reset }) => {
   const [groupSelected, setGroupSelected] = useState([]);
+  console.log(groupSelected);
+
+  const { data, isLoading } = useSWR(
+    isOpen ? `${process.env.NEXT_PUBLIC_SERVICE_BASE_URL}types/listTypes` : null,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      dedupingInterval: 60000,
+      cacheTime: 3600000,
+    },
+  );
+  const genres = data || [];
+
+  const handleReset = () => {
+    setGroupSelected([]);
+  };
 
   const handleConfirm = () => {
     onSelect(groupSelected);
@@ -42,9 +48,11 @@ const Genre = ({ isOpen, setIsOpen, onSelect, reset }) => {
     }
   }, [reset]);
 
-  const handleReset = () => {
-    setGroupSelected([]);
-  };
+  useEffect(() => {
+    if (isOpen && defaultSelectedGenres.length > 0) {
+      setGroupSelected(defaultSelectedGenres.map((genre) => genre));
+    }
+  }, [isOpen, defaultSelectedGenres]);
 
   return (
     <Dialog
@@ -58,7 +66,7 @@ const Genre = ({ isOpen, setIsOpen, onSelect, reset }) => {
         <div className='flex min-h-full items-center justify-center p-4'>
           <DialogPanel className='w-full'>
             <div className='p-4 flex items-center'>
-              <span className='text-white flex-1 mt-3'>Generi Musicali</span>
+              <span className='text-white flex-1 mt-3'>Generi</span>
               <button onClick={handleReset} className='p-2 bg-white/30 text-white rounded-lg'>
                 <Trash className='text-white w-5 h-5' />
               </button>
@@ -69,9 +77,9 @@ const Genre = ({ isOpen, setIsOpen, onSelect, reset }) => {
                   <CheckboxGroup value={groupSelected} onChange={setGroupSelected}>
                     <div className='w-full'>
                       <div className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 items-center justify-start w-full'>
-                        {musicGenres.map((g, idx) => (
-                          <CustomCheckbox key={idx} value={g.id}>
-                            {g.text}
+                        {genres?.map((genre) => (
+                          <CustomCheckbox key={genre._id} value={genre._id}>
+                            {genre.name}
                           </CustomCheckbox>
                         ))}
                       </div>
@@ -79,6 +87,8 @@ const Genre = ({ isOpen, setIsOpen, onSelect, reset }) => {
                   </CheckboxGroup>
                 </div>
               </div>
+
+              {isLoading && <Spinner className='absolute top-3 right-3' />}
 
               {groupSelected?.length && groupSelected?.length > 0 ? (
                 <button onClick={handleConfirm} className='px-4 py-2 bg-accent-500 text-white rounded-lg'>

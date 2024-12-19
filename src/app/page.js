@@ -6,6 +6,7 @@ import BgGlassmorphism from '@/components/Helpers/BgGlassmorphism';
 import LocalSlideCard from '@/components/UI/LocalSlideCard';
 import EventSlideCard from '@/components/UI/EventSlideCard';
 import EventListCard from '@/components/UI/EventListCard';
+import TypeSelector from '@/components/Helpers/TypeSelector';
 
 function generateTopEvents(events) {
   const totalEvents = events.length;
@@ -19,9 +20,6 @@ function generateTopEvents(events) {
   const topEventsCount = Math.ceil(totalEvents / 2);
   const topEvents = events.slice(0, topEventsCount);
   const otherEvents = events.slice(topEventsCount);
-
-  console.log('topEvents', topEvents);
-  console.log('otherEvents', otherEvents);
 
   return { topEvents, otherEvents };
 }
@@ -91,11 +89,7 @@ export default async function Home() {
               <div className='relative snap-x mx-auto snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-hide'>
                 <div className='w-full flex flex-row gap-2'>
                   {types?.map((type) => (
-                    <div key={type._id} className='flex flex-col items-center justify-center gap-3'>
-                      <div className='text-sm px-5 py-2 bg-background-500/70 border border-background-400 rounded-full text-white whitespace-nowrap'>
-                        {type.name}
-                      </div>
-                    </div>
+                    <TypeSelector key={type._id} type={type} />
                   ))}
                 </div>
               </div>

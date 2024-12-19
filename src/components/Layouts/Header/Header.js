@@ -1,15 +1,14 @@
 'use client';
 
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useContext } from 'react';
 import Link from 'next/link';
-// import dynamic from 'next/dynamic';
+import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 
 import Logo from '@/components/Helpers/Logo';
 import SearchButton from '@/components/Search/SearchButton';
-import SearchPanel from '@/components/Search/SearchPanel';
-
-// const SearchPanel = dynamic(() => import('@/components/Search/SearchPanel'), { ssr: false });
+import RootContext from '@/stores/root-context';
+const SearchPanel = dynamic(() => import('@/components/Search/SearchPanel'), { ssr: false });
 
 const links = [
   { label: 'Eventi', href: '/events' },
@@ -19,7 +18,7 @@ const links = [
 ];
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const rootCtx = useContext(RootContext);
   const pathname = usePathname();
 
   return (
@@ -27,7 +26,7 @@ const Header = () => {
       <div className='px-2 pt-2 pb-2'>
         <div className='flex items-center'>
           <div className='flex-1 w-full'>
-            <SearchButton setIsOpen={setIsOpen} />
+            <SearchButton setIsOpen={rootCtx.setSearchPanelOpen} />
           </div>
           <div className='ml-3'>
             <Logo />
@@ -61,7 +60,7 @@ const Header = () => {
         </div>
 
         <Suspense>
-          <SearchPanel isOpen={isOpen} setIsOpen={setIsOpen} />
+          <SearchPanel isOpen={rootCtx.isSearchPanelOpen} setIsOpen={rootCtx.setSearchPanelOpen} />
         </Suspense>
       </div>
     </header>

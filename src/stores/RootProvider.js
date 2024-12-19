@@ -8,6 +8,8 @@ const RootProvider = (props) => {
   const router = useRouter();
   const [position, setPosition] = useState({});
   const [footerNavVisible, setFooterNavVisible] = useState('');
+  const [isSearchPanelOpen, setSearchPanelOpen] = useState(false);
+  const [selectedGenres, setSelectedGenres] = useState([]);
 
   useEffect(() => {
     const city = localStorage.getItem('__pos_prtfn_');
@@ -60,11 +62,20 @@ const RootProvider = (props) => {
     setFooterNavVisible(value);
   }, []);
 
+  const handleTypeSelect = (type) => {
+    setSelectedGenres([type]);
+    setSearchPanelOpen(true);
+  };
+
   const rootContext = {
     position,
     footerNavVisible,
+    isSearchPanelOpen,
+    selectedGenres,
     setPositionCity,
     setFooterNavIsVisible,
+    setSearchPanelOpen,
+    handleTypeSelect
   };
 
   return <RootContext.Provider value={rootContext}>{props.children}</RootContext.Provider>;
