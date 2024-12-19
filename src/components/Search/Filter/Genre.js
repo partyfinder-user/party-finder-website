@@ -9,7 +9,6 @@ import useSWR from 'swr';
 import { CustomCheckbox } from '@/components/Helpers/CustomeCheckbox';
 
 const fetcher = async (url) => {
-  //test commit
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Failed to fetch genres');
