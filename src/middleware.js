@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export const config = {
-  matcher:
-    '/((?!api|partyfinderapi|breadcrumb|images|admin|account|pro|_next|static|public|_next/static|_next/image|favicon.ico).*)',
+  matcher: '/((?!api|partyfinderapi|images|admin|account|_next|static|public|_next/static|_next/image|favicon.ico).*)',
 };
 
 export async function middleware(req) {
