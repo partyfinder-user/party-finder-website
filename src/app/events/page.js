@@ -32,7 +32,7 @@ async function getData({ page = 1, geo }) {
 }
 
 export default async function EventsPage({ params }) {
-  const cookieStore = await cookies();
+  const cookieStore = cookies();
   const __geo_lat_prtfn_ = cookieStore.get('__geo_lat_prtfn_');
   const __geo_long_prtfn_ = cookieStore.get('__geo_long_prtfn_');
 
